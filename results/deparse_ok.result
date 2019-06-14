@@ -1,0 +1,1505 @@
+
+
+
+
+-------INSERT INTO tab (domcol) VALUES ((SELECT domcol FROM tab WHERE false));-------
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"tab", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cols"=>[{"ResTarget"=>{"name"=>"domcol", "location"=>17}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"SubLink"=>{"subLinkType"=>4, "subselect"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"domcol"}}], "location"=>41}}, "location"=>41}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"tab", "inh"=>true, "relpersistence"=>"p", "location"=>53}}], "whereClause"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"f"}}, "location"=>63}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"bool"}}], "typemod"=>-1, "location"=>-1}}, "location"=>-1}}, "op"=>0}}, "location"=>33}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>70}}
+
+02a082405db1d972feac186b2a278656222956efe6
+
+02a082405db1d972feac186b2a278656222956efe6
+
+INSERT INTO "tab" (domcol) VALUES ((SELECT "domcol" FROM "tab" WHERE false))
+
+------- End INSERT INTO tab (domcol) VALUES ((SELECT domcol FROM tab WHERE false));-------
+
+
+
+
+-------ABORT;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>3}}, "stmt_len"=>5}}
+
+02ad2720a208a2672e709e6f5b2f5e51ff383fb856
+
+02ad2720a208a2672e709e6f5b2f5e51ff383fb856
+
+ROLLBACK
+
+------- End ABORT;-------
+
+
+
+
+-------CREATE VIEW vista AS SELECT 'Hello World';-------
+{"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"vista", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Hello World"}}, "location"=>28}}, "location"=>28}}], "op"=>0}}, "withCheckOption"=>0}}, "stmt_len"=>41}}
+
+02e5c221eae3c8a6c844586daa17adb18122321685
+
+02e5c221eae3c8a6c844586daa17adb18122321685
+
+CREATE VIEW vista AS SELECT 'Hello World'
+
+------- End CREATE VIEW vista AS SELECT 'Hello World';-------
+
+
+
+
+-------CREATE VIEW vista AS SELECT text 'Hello World' AS hello;-------
+{"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"vista", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"name"=>"hello", "val"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Hello World"}}, "location"=>33}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>28}}, "location"=>-1}}, "location"=>28}}], "op"=>0}}, "withCheckOption"=>0}}, "stmt_len"=>55}}
+
+029918d6eb43152a422d08573b925b4ac25005b49c
+
+029918d6eb43152a422d08573b925b4ac25005b49c
+
+CREATE VIEW vista AS SELECT 'Hello World'::text AS "hello"
+
+------- End CREATE VIEW vista AS SELECT text 'Hello World' AS hello;-------
+
+
+
+
+-------CREATE VIEW comedies AS
+    SELECT *
+    FROM films
+    WHERE kind = 'Comedy';-------
+{"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"comedies", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>35}}, "location"=>35}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>46}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"kind"}}], "location"=>62}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Comedy"}}, "location"=>69}}, "location"=>67}}, "op"=>0}}, "withCheckOption"=>0}}, "stmt_len"=>77}}
+
+0259f38a82ba2d62f4f142babd882690f95368e3f9
+
+0259f38a82ba2d62f4f142babd882690f95368e3f9
+
+CREATE VIEW comedies AS SELECT * FROM "films" WHERE "kind" = 'Comedy'
+
+------- End CREATE VIEW comedies AS
+    SELECT *
+    FROM films
+    WHERE kind = 'Comedy';-------
+
+
+
+
+-------CREATE VIEW pg_comedies AS
+    SELECT *
+    FROM comedies
+    WHERE classification = 'PG'
+    WITH CASCADED CHECK OPTION;-------
+{"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"pg_comedies", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>38}}, "location"=>38}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"comedies", "inh"=>true, "relpersistence"=>"p", "location"=>49}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"classification"}}], "location"=>68}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"PG"}}, "location"=>85}}, "location"=>83}}, "op"=>0}}, "withCheckOption"=>2}}, "stmt_len"=>120}}
+
+0272f23ba445580764046e9fe12e36a1f6f139b71b
+
+0272f23ba445580764046e9fe12e36a1f6f139b71b
+
+CREATE VIEW pg_comedies AS SELECT * FROM "comedies" WHERE "classification" = 'PG' WITH CASCADED CHECK OPTION
+
+------- End CREATE VIEW pg_comedies AS
+    SELECT *
+    FROM comedies
+    WHERE classification = 'PG'
+    WITH CASCADED CHECK OPTION;-------
+
+
+
+
+-------CREATE VIEW comedies AS
+    SELECT f.*,
+           country_code_to_name(f.country_code) AS country,
+           (SELECT avg(r.rating)
+            FROM user_ratings r
+            WHERE r.film_id = f.id) AS avg_rating
+    FROM films f
+    WHERE f.kind = 'Comedy';-------
+{"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"comedies", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"f"}}, {"A_Star"=>{}}], "location"=>35}}, "location"=>35}}, {"ResTarget"=>{"name"=>"country", "val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"country_code_to_name"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"f"}}, {"String"=>{"str"=>"country_code"}}], "location"=>72}}], "location"=>51}}, "location"=>51}}, {"ResTarget"=>{"name"=>"avg_rating", "val"=>{"SubLink"=>{"subLinkType"=>4, "subselect"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"avg"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"r"}}, {"String"=>{"str"=>"rating"}}], "location"=>123}}], "location"=>119}}, "location"=>119}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"user_ratings", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"r"}}, "location"=>150}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"r"}}, {"String"=>{"str"=>"film_id"}}], "location"=>183}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"f"}}, {"String"=>{"str"=>"id"}}], "location"=>195}}, "location"=>193}}, "op"=>0}}, "location"=>111}}, "location"=>111}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"f"}}, "location"=>224}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"f"}}, {"String"=>{"str"=>"kind"}}], "location"=>242}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Comedy"}}, "location"=>251}}, "location"=>249}}, "op"=>0}}, "withCheckOption"=>0}}, "stmt_len"=>259}}
+
+02040f69a5dd91f4fc755a9d9499a44d36eb7c9859
+
+02040f69a5dd91f4fc755a9d9499a44d36eb7c9859
+
+CREATE VIEW comedies AS SELECT "f".*, country_code_to_name("f"."country_code") AS "country", (SELECT avg("r"."rating") FROM "user_ratings" "r" WHERE "r"."film_id" = "f"."id") AS "avg_rating" FROM "films" "f" WHERE "f"."kind" = 'Comedy'
+
+------- End CREATE VIEW comedies AS
+    SELECT f.*,
+           country_code_to_name(f.country_code) AS country,
+           (SELECT avg(r.rating)
+            FROM user_ratings r
+            WHERE r.film_id = f.id) AS avg_rating
+    FROM films f
+    WHERE f.kind = 'Comedy';-------
+
+
+
+
+-------SELECT CAST(42 AS float8);-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>42}}, "location"=>12}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"float8"}}], "typemod"=>-1, "location"=>18}}, "location"=>7}}, "location"=>7}}], "op"=>0}}, "stmt_len"=>25}}
+
+02ecc7f2b91f4dab10cbce948bb5bf21540561541d
+
+02ecc7f2b91f4dab10cbce948bb5bf21540561541d
+
+SELECT 42::float8
+
+------- End SELECT CAST(42 AS float8);-------
+
+
+
+
+-------INSERT INTO foo (f1) VALUES (42);-------
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"foo", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cols"=>[{"ResTarget"=>{"name"=>"f1", "location"=>17}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>42}}, "location"=>29}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>32}}
+
+02bf677c859f1807e324ebeb9533cab9aa9399f44f
+
+02bf677c859f1807e324ebeb9533cab9aa9399f44f
+
+INSERT INTO "foo" (f1) VALUES (42)
+
+------- End INSERT INTO foo (f1) VALUES (42);-------
+
+
+
+
+-------SELECT 2 + 4.0;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>7}}, "rexpr"=>{"A_Const"=>{"val"=>{"Float"=>{"str"=>"4.0"}}, "location"=>11}}, "location"=>9}}, "location"=>7}}], "op"=>0}}, "stmt_len"=>14}}
+
+025a33db2ae7cbfce37fa78c34b32e75b376eb6d16
+
+025a33db2ae7cbfce37fa78c34b32e75b376eb6d16
+
+SELECT 2 + 4.0
+
+------- End SELECT 2 + 4.0;-------
+
+
+
+
+-------SELECT CAST ( 2 AS numeric ) + 4.0;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>14}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"numeric"}}], "typemod"=>-1, "location"=>19}}, "location"=>7}}, "rexpr"=>{"A_Const"=>{"val"=>{"Float"=>{"str"=>"4.0"}}, "location"=>31}}, "location"=>29}}, "location"=>7}}], "op"=>0}}, "stmt_len"=>34}}
+
+02a3a6fcf57838bb6f187e4940f13005c760eb873b
+
+02a3a6fcf57838bb6f187e4940f13005c760eb873b
+
+SELECT 2::numeric + 4.0
+
+------- End SELECT CAST ( 2 AS numeric ) + 4.0;-------
+
+
+
+
+-------SELECT setseed(value);-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"setseed"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"value"}}], "location"=>15}}], "location"=>7}}, "location"=>7}}], "op"=>0}}, "stmt_len"=>21}}
+
+021d31d83597efa556d01b05dbf03112ecfd7263e6
+
+021d31d83597efa556d01b05dbf03112ecfd7263e6
+
+SELECT setseed("value")
+
+------- End SELECT setseed(value);-------
+
+
+
+
+-------SET search_path TO my_schema, public;-------
+{"RawStmt"=>{"stmt"=>{"VariableSetStmt"=>{"kind"=>0, "name"=>"search_path", "args"=>[{"A_Const"=>{"val"=>{"String"=>{"str"=>"my_schema"}}, "location"=>19}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"public"}}, "location"=>30}}]}}, "stmt_len"=>36}}
+
+026fa0e466aa06db6be42c4a45aba526fa4a0019d2
+
+026fa0e466aa06db6be42c4a45aba526fa4a0019d2
+
+SET search_path TO 'my_schema', 'public'
+
+------- End SET search_path TO my_schema, public;-------
+
+
+
+
+-------ROLLBACK TO SAVEPOINT my_savepoint;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>6, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"my_savepoint"}}, "defaction"=>0}}]}}, "stmt_len"=>34}}
+
+0289b985a1764365690bd73ab952a67d4f5c2238ed
+
+0289b985a1764365690bd73ab952a67d4f5c2238ed
+
+ROLLBACK TO SAVEPOINT "my_savepoint"
+
+------- End ROLLBACK TO SAVEPOINT my_savepoint;-------
+
+
+
+
+-------COMMIT;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>2}}, "stmt_len"=>6}}
+
+02a391d1fe53638620d24c0cddf25b48febf27cbc9
+
+02a391d1fe53638620d24c0cddf25b48febf27cbc9
+
+COMMIT
+
+------- End COMMIT;-------
+
+
+
+
+-------DELETE FROM films USING producers
+  WHERE producer_id = producers.id AND producers.name = 'foo';-------
+{"RawStmt"=>{"stmt"=>{"DeleteStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "usingClause"=>[{"RangeVar"=>{"relname"=>"producers", "inh"=>true, "relpersistence"=>"p", "location"=>24}}], "whereClause"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"producer_id"}}], "location"=>42}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"producers"}}, {"String"=>{"str"=>"id"}}], "location"=>56}}, "location"=>54}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"producers"}}, {"String"=>{"str"=>"name"}}], "location"=>73}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"foo"}}, "location"=>90}}, "location"=>88}}], "location"=>69}}}}, "stmt_len"=>95}}
+
+021bf3f7e7e74a76237ea45a37f76a5d19d2b7f63c
+
+021bf3f7e7e74a76237ea45a37f76a5d19d2b7f63c
+
+DELETE FROM "films" USING "producers" WHERE "producer_id" = "producers"."id" AND "producers"."name" = 'foo'
+
+------- End DELETE FROM films USING producers
+  WHERE producer_id = producers.id AND producers.name = 'foo';-------
+
+
+
+
+-------DELETE FROM films
+  WHERE producer_id IN (SELECT id FROM producers WHERE name = 'foo');-------
+{"RawStmt"=>{"stmt"=>{"DeleteStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "whereClause"=>{"SubLink"=>{"subLinkType"=>2, "testexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"producer_id"}}], "location"=>26}}, "subselect"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"id"}}], "location"=>49}}, "location"=>49}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"producers", "inh"=>true, "relpersistence"=>"p", "location"=>57}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"name"}}], "location"=>73}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"foo"}}, "location"=>80}}, "location"=>78}}, "op"=>0}}, "location"=>38}}}}, "stmt_len"=>86}}
+
+027b5aa3036ba6d8d897ff6912ca839f88e13931d7
+
+027b5aa3036ba6d8d897ff6912ca839f88e13931d7
+
+DELETE FROM "films" WHERE "producer_id" IN (SELECT "id" FROM "producers" WHERE "name" = 'foo')
+
+------- End DELETE FROM films
+  WHERE producer_id IN (SELECT id FROM producers WHERE name = 'foo');-------
+
+
+
+
+-------DELETE FROM films WHERE kind <> 'Musical';-------
+{"RawStmt"=>{"stmt"=>{"DeleteStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"<>"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"kind"}}], "location"=>24}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Musical"}}, "location"=>32}}, "location"=>29}}}}, "stmt_len"=>41}}
+
+02f65999765e68ee7243c259a157b99790678bf2fe
+
+02f65999765e68ee7243c259a157b99790678bf2fe
+
+DELETE FROM "films" WHERE "kind" <> 'Musical'
+
+------- End DELETE FROM films WHERE kind <> 'Musical';-------
+
+
+
+
+-------DELETE FROM films;-------
+{"RawStmt"=>{"stmt"=>{"DeleteStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}}}, "stmt_len"=>17}}
+
+02ee10986e12069e90c8bb1f444cc2cfcd450ff05e
+
+02ee10986e12069e90c8bb1f444cc2cfcd450ff05e
+
+DELETE FROM "films"
+
+------- End DELETE FROM films;-------
+
+
+
+
+-------DELETE FROM tasks WHERE status = 'DONE' RETURNING *;-------
+{"RawStmt"=>{"stmt"=>{"DeleteStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"tasks", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"status"}}], "location"=>24}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"DONE"}}, "location"=>33}}, "location"=>31}}, "returningList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>50}}, "location"=>50}}]}}, "stmt_len"=>51}}
+
+026ecf4e1922115bc78fca3b29d81911135d1569b4
+
+026ecf4e1922115bc78fca3b29d81911135d1569b4
+
+DELETE FROM "tasks" WHERE "status" = 'DONE' RETURNING *
+
+------- End DELETE FROM tasks WHERE status = 'DONE' RETURNING *;-------
+
+
+
+
+-------END;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>2}}, "stmt_len"=>3}}
+
+02a391d1fe53638620d24c0cddf25b48febf27cbc9
+
+02a391d1fe53638620d24c0cddf25b48febf27cbc9
+
+COMMIT
+
+------- End END;-------
+
+
+
+
+-------BEGIN;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}
+
+026cea02424b8c3b58b55c25151c6e027e1e5ab789
+
+026cea02424b8c3b58b55c25151c6e027e1e5ab789
+
+BEGIN
+
+------- End BEGIN;-------
+
+
+
+
+-------UPDATE films SET kind = 'Dramatic' WHERE kind = 'Drama';-------
+{"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>7}}, "targetList"=>[{"ResTarget"=>{"name"=>"kind", "val"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Dramatic"}}, "location"=>24}}, "location"=>17}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"kind"}}], "location"=>41}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Drama"}}, "location"=>48}}, "location"=>46}}}}, "stmt_len"=>55}}
+
+02d2d589bcab76156bd272ec15cec234f3006deb78
+
+02d2d589bcab76156bd272ec15cec234f3006deb78
+
+UPDATE "films" SET kind = 'Dramatic' WHERE "kind" = 'Drama'
+
+------- End UPDATE films SET kind = 'Dramatic' WHERE kind = 'Drama';-------
+
+
+
+
+-------UPDATE employees SET sales_count = sales_count + 1 WHERE id =
+  (SELECT sales_person FROM accounts WHERE name = 'Acme Corporation');-------
+{"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"employees", "inh"=>true, "relpersistence"=>"p", "location"=>7}}, "targetList"=>[{"ResTarget"=>{"name"=>"sales_count", "val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"sales_count"}}], "location"=>35}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>49}}, "location"=>47}}, "location"=>21}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"id"}}], "location"=>57}}, "rexpr"=>{"SubLink"=>{"subLinkType"=>4, "subselect"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"sales_person"}}], "location"=>72}}, "location"=>72}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"accounts", "inh"=>true, "relpersistence"=>"p", "location"=>90}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"name"}}], "location"=>105}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Acme Corporation"}}, "location"=>112}}, "location"=>110}}, "op"=>0}}, "location"=>64}}, "location"=>60}}}}, "stmt_len"=>131}}
+
+0218a247cefb90d72db9982db88821f635e76ac8c6
+
+0218a247cefb90d72db9982db88821f635e76ac8c6
+
+UPDATE "employees" SET sales_count = "sales_count" + 1 WHERE "id" = (SELECT "sales_person" FROM "accounts" WHERE "name" = 'Acme Corporation')
+
+------- End UPDATE employees SET sales_count = sales_count + 1 WHERE id =
+  (SELECT sales_person FROM accounts WHERE name = 'Acme Corporation');-------
+
+
+
+
+-------BEGIN;
+-- other operations
+SAVEPOINT sp1;
+INSERT INTO wines VALUES('Chateau Lafite 2003', '24');
+-- Assume the above fails because of a unique key violation,
+-- so now we issue these commands:
+ROLLBACK TO sp1;
+UPDATE wines SET stock = stock + 24 WHERE winename = 'Chateau Lafite 2003';
+-- continue with other operations, and eventually
+COMMIT;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>4, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"sp1"}}, "defaction"=>0, "location"=>27}}]}}, "stmt_location"=>6, "stmt_len"=>34}}
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"wines", "inh"=>true, "relpersistence"=>"p", "location"=>54}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"Chateau Lafite 2003"}}, "location"=>67}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"24"}}, "location"=>90}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>41, "stmt_len"=>54}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>6, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"sp1"}}, "defaction"=>0, "location"=>193}}]}}, "stmt_location"=>96, "stmt_len"=>112}}
+{"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"wines", "inh"=>true, "relpersistence"=>"p", "location"=>217}}, "targetList"=>[{"ResTarget"=>{"name"=>"stock", "val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"stock"}}], "location"=>235}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>24}}, "location"=>243}}, "location"=>241}}, "location"=>227}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"winename"}}], "location"=>252}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Chateau Lafite 2003"}}, "location"=>263}}, "location"=>261}}}}, "stmt_location"=>209, "stmt_len"=>75}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>2}}, "stmt_location"=>285, "stmt_len"=>57}}
+
+0256d06cbbe4ccca54e72616caed37bd315ba4865f
+
+0256d06cbbe4ccca54e72616caed37bd315ba4865f
+
+BEGIN; SAVEPOINT "sp1"; INSERT INTO "wines" VALUES ('Chateau Lafite 2003', '24'); ROLLBACK TO SAVEPOINT "sp1"; UPDATE "wines" SET stock = "stock" + 24 WHERE "winename" = 'Chateau Lafite 2003'; COMMIT
+
+------- End BEGIN;
+-- other operations
+SAVEPOINT sp1;
+INSERT INTO wines VALUES('Chateau Lafite 2003', '24');
+-- Assume the above fails because of a unique key violation,
+-- so now we issue these commands:
+ROLLBACK TO sp1;
+UPDATE wines SET stock = stock + 24 WHERE winename = 'Chateau Lafite 2003';
+-- continue with other operations, and eventually
+COMMIT;-------
+
+
+
+
+-------SELECT pg_describe_object(refclassid, refobjid, refobjsubid) AS "Collation",
+       pg_describe_object(classid, objid, objsubid) AS "Object"
+  FROM pg_depend d JOIN pg_collation c
+       ON refclassid = 'pg_collation'::regclass AND refobjid = c.oid
+  WHERE c.collversion <> pg_collation_actual_version(c.oid)
+  ORDER BY 1, 2;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"name"=>"Collation", "val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_describe_object"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refclassid"}}], "location"=>26}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refobjid"}}], "location"=>38}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refobjsubid"}}], "location"=>48}}], "location"=>7}}, "location"=>7}}, {"ResTarget"=>{"name"=>"Object", "val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_describe_object"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"classid"}}], "location"=>103}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"objid"}}], "location"=>112}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"objsubid"}}], "location"=>119}}], "location"=>84}}, "location"=>84}}], "fromClause"=>[{"JoinExpr"=>{"jointype"=>0, "larg"=>{"RangeVar"=>{"relname"=>"pg_depend", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"d"}}, "location"=>148}}, "rarg"=>{"RangeVar"=>{"relname"=>"pg_collation", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"c"}}, "location"=>165}}, "quals"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refclassid"}}], "location"=>190}}, "rexpr"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"pg_collation"}}, "location"=>203}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"regclass"}}], "typemod"=>-1, "location"=>219}}, "location"=>217}}, "location"=>201}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refobjid"}}], "location"=>232}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"c"}}, {"String"=>{"str"=>"oid"}}], "location"=>243}}, "location"=>241}}], "location"=>228}}}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"<>"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"c"}}, {"String"=>{"str"=>"collversion"}}], "location"=>257}}, "rexpr"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_collation_actual_version"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"c"}}, {"String"=>{"str"=>"oid"}}], "location"=>302}}], "location"=>274}}, "location"=>271}}, "sortClause"=>[{"SortBy"=>{"node"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>320}}, "sortby_dir"=>0, "sortby_nulls"=>0, "location"=>-1}}, {"SortBy"=>{"node"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>323}}, "sortby_dir"=>0, "sortby_nulls"=>0, "location"=>-1}}], "op"=>0}}, "stmt_len"=>324}}
+
+02125c83e952b4d44c63a8feef6d43cee39c36b560
+
+02125c83e952b4d44c63a8feef6d43cee39c36b560
+
+SELECT pg_describe_object("refclassid", "refobjid", "refobjsubid") AS "Collation", pg_describe_object("classid", "objid", "objsubid") AS "Object" FROM "pg_depend" "d" JOIN "pg_collation" "c" ON "refclassid" = 'pg_collation'::regclass AND "refobjid" = "c"."oid" WHERE "c"."collversion" <> pg_collation_actual_version("c"."oid") ORDER BY 1, 2
+
+------- End SELECT pg_describe_object(refclassid, refobjid, refobjsubid) AS "Collation",
+       pg_describe_object(classid, objid, objsubid) AS "Object"
+  FROM pg_depend d JOIN pg_collation c
+       ON refclassid = 'pg_collation'::regclass AND refobjid = c.oid
+  WHERE c.collversion <> pg_collation_actual_version(c.oid)
+  ORDER BY 1, 2;-------
+
+
+
+
+-------SELECT * FROM name;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"name", "inh"=>true, "relpersistence"=>"p", "location"=>14}}], "op"=>0}}, "stmt_len"=>18}}
+
+02e6e820550cad5e8f22c4e70dba18188c42f99b87
+
+02e6e820550cad5e8f22c4e70dba18188c42f99b87
+
+SELECT * FROM "name"
+
+------- End SELECT * FROM name;-------
+
+
+
+
+-------INSERT INTO distributors VALUES (nextval('serial'), 'nothing');-------
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"nextval"}}], "args"=>[{"A_Const"=>{"val"=>{"String"=>{"str"=>"serial"}}, "location"=>41}}], "location"=>33}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"nothing"}}, "location"=>52}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>62}}
+
+02470015399d3c573ca3fe8b6d8ce24965d4f2ca4c
+
+02470015399d3c573ca3fe8b6d8ce24965d4f2ca4c
+
+INSERT INTO "distributors" VALUES (nextval('serial'), 'nothing')
+
+------- End INSERT INTO distributors VALUES (nextval('serial'), 'nothing');-------
+
+
+
+
+-------BEGIN;
+COPY distributors FROM 'input_file';
+SELECT setval('serial', max(id)) FROM distributors;
+END;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}
+{"RawStmt"=>{"stmt"=>{"CopyStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "is_from"=>true, "filename"=>"input_file"}}, "stmt_location"=>6, "stmt_len"=>36}}
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"setval"}}], "args"=>[{"A_Const"=>{"val"=>{"String"=>{"str"=>"serial"}}, "location"=>58}}, {"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"max"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"id"}}], "location"=>72}}], "location"=>68}}], "location"=>51}}, "location"=>51}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>82}}], "op"=>0}}, "stmt_location"=>43, "stmt_len"=>51}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>2}}, "stmt_location"=>95, "stmt_len"=>4}}
+
+02cf44e92baf8ca780177fddd9463b90a89ef4094c
+
+02cf44e92baf8ca780177fddd9463b90a89ef4094c
+
+BEGIN; COPY "distributors" FROM 'input_file'; SELECT setval('serial', max("id")) FROM "distributors"; COMMIT
+
+------- End BEGIN;
+COPY distributors FROM 'input_file';
+SELECT setval('serial', max(id)) FROM distributors;
+END;-------
+
+
+
+
+-------BEGIN;
+    INSERT INTO table1 VALUES (1);
+    SAVEPOINT my_savepoint;
+    INSERT INTO table1 VALUES (2);
+    ROLLBACK TO SAVEPOINT my_savepoint;
+    INSERT INTO table1 VALUES (3);
+COMMIT;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"table1", "inh"=>true, "relpersistence"=>"p", "location"=>23}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>38}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>6, "stmt_len"=>34}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>4, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"my_savepoint"}}, "defaction"=>0, "location"=>46}}]}}, "stmt_location"=>41, "stmt_len"=>27}}
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"table1", "inh"=>true, "relpersistence"=>"p", "location"=>86}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>101}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>69, "stmt_len"=>34}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>6, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"my_savepoint"}}, "defaction"=>0, "location"=>109}}]}}, "stmt_location"=>104, "stmt_len"=>39}}
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"table1", "inh"=>true, "relpersistence"=>"p", "location"=>161}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>3}}, "location"=>176}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>144, "stmt_len"=>34}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>2}}, "stmt_location"=>179, "stmt_len"=>7}}
+
+02f9dd80748504b1d7714ddc548aff1782b381646f
+
+02f9dd80748504b1d7714ddc548aff1782b381646f
+
+BEGIN; INSERT INTO "table1" VALUES (1); SAVEPOINT "my_savepoint"; INSERT INTO "table1" VALUES (2); ROLLBACK TO SAVEPOINT "my_savepoint"; INSERT INTO "table1" VALUES (3); COMMIT
+
+------- End BEGIN;
+    INSERT INTO table1 VALUES (1);
+    SAVEPOINT my_savepoint;
+    INSERT INTO table1 VALUES (2);
+    ROLLBACK TO SAVEPOINT my_savepoint;
+    INSERT INTO table1 VALUES (3);
+COMMIT;-------
+
+
+
+
+-------BEGIN;
+    INSERT INTO table1 VALUES (3);
+    SAVEPOINT my_savepoint;
+    INSERT INTO table1 VALUES (4);
+    RELEASE SAVEPOINT my_savepoint;
+COMMIT;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"table1", "inh"=>true, "relpersistence"=>"p", "location"=>23}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>3}}, "location"=>38}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>6, "stmt_len"=>34}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>4, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"my_savepoint"}}, "defaction"=>0, "location"=>46}}]}}, "stmt_location"=>41, "stmt_len"=>27}}
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"table1", "inh"=>true, "relpersistence"=>"p", "location"=>86}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>4}}, "location"=>101}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>69, "stmt_len"=>34}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>5, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"my_savepoint"}}, "defaction"=>0, "location"=>109}}]}}, "stmt_location"=>104, "stmt_len"=>35}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>2}}, "stmt_location"=>140, "stmt_len"=>7}}
+
+024407976e4055866cfbdc38886d44ee79e1d94e28
+
+024407976e4055866cfbdc38886d44ee79e1d94e28
+
+BEGIN; INSERT INTO "table1" VALUES (3); SAVEPOINT "my_savepoint"; INSERT INTO "table1" VALUES (4); RELEASE "my_savepoint"; COMMIT
+
+------- End BEGIN;
+    INSERT INTO table1 VALUES (3);
+    SAVEPOINT my_savepoint;
+    INSERT INTO table1 VALUES (4);
+    RELEASE SAVEPOINT my_savepoint;
+COMMIT;-------
+
+
+
+
+-------CREATE SCHEMA myschema;-------
+{"RawStmt"=>{"stmt"=>{"CreateSchemaStmt"=>{"schemaname"=>"myschema"}}, "stmt_len"=>22}}
+
+020d73b87281de807462ac8fff042aaa6e55623d0c
+
+020d73b87281de807462ac8fff042aaa6e55623d0c
+
+CREATE SCHEMA "myschema"
+
+------- End CREATE SCHEMA myschema;-------
+
+
+
+
+-------CREATE SCHEMA AUTHORIZATION joe;-------
+{"RawStmt"=>{"stmt"=>{"CreateSchemaStmt"=>{"authrole"=>{"RoleSpec"=>{"roletype"=>0, "rolename"=>"joe", "location"=>28}}}}, "stmt_len"=>31}}
+
+02a4d8ab377d30dcdb5f57dd81eade39567d2b68c3
+
+02a4d8ab377d30dcdb5f57dd81eade39567d2b68c3
+
+CREATE SCHEMA AUTHORIZATION "joe"
+
+------- End CREATE SCHEMA AUTHORIZATION joe;-------
+
+
+
+
+-------CREATE SCHEMA IF NOT EXISTS test AUTHORIZATION joe;-------
+{"RawStmt"=>{"stmt"=>{"CreateSchemaStmt"=>{"schemaname"=>"test", "authrole"=>{"RoleSpec"=>{"roletype"=>0, "rolename"=>"joe", "location"=>47}}, "if_not_exists"=>true}}, "stmt_len"=>50}}
+
+02c9da5d5bedf3af0d9afe75dd9097f34feece9cdc
+
+02c9da5d5bedf3af0d9afe75dd9097f34feece9cdc
+
+CREATE SCHEMA IF NOT EXISTS "test" AUTHORIZATION "joe"
+
+------- End CREATE SCHEMA IF NOT EXISTS test AUTHORIZATION joe;-------
+
+
+
+
+-------CREATE SCHEMA hollywood
+    CREATE TABLE films (title text, release date, awards text[])
+    CREATE VIEW winners AS
+        SELECT title, release FROM films WHERE awards IS NOT NULL;-------
+{"RawStmt"=>{"stmt"=>{"CreateSchemaStmt"=>{"schemaname"=>"hollywood", "schemaElts"=>[{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>41}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"title", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>54}}, "is_local"=>true, "location"=>48}}, {"ColumnDef"=>{"colname"=>"release", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"date"}}], "typemod"=>-1, "location"=>68}}, "is_local"=>true, "location"=>60}}, {"ColumnDef"=>{"colname"=>"awards", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "arrayBounds"=>[{"Integer"=>{"ival"=>-1}}], "location"=>81}}, "is_local"=>true, "location"=>74}}], "oncommit"=>0}}, {"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"winners", "inh"=>true, "relpersistence"=>"p", "location"=>105}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"title"}}], "location"=>131}}, "location"=>131}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"release"}}], "location"=>138}}, "location"=>138}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>151}}], "whereClause"=>{"NullTest"=>{"arg"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"awards"}}], "location"=>163}}, "nulltesttype"=>1, "location"=>170}}, "op"=>0}}, "withCheckOption"=>0}}]}}, "stmt_len"=>181}}
+
+02d3f21b3d8974293f3883cef9ab3e6ff2ac7985cf
+
+02d3f21b3d8974293f3883cef9ab3e6ff2ac7985cf
+
+CREATE SCHEMA "hollywood" CREATE TABLE "films" (title text, release date, awards text[]) CREATE VIEW winners AS SELECT "title", "release" FROM "films" WHERE "awards" IS NOT NULL
+
+------- End CREATE SCHEMA hollywood
+    CREATE TABLE films (title text, release date, awards text[])
+    CREATE VIEW winners AS
+        SELECT title, release FROM films WHERE awards IS NOT NULL;-------
+
+
+
+
+-------DO $$DECLARE r record;
+BEGIN
+    FOR r IN SELECT table_schema, table_name FROM information_schema.tables
+             WHERE table_type = 'VIEW' AND table_schema = 'public'
+    LOOP
+        EXECUTE 'GRANT ALL ON ' || quote_ident(r.table_schema) || '.' || quote_ident(r.table_name) || ' TO webuser';
+    END LOOP;
+END$$;-------
+{"RawStmt"=>{"stmt"=>{"DoStmt"=>{"args"=>[{"DefElem"=>{"defname"=>"as", "arg"=>{"String"=>{"str"=>"DECLARE r record;\nBEGIN\n    FOR r IN SELECT table_schema, table_name FROM information_schema.tables\n             WHERE table_type = 'VIEW' AND table_schema = 'public'\n    LOOP\n        EXECUTE 'GRANT ALL ON ' || quote_ident(r.table_schema) || '.' || quote_ident(r.table_name) || ' TO webuser';\n    END LOOP;\nEND"}}, "defaction"=>0, "location"=>3}}]}}, "stmt_len"=>317}}
+
+023eef497127be0ec0656c916870b43b9cd9f75d3c
+
+023eef497127be0ec0656c916870b43b9cd9f75d3c
+
+DO $$DECLARE r record;
+BEGIN
+    FOR r IN SELECT table_schema, table_name FROM information_schema.tables
+             WHERE table_type = 'VIEW' AND table_schema = 'public'
+    LOOP
+        EXECUTE 'GRANT ALL ON ' || quote_ident(r.table_schema) || '.' || quote_ident(r.table_name) || ' TO webuser';
+    END LOOP;
+END$$
+
+------- End DO $$DECLARE r record;
+BEGIN
+    FOR r IN SELECT table_schema, table_name FROM information_schema.tables
+             WHERE table_type = 'VIEW' AND table_schema = 'public'
+    LOOP
+        EXECUTE 'GRANT ALL ON ' || quote_ident(r.table_schema) || '.' || quote_ident(r.table_name) || ' TO webuser';
+    END LOOP;
+END$$;-------
+
+
+
+
+-------VACUUM (VERBOSE, ANALYZE) onek;-------
+{"RawStmt"=>{"stmt"=>{"VacuumStmt"=>{"options"=>7, "relation"=>{"RangeVar"=>{"relname"=>"onek", "inh"=>true, "relpersistence"=>"p", "location"=>26}}}}, "stmt_len"=>30}}
+
+02f823b5be2409d5ddc39f61d20b8b235f58fca61a
+
+02f823b5be2409d5ddc39f61d20b8b235f58fca61a
+
+VACUUM VERBOSE ANALYZE "onek"
+
+------- End VACUUM (VERBOSE, ANALYZE) onek;-------
+
+
+
+
+-------select 1; select 2; select 3;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>7}}, "location"=>7}}], "op"=>0}}, "stmt_len"=>8}}
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>17}}, "location"=>17}}], "op"=>0}}, "stmt_location"=>9, "stmt_len"=>9}}
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>3}}, "location"=>27}}, "location"=>27}}], "op"=>0}}, "stmt_location"=>19, "stmt_len"=>9}}
+
+02ff9bbc5bdda261dcbb0dcfc84cfe5eae230165d8
+
+02ff9bbc5bdda261dcbb0dcfc84cfe5eae230165d8
+
+SELECT 1; SELECT 2; SELECT 3
+
+------- End select 1; select 2; select 3;-------
+
+
+
+
+-------SELECT DISTINCT ON (location) location, time, report
+    FROM weather_reports
+    ORDER BY location, time DESC;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"distinctClause"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"location"}}], "location"=>20}}], "targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"location"}}], "location"=>30}}, "location"=>30}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"time"}}], "location"=>40}}, "location"=>40}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"report"}}], "location"=>46}}, "location"=>46}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"weather_reports", "inh"=>true, "relpersistence"=>"p", "location"=>62}}], "sortClause"=>[{"SortBy"=>{"node"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"location"}}], "location"=>91}}, "sortby_dir"=>0, "sortby_nulls"=>0, "location"=>-1}}, {"SortBy"=>{"node"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"time"}}], "location"=>101}}, "sortby_dir"=>2, "sortby_nulls"=>0, "location"=>-1}}], "op"=>0}}, "stmt_len"=>110}}
+
+02590eac1118a7125ebde940d69d3a97259445f780
+
+02590eac1118a7125ebde940d69d3a97259445f780
+
+SELECT DISTINCT ON ("location") "location", "time", "report" FROM "weather_reports" ORDER BY "location", "time" DESC
+
+------- End SELECT DISTINCT ON (location) location, time, report
+    FROM weather_reports
+    ORDER BY location, time DESC;-------
+
+
+
+
+-------SELECT name FROM distributors ORDER BY code;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"name"}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>17}}], "sortClause"=>[{"SortBy"=>{"node"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"code"}}], "location"=>39}}, "sortby_dir"=>0, "sortby_nulls"=>0, "location"=>-1}}], "op"=>0}}, "stmt_len"=>43}}
+
+029e5cbfdaa6c3523fbeb8515d1f7c001fde25fb4a
+
+029e5cbfdaa6c3523fbeb8515d1f7c001fde25fb4a
+
+SELECT "name" FROM "distributors" ORDER BY "code"
+
+------- End SELECT name FROM distributors ORDER BY code;-------
+
+
+
+
+-------SELECT * FROM (SELECT * FROM mytable FOR UPDATE) ss WHERE col1 = 5;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeSubselect"=>{"subquery"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>22}}, "location"=>22}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"mytable", "inh"=>true, "relpersistence"=>"p", "location"=>29}}], "lockingClause"=>[{"LockingClause"=>{"strength"=>4, "waitPolicy"=>0}}], "op"=>0}}, "alias"=>{"Alias"=>{"aliasname"=>"ss"}}}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"col1"}}], "location"=>58}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>5}}, "location"=>65}}, "location"=>63}}, "op"=>0}}, "stmt_len"=>66}}
+
+024b39d7c0183206e8e13b8752f7260d9ba761b410
+
+024b39d7c0183206e8e13b8752f7260d9ba761b410
+
+SELECT * FROM (SELECT * FROM "mytable" FOR UPDATE) "ss" WHERE "col1" = 5
+
+------- End SELECT * FROM (SELECT * FROM mytable FOR UPDATE) ss WHERE col1 = 5;-------
+
+
+
+
+-------SELECT * FROM (SELECT * FROM mytable FOR UPDATE) ss ORDER BY column1;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeSubselect"=>{"subquery"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>22}}, "location"=>22}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"mytable", "inh"=>true, "relpersistence"=>"p", "location"=>29}}], "lockingClause"=>[{"LockingClause"=>{"strength"=>4, "waitPolicy"=>0}}], "op"=>0}}, "alias"=>{"Alias"=>{"aliasname"=>"ss"}}}}], "sortClause"=>[{"SortBy"=>{"node"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"column1"}}], "location"=>61}}, "sortby_dir"=>0, "sortby_nulls"=>0, "location"=>-1}}], "op"=>0}}, "stmt_len"=>68}}
+
+02894b655c1a8f373f3e6974df8cc1d99f72ccd2e6
+
+02894b655c1a8f373f3e6974df8cc1d99f72ccd2e6
+
+SELECT * FROM (SELECT * FROM "mytable" FOR UPDATE) "ss" ORDER BY "column1"
+
+------- End SELECT * FROM (SELECT * FROM mytable FOR UPDATE) ss ORDER BY column1;-------
+
+
+
+
+-------TABLE name-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>-1}}, "location"=>-1}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"name", "inh"=>true, "relpersistence"=>"p", "location"=>6}}], "op"=>0}}}}
+
+02e6e820550cad5e8f22c4e70dba18188c42f99b87
+
+02e6e820550cad5e8f22c4e70dba18188c42f99b87
+
+SELECT * FROM "name"
+
+------- End TABLE name-------
+
+
+
+
+-------SELECT * FROM name-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"name", "inh"=>true, "relpersistence"=>"p", "location"=>14}}], "op"=>0}}}}
+
+02e6e820550cad5e8f22c4e70dba18188c42f99b87
+
+02e6e820550cad5e8f22c4e70dba18188c42f99b87
+
+SELECT * FROM "name"
+
+------- End SELECT * FROM name-------
+
+
+
+
+-------WITH RECURSIVE employee_recursive(distance, employee_name, manager_name) AS (
+    SELECT 1, employee_name, manager_name
+    FROM employee
+    WHERE manager_name = 'Mary'
+  UNION ALL
+    SELECT er.distance + 1, e.employee_name, e.manager_name
+    FROM employee_recursive er, employee e
+    WHERE er.employee_name = e.manager_name
+  )
+SELECT distance, employee_name FROM employee_recursive;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"distance"}}], "location"=>340}}, "location"=>340}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"employee_name"}}], "location"=>350}}, "location"=>350}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"employee_recursive", "inh"=>true, "relpersistence"=>"p", "location"=>369}}], "withClause"=>{"WithClause"=>{"ctes"=>[{"CommonTableExpr"=>{"ctename"=>"employee_recursive", "aliascolnames"=>[{"String"=>{"str"=>"distance"}}, {"String"=>{"str"=>"employee_name"}}, {"String"=>{"str"=>"manager_name"}}], "ctequery"=>{"SelectStmt"=>{"op"=>1, "all"=>true, "larg"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>89}}, "location"=>89}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"employee_name"}}], "location"=>92}}, "location"=>92}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"manager_name"}}], "location"=>107}}, "location"=>107}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"employee", "inh"=>true, "relpersistence"=>"p", "location"=>129}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"manager_name"}}], "location"=>148}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Mary"}}, "location"=>163}}, "location"=>161}}, "op"=>0}}, "rarg"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"er"}}, {"String"=>{"str"=>"distance"}}], "location"=>193}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>207}}, "location"=>205}}, "location"=>193}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"e"}}, {"String"=>{"str"=>"employee_name"}}], "location"=>210}}, "location"=>210}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"e"}}, {"String"=>{"str"=>"manager_name"}}], "location"=>227}}, "location"=>227}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"employee_recursive", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"er"}}, "location"=>251}}, {"RangeVar"=>{"relname"=>"employee", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"e"}}, "location"=>274}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"er"}}, {"String"=>{"str"=>"employee_name"}}], "location"=>295}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"e"}}, {"String"=>{"str"=>"manager_name"}}], "location"=>314}}, "location"=>312}}, "op"=>0}}}}, "location"=>15}}], "recursive"=>true}}, "op"=>0}}, "stmt_len"=>387}}
+
+02c59f0292ca8c2b72b54730e0e1ec43c5dd9401d1
+
+02c59f0292ca8c2b72b54730e0e1ec43c5dd9401d1
+
+WITH RECURSIVE employee_recursive ("distance", "employee_name", "manager_name") AS (SELECT 1, "employee_name", "manager_name" FROM "employee" WHERE "manager_name" = 'Mary' UNION ALL SELECT "er"."distance" + 1, "e"."employee_name", "e"."manager_name" FROM "employee_recursive" "er", "employee" "e" WHERE "er"."employee_name" = "e"."manager_name") SELECT "distance", "employee_name" FROM "employee_recursive"
+
+------- End WITH RECURSIVE employee_recursive(distance, employee_name, manager_name) AS (
+    SELECT 1, employee_name, manager_name
+    FROM employee
+    WHERE manager_name = 'Mary'
+  UNION ALL
+    SELECT er.distance + 1, e.employee_name, e.manager_name
+    FROM employee_recursive er, employee e
+    WHERE er.employee_name = e.manager_name
+  )
+SELECT distance, employee_name FROM employee_recursive;-------
+
+
+
+
+-------SELECT m.name AS mname, pname
+FROM manufacturers m, LATERAL get_product_names(m.id) pname;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"name"=>"mname", "val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"m"}}, {"String"=>{"str"=>"name"}}], "location"=>7}}, "location"=>7}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"pname"}}], "location"=>24}}, "location"=>24}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"manufacturers", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"m"}}, "location"=>35}}, {"RangeFunction"=>{"lateral"=>true, "functions"=>[[{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"get_product_names"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"m"}}, {"String"=>{"str"=>"id"}}], "location"=>78}}], "location"=>60}}, nil]], "alias"=>{"Alias"=>{"aliasname"=>"pname"}}}}], "op"=>0}}, "stmt_len"=>89}}
+
+024910d8e2b74ee7069fe077dcb49ae520b68724a9
+
+024910d8e2b74ee7069fe077dcb49ae520b68724a9
+
+SELECT "m"."name" AS "mname", "pname" FROM "manufacturers" "m", LATERAL get_product_names("m"."id") "pname"
+
+------- End SELECT m.name AS mname, pname
+FROM manufacturers m, LATERAL get_product_names(m.id) pname;-------
+
+
+
+
+-------SELECT m.name AS mname, pname
+FROM manufacturers m LEFT JOIN LATERAL get_product_names(m.id) pname ON true;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"name"=>"mname", "val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"m"}}, {"String"=>{"str"=>"name"}}], "location"=>7}}, "location"=>7}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"pname"}}], "location"=>24}}, "location"=>24}}], "fromClause"=>[{"JoinExpr"=>{"jointype"=>1, "larg"=>{"RangeVar"=>{"relname"=>"manufacturers", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"m"}}, "location"=>35}}, "rarg"=>{"RangeFunction"=>{"lateral"=>true, "functions"=>[[{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"get_product_names"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"m"}}, {"String"=>{"str"=>"id"}}], "location"=>87}}], "location"=>69}}, nil]], "alias"=>{"Alias"=>{"aliasname"=>"pname"}}}}, "quals"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"t"}}, "location"=>102}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"bool"}}], "typemod"=>-1, "location"=>-1}}, "location"=>-1}}}}], "op"=>0}}, "stmt_len"=>106}}
+
+024f8cf8f766a2e9402251016e0f0782e6c96129a0
+
+024f8cf8f766a2e9402251016e0f0782e6c96129a0
+
+SELECT "m"."name" AS "mname", "pname" FROM "manufacturers" "m" LEFT JOIN LATERAL get_product_names("m"."id") "pname" ON true
+
+------- End SELECT m.name AS mname, pname
+FROM manufacturers m LEFT JOIN LATERAL get_product_names(m.id) pname ON true;-------
+
+
+
+
+-------SELECT distributors.* WHERE distributors.name = 'Westward';-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"distributors"}}, {"A_Star"=>{}}], "location"=>7}}, "location"=>7}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"distributors"}}, {"String"=>{"str"=>"name"}}], "location"=>28}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Westward"}}, "location"=>48}}, "location"=>46}}, "op"=>0}}, "stmt_len"=>58}}
+
+027c53e397aa0347e4cb4deb951aaa9ca15ab16e19
+
+027c53e397aa0347e4cb4deb951aaa9ca15ab16e19
+
+SELECT "distributors".* WHERE "distributors"."name" = 'Westward'
+
+------- End SELECT distributors.* WHERE distributors.name = 'Westward';-------
+
+
+
+
+-------ALTER TABLE distributors ADD COLUMN address varchar(30);-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>0, "def"=>{"ColumnDef"=>{"colname"=>"address", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>30}}, "location"=>52}}], "typemod"=>-1, "location"=>44}}, "is_local"=>true, "location"=>36}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>55}}
+
+025cda0a8a6a6ccd8d761c0caaff0301f383c80ff2
+
+025cda0a8a6a6ccd8d761c0caaff0301f383c80ff2
+
+ALTER TABLE "distributors" ADD COLUMN address varchar(30)
+
+------- End ALTER TABLE distributors ADD COLUMN address varchar(30);-------
+
+
+
+
+-------ALTER TABLE distributors DROP COLUMN address RESTRICT;-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>10, "name"=>"address", "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>53}}
+
+024246175fcf7cb0acff3db82f2e68ed2d138ad367
+
+024246175fcf7cb0acff3db82f2e68ed2d138ad367
+
+ALTER TABLE "distributors" DROP address
+
+------- End ALTER TABLE distributors DROP COLUMN address RESTRICT;-------
+
+
+
+
+-------ALTER TABLE distributors
+    ALTER COLUMN address TYPE varchar(80),
+    ALTER COLUMN name TYPE varchar(100);-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>25, "name"=>"address", "def"=>{"ColumnDef"=>{"typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>80}}, "location"=>63}}], "typemod"=>-1, "location"=>55}}, "location"=>42}}, "behavior"=>0}}, {"AlterTableCmd"=>{"subtype"=>25, "name"=>"name", "def"=>{"ColumnDef"=>{"typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>100}}, "location"=>103}}], "typemod"=>-1, "location"=>95}}, "location"=>85}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>107}}
+
+023bf8e0b9c99ae54e35621b0c6beb3616fc0a1b1b
+
+023bf8e0b9c99ae54e35621b0c6beb3616fc0a1b1b
+
+ALTER TABLE "distributors" ALTER COLUMN address TYPE varchar(80), ALTER COLUMN name TYPE varchar(100)
+
+------- End ALTER TABLE distributors
+    ALTER COLUMN address TYPE varchar(80),
+    ALTER COLUMN name TYPE varchar(100);-------
+
+
+
+
+-------ALTER TABLE foo
+    ALTER COLUMN foo_timestamp SET DATA TYPE timestamp with time zone
+    USING
+        timestamp with time zone 'epoch' + foo_timestamp * interval '1 second';-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"foo", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>25, "name"=>"foo_timestamp", "def"=>{"ColumnDef"=>{"typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"timestamptz"}}], "typemod"=>-1, "location"=>61}}, "raw_default"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"epoch"}}, "location"=>129}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"timestamptz"}}], "typemod"=>-1, "location"=>104}}, "location"=>-1}}, "rexpr"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"*"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"foo_timestamp"}}], "location"=>139}}, "rexpr"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"1 second"}}, "location"=>164}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"interval"}}], "typemod"=>-1, "location"=>155}}, "location"=>-1}}, "location"=>153}}, "location"=>137}}, "location"=>33}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>174}}
+
+02a3123d79cb74d47a8e4c2b89404d5f9b835226ba
+
+02a3123d79cb74d47a8e4c2b89404d5f9b835226ba
+
+ALTER TABLE "foo" ALTER COLUMN foo_timestamp TYPE timestamp with time zone USING 'epoch'::timestamp with time zone + ("foo_timestamp" * '1 second'::interval)
+
+------- End ALTER TABLE foo
+    ALTER COLUMN foo_timestamp SET DATA TYPE timestamp with time zone
+    USING
+        timestamp with time zone 'epoch' + foo_timestamp * interval '1 second';-------
+
+
+
+
+-------ALTER TABLE foo
+    ALTER COLUMN foo_timestamp DROP DEFAULT,
+    ALTER COLUMN foo_timestamp TYPE timestamp with time zone
+    USING
+        timestamp with time zone 'epoch' + foo_timestamp * interval '1 second',
+    ALTER COLUMN foo_timestamp SET DEFAULT now();-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"foo", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>3, "name"=>"foo_timestamp", "behavior"=>0}}, {"AlterTableCmd"=>{"subtype"=>25, "name"=>"foo_timestamp", "def"=>{"ColumnDef"=>{"typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"timestamptz"}}], "typemod"=>-1, "location"=>97}}, "raw_default"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"epoch"}}, "location"=>165}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"timestamptz"}}], "typemod"=>-1, "location"=>140}}, "location"=>-1}}, "rexpr"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"*"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"foo_timestamp"}}], "location"=>175}}, "rexpr"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"1 second"}}, "location"=>200}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"interval"}}], "typemod"=>-1, "location"=>191}}, "location"=>-1}}, "location"=>189}}, "location"=>173}}, "location"=>78}}, "behavior"=>0}}, {"AlterTableCmd"=>{"subtype"=>3, "name"=>"foo_timestamp", "def"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"now"}}], "location"=>255}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>260}}
+
+025c63c0a996010e1c559508cf3e278ea276f01e02
+
+025c63c0a996010e1c559508cf3e278ea276f01e02
+
+ALTER TABLE "foo" ALTER COLUMN foo_timestamp DROP DEFAULT, ALTER COLUMN foo_timestamp TYPE timestamp with time zone USING 'epoch'::timestamp with time zone + ("foo_timestamp" * '1 second'::interval), ALTER COLUMN foo_timestamp SET DEFAULT now()
+
+------- End ALTER TABLE foo
+    ALTER COLUMN foo_timestamp DROP DEFAULT,
+    ALTER COLUMN foo_timestamp TYPE timestamp with time zone
+    USING
+        timestamp with time zone 'epoch' + foo_timestamp * interval '1 second',
+    ALTER COLUMN foo_timestamp SET DEFAULT now();-------
+
+
+
+
+-------ALTER TABLE distributors RENAME TO suppliers;-------
+{"RawStmt"=>{"stmt"=>{"RenameStmt"=>{"renameType"=>37, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "newname"=>"suppliers", "behavior"=>0}}, "stmt_len"=>44}}
+
+02c7d8c82a9a9f987243cc638b44f6c4023fb4d5e7
+
+02c7d8c82a9a9f987243cc638b44f6c4023fb4d5e7
+
+ALTER TABLE "distributors" RENAME TO suppliers
+
+------- End ALTER TABLE distributors RENAME TO suppliers;-------
+
+
+
+
+-------ALTER TABLE distributors ALTER COLUMN street SET NOT NULL;-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>5, "name"=>"street", "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>57}}
+
+02dd60a38eaa7289a41d6078bd872574d4ac99e5c2
+
+02dd60a38eaa7289a41d6078bd872574d4ac99e5c2
+
+ALTER TABLE "distributors" ALTER COLUMN street SET NOT NULL
+
+------- End ALTER TABLE distributors ALTER COLUMN street SET NOT NULL;-------
+
+
+
+
+-------ALTER TABLE distributors ALTER COLUMN street DROP NOT NULL;-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>4, "name"=>"street", "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>58}}
+
+02083892b8adc01c68bc6127be59ac6efae998717e
+
+02083892b8adc01c68bc6127be59ac6efae998717e
+
+ALTER TABLE "distributors" ALTER COLUMN street DROP NOT NULL
+
+------- End ALTER TABLE distributors ALTER COLUMN street DROP NOT NULL;-------
+
+
+
+
+-------ALTER TABLE distributors ADD CONSTRAINT zipchk CHECK (char_length(zipcode) = 5);-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>14, "def"=>{"Constraint"=>{"contype"=>4, "conname"=>"zipchk", "location"=>29, "raw_expr"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"char_length"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"zipcode"}}], "location"=>66}}], "location"=>54}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>5}}, "location"=>77}}, "location"=>75}}, "initially_valid"=>true}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>79}}
+
+026568916359188356fe16839be89f88b117164dad
+
+026568916359188356fe16839be89f88b117164dad
+
+ALTER TABLE "distributors" ADD CONSTRAINT zipchk CHECK (char_length("zipcode") = 5)
+
+------- End ALTER TABLE distributors ADD CONSTRAINT zipchk CHECK (char_length(zipcode) = 5);-------
+
+
+
+
+-------ALTER TABLE distributors DROP CONSTRAINT zipchk;-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>22, "name"=>"zipchk", "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>47}}
+
+02bfcb5e4b94b7dcf4426a1cd2a8d308aa93675f24
+
+02bfcb5e4b94b7dcf4426a1cd2a8d308aa93675f24
+
+ALTER TABLE "distributors" DROP CONSTRAINT zipchk
+
+------- End ALTER TABLE distributors DROP CONSTRAINT zipchk;-------
+
+
+
+
+-------ALTER TABLE ONLY distributors DROP CONSTRAINT zipchk;-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "relpersistence"=>"p", "location"=>17}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>22, "name"=>"zipchk", "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>52}}
+
+026ae4a82434c95f012657672c374c888807d49d0e
+
+026ae4a82434c95f012657672c374c888807d49d0e
+
+ALTER TABLE ONLY "distributors" DROP CONSTRAINT zipchk
+
+------- End ALTER TABLE ONLY distributors DROP CONSTRAINT zipchk;-------
+
+
+
+
+-------ALTER TABLE distributors ADD CONSTRAINT distfk FOREIGN KEY (address) REFERENCES addresses (address);-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>14, "def"=>{"Constraint"=>{"contype"=>8, "conname"=>"distfk", "location"=>29, "pktable"=>{"RangeVar"=>{"relname"=>"addresses", "inh"=>true, "relpersistence"=>"p", "location"=>80}}, "fk_attrs"=>[{"String"=>{"str"=>"address"}}], "pk_attrs"=>[{"String"=>{"str"=>"address"}}], "fk_matchtype"=>"s", "fk_upd_action"=>"a", "fk_del_action"=>"a", "initially_valid"=>true}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>99}}
+
+02cd1082ac9fcbb4797b66916eaba24a5b3554df3e
+
+02cd1082ac9fcbb4797b66916eaba24a5b3554df3e
+
+ALTER TABLE "distributors" ADD CONSTRAINT distfk FOREIGN KEY ("address") REFERENCES "addresses" ("address")
+
+------- End ALTER TABLE distributors ADD CONSTRAINT distfk FOREIGN KEY (address) REFERENCES addresses (address);-------
+
+
+
+
+-------ALTER TABLE distributors ADD CONSTRAINT distfk FOREIGN KEY (address) REFERENCES addresses (address) NOT VALID;
+ALTER TABLE distributors VALIDATE CONSTRAINT distfk;-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>14, "def"=>{"Constraint"=>{"contype"=>8, "conname"=>"distfk", "location"=>29, "pktable"=>{"RangeVar"=>{"relname"=>"addresses", "inh"=>true, "relpersistence"=>"p", "location"=>80}}, "fk_attrs"=>[{"String"=>{"str"=>"address"}}], "pk_attrs"=>[{"String"=>{"str"=>"address"}}], "fk_matchtype"=>"s", "fk_upd_action"=>"a", "fk_del_action"=>"a", "skip_validation"=>true}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>109}}
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>123}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>18, "name"=>"distfk", "behavior"=>0}}], "relkind"=>37}}, "stmt_location"=>110, "stmt_len"=>52}}
+
+02ac9e03dda40baa3a8bb0bce26cc31ad56e1120fa
+
+02ac9e03dda40baa3a8bb0bce26cc31ad56e1120fa
+
+ALTER TABLE "distributors" ADD CONSTRAINT distfk FOREIGN KEY ("address") REFERENCES "addresses" ("address") NOT VALID; ALTER TABLE "distributors" VALIDATE CONSTRAINT distfk
+
+------- End ALTER TABLE distributors ADD CONSTRAINT distfk FOREIGN KEY (address) REFERENCES addresses (address) NOT VALID;
+ALTER TABLE distributors VALIDATE CONSTRAINT distfk;-------
+
+
+
+
+-------ALTER TABLE distributors ADD CONSTRAINT dist_id_zipcode_key UNIQUE (dist_id, zipcode);-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>14, "def"=>{"Constraint"=>{"contype"=>6, "conname"=>"dist_id_zipcode_key", "location"=>29, "keys"=>[{"String"=>{"str"=>"dist_id"}}, {"String"=>{"str"=>"zipcode"}}]}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>85}}
+
+02affc28e27862c3c5a321aad3c33054919eae2758
+
+02affc28e27862c3c5a321aad3c33054919eae2758
+
+ALTER TABLE "distributors" ADD CONSTRAINT dist_id_zipcode_key UNIQUE ("dist_id", "zipcode")
+
+------- End ALTER TABLE distributors ADD CONSTRAINT dist_id_zipcode_key UNIQUE (dist_id, zipcode);-------
+
+
+
+
+-------ALTER TABLE distributors ADD PRIMARY KEY (dist_id);-------
+{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>14, "def"=>{"Constraint"=>{"contype"=>5, "location"=>29, "keys"=>[{"String"=>{"str"=>"dist_id"}}]}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>50}}
+
+0237bab51c23abdbb3c1c7f21c77b5a23c11a09021
+
+0237bab51c23abdbb3c1c7f21c77b5a23c11a09021
+
+ALTER TABLE "distributors" ADD PRIMARY KEY ("dist_id")
+
+------- End ALTER TABLE distributors ADD PRIMARY KEY (dist_id);-------
+
+
+
+
+-------INSERT INTO films VALUES
+    ('UA502', 'Bananas', 105, '1971-07-13', 'Comedy', '82 minutes');-------
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"UA502"}}, "location"=>30}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Bananas"}}, "location"=>39}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>105}}, "location"=>50}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"1971-07-13"}}, "location"=>55}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Comedy"}}, "location"=>69}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"82 minutes"}}, "location"=>79}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>92}}
+
+022b181513ed12623a5d018d335564c88109b4f72e
+
+022b181513ed12623a5d018d335564c88109b4f72e
+
+INSERT INTO "films" VALUES ('UA502', 'Bananas', 105, '1971-07-13', 'Comedy', '82 minutes')
+
+------- End INSERT INTO films VALUES
+    ('UA502', 'Bananas', 105, '1971-07-13', 'Comedy', '82 minutes');-------
+
+
+
+
+-------INSERT INTO films (code, title, did, date_prod, kind)
+    VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');-------
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cols"=>[{"ResTarget"=>{"name"=>"code", "location"=>19}}, {"ResTarget"=>{"name"=>"title", "location"=>25}}, {"ResTarget"=>{"name"=>"did", "location"=>32}}, {"ResTarget"=>{"name"=>"date_prod", "location"=>37}}, {"ResTarget"=>{"name"=>"kind", "location"=>48}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"T_601"}}, "location"=>66}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Yojimbo"}}, "location"=>75}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>106}}, "location"=>86}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"1961-06-16"}}, "location"=>91}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Drama"}}, "location"=>105}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>113}}
+
+024ce759186ea44388df4f3b859d7025f7fc7e3147
+
+024ce759186ea44388df4f3b859d7025f7fc7e3147
+
+INSERT INTO "films" (code, title, did, date_prod, kind) VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama')
+
+------- End INSERT INTO films (code, title, did, date_prod, kind)
+    VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');-------
+
+
+
+
+-------INSERT INTO films SELECT * FROM tmp_films WHERE date_prod  '2004-05-07';-------
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "selectStmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>25}}, "location"=>25}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"tmp_films", "inh"=>true, "relpersistence"=>"p", "location"=>32}}], "whereClause"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"2004-05-07"}}, "location"=>59}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"date_prod"}}], "typemod"=>-1, "location"=>48}}, "location"=>-1}}, "op"=>0}}, "override"=>0}}, "stmt_len"=>71}}
+
+02a29d451e23e0c4dfe1895c9ef8c2681f439b35d8
+
+02a29d451e23e0c4dfe1895c9ef8c2681f439b35d8
+
+INSERT INTO "films" SELECT * FROM "tmp_films" WHERE '2004-05-07'::date_prod
+
+------- End INSERT INTO films SELECT * FROM tmp_films WHERE date_prod  '2004-05-07';-------
+
+
+
+
+-------WITH upd AS (
+  UPDATE employees SET sales_count = sales_count + 1 WHERE id =
+    (SELECT sales_person FROM accounts WHERE name = 'Acme Corporation')
+    RETURNING *
+)
+INSERT INTO employees_log SELECT *, current_timestamp FROM upd;-------
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"employees_log", "inh"=>true, "relpersistence"=>"p", "location"=>180}}, "selectStmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>201}}, "location"=>201}}, {"ResTarget"=>{"val"=>{"SQLValueFunction"=>{"op"=>3, "typmod"=>-1, "location"=>204}}, "location"=>204}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"upd", "inh"=>true, "relpersistence"=>"p", "location"=>227}}], "op"=>0}}, "withClause"=>{"WithClause"=>{"ctes"=>[{"CommonTableExpr"=>{"ctename"=>"upd", "ctequery"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"employees", "inh"=>true, "relpersistence"=>"p", "location"=>23}}, "targetList"=>[{"ResTarget"=>{"name"=>"sales_count", "val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"sales_count"}}], "location"=>51}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>65}}, "location"=>63}}, "location"=>37}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"id"}}], "location"=>73}}, "rexpr"=>{"SubLink"=>{"subLinkType"=>4, "subselect"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"sales_person"}}], "location"=>90}}, "location"=>90}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"accounts", "inh"=>true, "relpersistence"=>"p", "location"=>108}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"name"}}], "location"=>123}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Acme Corporation"}}, "location"=>130}}, "location"=>128}}, "op"=>0}}, "location"=>82}}, "location"=>76}}, "returningList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>164}}, "location"=>164}}]}}, "location"=>5}}]}}, "override"=>0}}, "stmt_len"=>230}}
+
+02531b3970d90454b65eb593b60f69a428ce5a9600
+
+02531b3970d90454b65eb593b60f69a428ce5a9600
+
+WITH upd AS (UPDATE "employees" SET sales_count = "sales_count" + 1 WHERE "id" = (SELECT "sales_person" FROM "accounts" WHERE "name" = 'Acme Corporation') RETURNING *) INSERT INTO "employees_log" SELECT *, current_timestamp FROM "upd"
+
+------- End WITH upd AS (
+  UPDATE employees SET sales_count = sales_count + 1 WHERE id =
+    (SELECT sales_person FROM accounts WHERE name = 'Acme Corporation')
+    RETURNING *
+)
+INSERT INTO employees_log SELECT *, current_timestamp FROM upd;-------
+
+
+
+
+-------ROLLBACK;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>3}}, "stmt_len"=>8}}
+
+02ad2720a208a2672e709e6f5b2f5e51ff383fb856
+
+02ad2720a208a2672e709e6f5b2f5e51ff383fb856
+
+ROLLBACK
+
+------- End ROLLBACK;-------
+
+
+
+
+-------CREATE TABLE films (
+    code        char(5),
+    title       varchar(40),
+    did         integer,
+    date_prod   date,
+    kind        varchar(10),
+    len         interval hour to minute,
+    CONSTRAINT production UNIQUE(date_prod)
+);-------
+{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"code", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"bpchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>5}}, "location"=>42}}], "typemod"=>-1, "location"=>37}}, "is_local"=>true, "location"=>25}}, {"ColumnDef"=>{"colname"=>"title", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>40}}, "location"=>70}}], "typemod"=>-1, "location"=>62}}, "is_local"=>true, "location"=>50}}, {"ColumnDef"=>{"colname"=>"did", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>91}}, "is_local"=>true, "location"=>79}}, {"ColumnDef"=>{"colname"=>"date_prod", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"date"}}], "typemod"=>-1, "location"=>116}}, "is_local"=>true, "location"=>104}}, {"ColumnDef"=>{"colname"=>"kind", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>10}}, "location"=>146}}], "typemod"=>-1, "location"=>138}}, "is_local"=>true, "location"=>126}}, {"ColumnDef"=>{"colname"=>"len", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"interval"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>3072}}, "location"=>176}}], "typemod"=>-1, "location"=>167}}, "is_local"=>true, "location"=>155}}, {"Constraint"=>{"contype"=>6, "conname"=>"production", "location"=>196, "keys"=>[{"String"=>{"str"=>"date_prod"}}]}}], "oncommit"=>0}}, "stmt_len"=>237}}
+
+022285e211ab789f75011655cbc535f67ac675c07f
+
+022285e211ab789f75011655cbc535f67ac675c07f
+
+CREATE TABLE "films" (code char(5), title varchar(40), did int, date_prod date, kind varchar(10), len interval hour to minute, CONSTRAINT production UNIQUE ("date_prod"))
+
+------- End CREATE TABLE films (
+    code        char(5),
+    title       varchar(40),
+    did         integer,
+    date_prod   date,
+    kind        varchar(10),
+    len         interval hour to minute,
+    CONSTRAINT production UNIQUE(date_prod)
+);-------
+
+
+
+
+-------CREATE TABLE films (
+    code        char(5),
+    title       varchar(40),
+    did         integer,
+    date_prod   date,
+    kind        varchar(10),
+    len         interval hour to minute,
+    CONSTRAINT code_title PRIMARY KEY(code,title)
+);-------
+{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"code", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"bpchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>5}}, "location"=>42}}], "typemod"=>-1, "location"=>37}}, "is_local"=>true, "location"=>25}}, {"ColumnDef"=>{"colname"=>"title", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>40}}, "location"=>70}}], "typemod"=>-1, "location"=>62}}, "is_local"=>true, "location"=>50}}, {"ColumnDef"=>{"colname"=>"did", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>91}}, "is_local"=>true, "location"=>79}}, {"ColumnDef"=>{"colname"=>"date_prod", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"date"}}], "typemod"=>-1, "location"=>116}}, "is_local"=>true, "location"=>104}}, {"ColumnDef"=>{"colname"=>"kind", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>10}}, "location"=>146}}], "typemod"=>-1, "location"=>138}}, "is_local"=>true, "location"=>126}}, {"ColumnDef"=>{"colname"=>"len", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"interval"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>3072}}, "location"=>176}}], "typemod"=>-1, "location"=>167}}, "is_local"=>true, "location"=>155}}, {"Constraint"=>{"contype"=>5, "conname"=>"code_title", "location"=>196, "keys"=>[{"String"=>{"str"=>"code"}}, {"String"=>{"str"=>"title"}}]}}], "oncommit"=>0}}, "stmt_len"=>243}}
+
+024c29d0fb29a984a9e0e5e7c6c19938612eeb3365
+
+024c29d0fb29a984a9e0e5e7c6c19938612eeb3365
+
+CREATE TABLE "films" (code char(5), title varchar(40), did int, date_prod date, kind varchar(10), len interval hour to minute, CONSTRAINT code_title PRIMARY KEY ("code", "title"))
+
+------- End CREATE TABLE films (
+    code        char(5),
+    title       varchar(40),
+    did         integer,
+    date_prod   date,
+    kind        varchar(10),
+    len         interval hour to minute,
+    CONSTRAINT code_title PRIMARY KEY(code,title)
+);-------
+
+
+
+
+-------CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40),
+    PRIMARY KEY(did)
+);
+
+CREATE TABLE distributors (
+    did     integer PRIMARY KEY,
+    name    varchar(40)
+);-------
+{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"did", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>40}}, "is_local"=>true, "location"=>32}}, {"ColumnDef"=>{"colname"=>"name", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>40}}, "location"=>69}}], "typemod"=>-1, "location"=>61}}, "is_local"=>true, "location"=>53}}, {"Constraint"=>{"contype"=>5, "location"=>78, "keys"=>[{"String"=>{"str"=>"did"}}]}}], "oncommit"=>0}}, "stmt_len"=>96}}
+{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>112}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"did", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>139}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>5, "location"=>147}}], "location"=>131}}, {"ColumnDef"=>{"colname"=>"name", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>40}}, "location"=>180}}], "typemod"=>-1, "location"=>172}}, "is_local"=>true, "location"=>164}}], "oncommit"=>0}}, "stmt_location"=>97, "stmt_len"=>88}}
+
+028a2cb9828e190fa94f16748b9220c792fa5a3f12
+
+028a2cb9828e190fa94f16748b9220c792fa5a3f12
+
+CREATE TABLE "distributors" (did int, name varchar(40), PRIMARY KEY ("did")); CREATE TABLE "distributors" (did int PRIMARY KEY, name varchar(40))
+
+------- End CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40),
+    PRIMARY KEY(did)
+);
+
+CREATE TABLE distributors (
+    did     integer PRIMARY KEY,
+    name    varchar(40)
+);-------
+
+
+
+
+-------CREATE TABLE distributors (
+    name      varchar(40) DEFAULT 'Luso Films',
+    did       integer DEFAULT nextval('distributors_serial'),
+    modtime   timestamp DEFAULT current_timestamp
+);-------
+{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"name", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>40}}, "location"=>50}}], "typemod"=>-1, "location"=>42}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>2, "location"=>54, "raw_expr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Luso Films"}}, "location"=>62}}}}], "location"=>32}}, {"ColumnDef"=>{"colname"=>"did", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>90}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>2, "location"=>98, "raw_expr"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"nextval"}}], "args"=>[{"A_Const"=>{"val"=>{"String"=>{"str"=>"distributors_serial"}}, "location"=>114}}], "location"=>106}}}}], "location"=>80}}, {"ColumnDef"=>{"colname"=>"modtime", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"timestamp"}}], "typemod"=>-1, "location"=>152}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>2, "location"=>162, "raw_expr"=>{"SQLValueFunction"=>{"op"=>3, "typmod"=>-1, "location"=>170}}}}], "location"=>142}}], "oncommit"=>0}}, "stmt_len"=>189}}
+
+0247a8bd63ebd4d94934767e758225b5f40211ce54
+
+0247a8bd63ebd4d94934767e758225b5f40211ce54
+
+CREATE TABLE "distributors" (name varchar(40) DEFAULT 'Luso Films', did int DEFAULT nextval('distributors_serial'), modtime timestamp DEFAULT current_timestamp)
+
+------- End CREATE TABLE distributors (
+    name      varchar(40) DEFAULT 'Luso Films',
+    did       integer DEFAULT nextval('distributors_serial'),
+    modtime   timestamp DEFAULT current_timestamp
+);-------
+
+
+
+
+-------CREATE TABLE distributors (
+    did     integer CONSTRAINT no_null NOT NULL,
+    name    varchar(40) NOT NULL
+);-------
+{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"did", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>40}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>1, "conname"=>"no_null", "location"=>48}}], "location"=>32}}, {"ColumnDef"=>{"colname"=>"name", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>40}}, "location"=>97}}], "typemod"=>-1, "location"=>89}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>1, "location"=>101}}], "location"=>81}}], "oncommit"=>0}}, "stmt_len"=>111}}
+
+022faff375666e4dcd3cd0c21f452412b2232c42a3
+
+022faff375666e4dcd3cd0c21f452412b2232c42a3
+
+CREATE TABLE "distributors" (did int CONSTRAINT no_null NOT NULL, name varchar(40) NOT NULL)
+
+------- End CREATE TABLE distributors (
+    did     integer CONSTRAINT no_null NOT NULL,
+    name    varchar(40) NOT NULL
+);-------
+
+
+
+
+-------CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40) UNIQUE
+);-------
+{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"did", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>40}}, "is_local"=>true, "location"=>32}}, {"ColumnDef"=>{"colname"=>"name", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>40}}, "location"=>69}}], "typemod"=>-1, "location"=>61}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>6, "location"=>73}}], "location"=>53}}], "oncommit"=>0}}, "stmt_len"=>81}}
+
+0250b5804c86a1bda0159b4ff1933ba27edcfa72c0
+
+0250b5804c86a1bda0159b4ff1933ba27edcfa72c0
+
+CREATE TABLE "distributors" (did int, name varchar(40) UNIQUE)
+
+------- End CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40) UNIQUE
+);-------
+
+
+
+
+-------CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40),
+    UNIQUE(name)
+);-------
+{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"did", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>40}}, "is_local"=>true, "location"=>32}}, {"ColumnDef"=>{"colname"=>"name", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"varchar"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>40}}, "location"=>69}}], "typemod"=>-1, "location"=>61}}, "is_local"=>true, "location"=>53}}, {"Constraint"=>{"contype"=>6, "location"=>78, "keys"=>[{"String"=>{"str"=>"name"}}]}}], "oncommit"=>0}}, "stmt_len"=>92}}
+
+024625777658b598dd3f8bd01c63c461c788781e4f
+
+024625777658b598dd3f8bd01c63c461c788781e4f
+
+CREATE TABLE "distributors" (did int, name varchar(40), UNIQUE ("name"))
+
+------- End CREATE TABLE distributors (
+    did     integer,
+    name    varchar(40),
+    UNIQUE(name)
+);-------
+
+
+
+
+-------DROP TABLE films, distributors;-------
+{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"films"}}], [{"String"=>{"str"=>"distributors"}}]], "removeType"=>37, "behavior"=>0}}, "stmt_len"=>30}}
+
+02f135527f2f634fb131cc000e5a394e57b80f5405
+
+02f135527f2f634fb131cc000e5a394e57b80f5405
+
+DROP TABLE "films", "distributors"
+
+------- End DROP TABLE films, distributors;-------
+
+
+
+
+-------CREATE FUNCTION add(integer, integer) RETURNS integer
+    AS 'select $1 + $2;'
+    LANGUAGE SQL
+    IMMUTABLE
+    RETURNS NULL ON NULL INPUT;-------
+{"RawStmt"=>{"stmt"=>{"CreateFunctionStmt"=>{"funcname"=>[{"String"=>{"str"=>"add"}}], "parameters"=>[{"FunctionParameter"=>{"argType"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>20}}, "mode"=>105}}, {"FunctionParameter"=>{"argType"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>29}}, "mode"=>105}}], "returnType"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>46}}, "options"=>[{"DefElem"=>{"defname"=>"as", "arg"=>[{"String"=>{"str"=>"select $1 + $2;"}}], "defaction"=>0, "location"=>58}}, {"DefElem"=>{"defname"=>"language", "arg"=>{"String"=>{"str"=>"sql"}}, "defaction"=>0, "location"=>83}}, {"DefElem"=>{"defname"=>"volatility", "arg"=>{"String"=>{"str"=>"immutable"}}, "defaction"=>0, "location"=>100}}, {"DefElem"=>{"defname"=>"strict", "arg"=>{"Integer"=>{"ival"=>1}}, "defaction"=>0, "location"=>114}}]}}, "stmt_len"=>140}}
+
+028f80ce7ae0b88f0d32cca3c3f8f362ae2fbcbd35
+
+028f80ce7ae0b88f0d32cca3c3f8f362ae2fbcbd35
+
+CREATE FUNCTION "add"(int, int) RETURNS int AS $$select $1 + $2;$$ language "sql" IMMUTABLE RETURNS NULL ON NULL INPUT
+
+------- End CREATE FUNCTION add(integer, integer) RETURNS integer
+    AS 'select $1 + $2;'
+    LANGUAGE SQL
+    IMMUTABLE
+    RETURNS NULL ON NULL INPUT;-------
+
+
+
+
+-------BEGIN;
+    INSERT INTO table1 VALUES (3);
+    SAVEPOINT my_savepoint;
+    INSERT INTO table1 VALUES (4);
+    RELEASE SAVEPOINT my_savepoint;
+COMMIT;-------
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"table1", "inh"=>true, "relpersistence"=>"p", "location"=>23}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>3}}, "location"=>38}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>6, "stmt_len"=>34}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>4, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"my_savepoint"}}, "defaction"=>0, "location"=>46}}]}}, "stmt_location"=>41, "stmt_len"=>27}}
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"table1", "inh"=>true, "relpersistence"=>"p", "location"=>86}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>4}}, "location"=>101}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>69, "stmt_len"=>34}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>5, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"my_savepoint"}}, "defaction"=>0, "location"=>109}}]}}, "stmt_location"=>104, "stmt_len"=>35}}
+{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>2}}, "stmt_location"=>140, "stmt_len"=>7}}
+
+024407976e4055866cfbdc38886d44ee79e1d94e28
+
+024407976e4055866cfbdc38886d44ee79e1d94e28
+
+BEGIN; INSERT INTO "table1" VALUES (3); SAVEPOINT "my_savepoint"; INSERT INTO "table1" VALUES (4); RELEASE "my_savepoint"; COMMIT
+
+------- End BEGIN;
+    INSERT INTO table1 VALUES (3);
+    SAVEPOINT my_savepoint;
+    INSERT INTO table1 VALUES (4);
+    RELEASE SAVEPOINT my_savepoint;
+COMMIT;-------
+
+
+
+
+-------COPY country FROM '/usr1/proj/bray/sql/country_data';-------
+{"RawStmt"=>{"stmt"=>{"CopyStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"country", "inh"=>true, "relpersistence"=>"p", "location"=>5}}, "is_from"=>true, "filename"=>"/usr1/proj/bray/sql/country_data"}}, "stmt_len"=>52}}
+
+022d9ce60311a8626c905caf234a27fdf0e227a5f2
+
+022d9ce60311a8626c905caf234a27fdf0e227a5f2
+
+COPY "country" FROM '/usr1/proj/bray/sql/country_data'
+
+------- End COPY country FROM '/usr1/proj/bray/sql/country_data';-------
+
+
+
+
+-------COPY country TO PROGRAM 'gzip > /usr1/proj/bray/sql/country_data.gz';-------
+{"RawStmt"=>{"stmt"=>{"CopyStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"country", "inh"=>true, "relpersistence"=>"p", "location"=>5}}, "is_program"=>true, "filename"=>"gzip > /usr1/proj/bray/sql/country_data.gz"}}, "stmt_len"=>68}}
+
+028ca74c547a1a0657fb5f43b5659d7e73b35eb2ae
+
+028ca74c547a1a0657fb5f43b5659d7e73b35eb2ae
+
+COPY "country" TO PROGRAM 'gzip > /usr1/proj/bray/sql/country_data.gz'
+
+------- End COPY country TO PROGRAM 'gzip > /usr1/proj/bray/sql/country_data.gz';-------
+
+
+
+
+-------VALUES (1, 'one'), (2, 'two'), (3, 'three');-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>8}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"one"}}, "location"=>11}}], [{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>20}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"two"}}, "location"=>23}}], [{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>3}}, "location"=>32}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"three"}}, "location"=>35}}]], "op"=>0}}, "stmt_len"=>43}}
+
+027b53c46681b378f36e7f5c2adf8b0e752371c230
+
+027b53c46681b378f36e7f5c2adf8b0e752371c230
+
+VALUES (1, 'one'), (2, 'two'), (3, 'three')
+
+------- End VALUES (1, 'one'), (2, 'two'), (3, 'three');-------
+
+
+
+
+-------SELECT 1 AS column1, 'one' AS column2
+UNION ALL
+SELECT 2, 'two'
+UNION ALL
+SELECT 3, 'three';-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"op"=>1, "all"=>true, "larg"=>{"SelectStmt"=>{"op"=>1, "all"=>true, "larg"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"name"=>"column1", "val"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>7}}, "location"=>7}}, {"ResTarget"=>{"name"=>"column2", "val"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"one"}}, "location"=>21}}, "location"=>21}}], "op"=>0}}, "rarg"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>55}}, "location"=>55}}, {"ResTarget"=>{"val"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"two"}}, "location"=>58}}, "location"=>58}}], "op"=>0}}}}, "rarg"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>3}}, "location"=>81}}, "location"=>81}}, {"ResTarget"=>{"val"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"three"}}, "location"=>84}}, "location"=>84}}], "op"=>0}}}}, "stmt_len"=>91}}
+
+028feebd0692f1b1a4f36bbdb6a86aefe69a3cd625
+
+028feebd0692f1b1a4f36bbdb6a86aefe69a3cd625
+
+SELECT 1 AS "column1", 'one' AS "column2" UNION ALL SELECT 2, 'two' UNION ALL SELECT 3, 'three'
+
+------- End SELECT 1 AS column1, 'one' AS column2
+UNION ALL
+SELECT 2, 'two'
+UNION ALL
+SELECT 3, 'three';-------
+
+
+
+
+-------INSERT INTO films (code, title, did, date_prod, kind)
+    VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');-------
+{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cols"=>[{"ResTarget"=>{"name"=>"code", "location"=>19}}, {"ResTarget"=>{"name"=>"title", "location"=>25}}, {"ResTarget"=>{"name"=>"did", "location"=>32}}, {"ResTarget"=>{"name"=>"date_prod", "location"=>37}}, {"ResTarget"=>{"name"=>"kind", "location"=>48}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"T_601"}}, "location"=>66}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Yojimbo"}}, "location"=>75}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>106}}, "location"=>86}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"1961-06-16"}}, "location"=>91}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Drama"}}, "location"=>105}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>113}}
+
+024ce759186ea44388df4f3b859d7025f7fc7e3147
+
+024ce759186ea44388df4f3b859d7025f7fc7e3147
+
+INSERT INTO "films" (code, title, did, date_prod, kind) VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama')
+
+------- End INSERT INTO films (code, title, did, date_prod, kind)
+    VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama');-------
+
+
+
+
+-------SELECT * FROM machines
+WHERE ip_address IN (VALUES('192.168.0.1'::inet), ('192.168.0.10'), ('192.168.1.43'));-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"machines", "inh"=>true, "relpersistence"=>"p", "location"=>14}}], "whereClause"=>{"SubLink"=>{"subLinkType"=>2, "testexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"ip_address"}}], "location"=>29}}, "subselect"=>{"SelectStmt"=>{"valuesLists"=>[[{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"192.168.0.1"}}, "location"=>51}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"inet"}}], "typemod"=>-1, "location"=>66}}, "location"=>64}}], [{"A_Const"=>{"val"=>{"String"=>{"str"=>"192.168.0.10"}}, "location"=>74}}], [{"A_Const"=>{"val"=>{"String"=>{"str"=>"192.168.1.43"}}, "location"=>92}}]], "op"=>0}}, "location"=>40}}, "op"=>0}}, "stmt_len"=>108}}
+
+02e8d1f46fd129a73b182092abc0487a6ef9c4ed8a
+
+02e8d1f46fd129a73b182092abc0487a6ef9c4ed8a
+
+SELECT * FROM "machines" WHERE "ip_address" IN (VALUES ('192.168.0.1'::inet), ('192.168.0.10'), ('192.168.1.43'))
+
+------- End SELECT * FROM machines
+WHERE ip_address IN (VALUES('192.168.0.1'::inet), ('192.168.0.10'), ('192.168.1.43'));-------
+
+
+
+
+-------SELECT agg(col) FROM tab;-------
+{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"agg"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"col"}}], "location"=>11}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"tab", "inh"=>true, "relpersistence"=>"p", "location"=>21}}], "op"=>0}}, "stmt_len"=>24}}
+
+0235a207d7d32f31da77b1c65f2433d3f64caa2ed3
+
+0235a207d7d32f31da77b1c65f2433d3f64caa2ed3
+
+SELECT agg("col") FROM "tab"
+
+------- End SELECT agg(col) FROM tab;-------
