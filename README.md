@@ -1,2 +1,2 @@
-# friendly-doodle
+# extract_postgresql_documentation_sql_examples
 Extract SQL examples in PostgreSQL Documentation
