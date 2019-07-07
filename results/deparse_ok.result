@@ -45,6 +45,33 @@ Tree: [{"RawStmt"=>{"stmt"=>{"CreateCastStmt"=>{"sourcetype"=>{"TypeName"=>{"nam
 --------END-------
 
 -------BEGIN-------
+Method: drop_publication
+SQL: DROP PUBLICATION mypublication;
+Fingerprint: 02cdb94b26297e08821fa0f6d168f304743ee92b47
+Fingerprint Deparse: 02cdb94b26297e08821fa0f6d168f304743ee92b47
+Deparse SQL: DROP PUBLICATION "mypublication"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"mypublication"}}], "removeType"=>28, "behavior"=>0}}, "stmt_len"=>30}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_transform
+SQL: DROP TRANSFORM FOR hstore LANGUAGE plpythonu;
+Fingerprint: 0277cad537cd2e4af1c353ab48dc144767c6814424
+Fingerprint Deparse: 0277cad537cd2e4af1c353ab48dc144767c6814424
+Deparse SQL: DROP TRANSFORM FOR hstore LANGUAGE "plpythonu"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"hstore"}}], "typemod"=>-1, "location"=>19}}, {"String"=>{"str"=>"plpythonu"}}]], "removeType"=>39, "behavior"=>0}}, "stmt_len"=>44}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_materialized_view
+SQL: DROP MATERIALIZED VIEW order_summary;
+Fingerprint: 0276d5570273c363dbea342916ab46f6468e1fcac6
+Fingerprint Deparse: 0276d5570273c363dbea342916ab46f6468e1fcac6
+Deparse SQL: DROP MATERIALIZED VIEW "order_summary"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"order_summary"}}]], "removeType"=>23, "behavior"=>0}}, "stmt_len"=>36}}]
+--------END-------
+
+-------BEGIN-------
 Method: set
 SQL: SELECT setseed(value);
 Fingerprint: 021d31d83597efa556d01b05dbf03112ecfd7263e6
@@ -60,6 +87,15 @@ Fingerprint: 026fa0e466aa06db6be42c4a45aba526fa4a0019d2
 Fingerprint Deparse: 026fa0e466aa06db6be42c4a45aba526fa4a0019d2
 Deparse SQL: SET search_path TO 'my_schema', 'public'
 Tree: [{"RawStmt"=>{"stmt"=>{"VariableSetStmt"=>{"kind"=>0, "name"=>"search_path", "args"=>[{"A_Const"=>{"val"=>{"String"=>{"str"=>"my_schema"}}, "location"=>19}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"public"}}, "location"=>30}}]}}, "stmt_len"=>36}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_type
+SQL: DROP TYPE box;
+Fingerprint: 02a171d43aed14152a47e66cc5c0b1af70f67836d8
+Fingerprint Deparse: 02a171d43aed14152a47e66cc5c0b1af70f67836d8
+Deparse SQL: DROP TYPE box
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"box"}}], "typemod"=>-1, "location"=>10}}], "removeType"=>45, "behavior"=>0}}, "stmt_len"=>13}}]
 --------END-------
 
 -------BEGIN-------
@@ -196,6 +232,24 @@ Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"films
 --------END-------
 
 -------BEGIN-------
+Method: drop_tablespace
+SQL: DROP TABLESPACE mystuff;
+Fingerprint: 0222fe29bc4e2eb7e1787338f507fece3136e48204
+Fingerprint Deparse: 0222fe29bc4e2eb7e1787338f507fece3136e48204
+Deparse SQL: DROP TABLESPACE mystuff
+Tree: [{"RawStmt"=>{"stmt"=>{"DropTableSpaceStmt"=>{"tablespacename"=>"mystuff"}}, "stmt_len"=>23}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_conversion
+SQL: DROP CONVERSION myname;
+Fingerprint: 0203be032f9651324deb154abaad73457ad4f329a7
+Fingerprint Deparse: 0203be032f9651324deb154abaad73457ad4f329a7
+Deparse SQL: DROP CONVERSION "myname"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"myname"}}]], "removeType"=>8, "behavior"=>0}}, "stmt_len"=>22}}]
+--------END-------
+
+-------BEGIN-------
 Method: create_table
 SQL: CREATE TABLE films (
     code        char(5),
@@ -298,6 +352,15 @@ Tree: [{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 --------END-------
 
 -------BEGIN-------
+Method: drop_trigger
+SQL: DROP TRIGGER if_dist_exists ON films;
+Fingerprint: 022cf13e5d31d5bfd4a137f39a79563021ef0c7ef6
+Fingerprint Deparse: 022cf13e5d31d5bfd4a137f39a79563021ef0c7ef6
+Deparse SQL: DROP TRIGGER "if_dist_exists" ON "films"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"films"}}, {"String"=>{"str"=>"if_dist_exists"}}]], "removeType"=>40, "behavior"=>0}}, "stmt_len"=>36}}]
+--------END-------
+
+-------BEGIN-------
 Method: insert
 SQL: INSERT INTO films VALUES
     ('UA502', 'Bananas', 105, '1971-07-13', 'Comedy', '82 minutes');
@@ -341,6 +404,42 @@ Tree: [{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 --------END-------
 
 -------BEGIN-------
+Method: drop_rule
+SQL: DROP RULE newrule ON mytable;
+Fingerprint: 02c7d815617cc08f5a8fccd0eb6205aec8ad4f1f1a
+Fingerprint Deparse: 02c7d815617cc08f5a8fccd0eb6205aec8ad4f1f1a
+Deparse SQL: DROP RULE "newrule" ON "mytable"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"mytable"}}, {"String"=>{"str"=>"newrule"}}]], "removeType"=>31, "behavior"=>0}}, "stmt_len"=>28}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_server
+SQL: DROP SERVER IF EXISTS foo;
+Fingerprint: 02c5b24bb7fa38f62f81c3082e559831d2aa99c7e7
+Fingerprint Deparse: 02c5b24bb7fa38f62f81c3082e559831d2aa99c7e7
+Deparse SQL: DROP SERVER IF EXISTS "foo"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"foo"}}], "removeType"=>17, "behavior"=>0, "missing_ok"=>true}}, "stmt_len"=>25}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_cast
+SQL: DROP CAST (text AS int);
+Fingerprint: 023412497044b61a7725009e2a014ce4d21df9eb8c
+Fingerprint Deparse: 023412497044b61a7725009e2a014ce4d21df9eb8c
+Deparse SQL: DROP CAST (text AS int)
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>11}}, {"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>19}}]], "removeType"=>5, "behavior"=>0}}, "stmt_len"=>23}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_opfamily
+SQL: DROP OPERATOR FAMILY float_ops USING btree;
+Fingerprint: 027bd7ecc076abbedf1e50444c9bd113fd4413182c
+Fingerprint Deparse: 027bd7ecc076abbedf1e50444c9bd113fd4413182c
+Deparse SQL: DROP OPERATOR FAMILY "float_ops" USING "btree"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"btree"}}, {"String"=>{"str"=>"float_ops"}}]], "removeType"=>26, "behavior"=>0}}, "stmt_len"=>42}}]
+--------END-------
+
+-------BEGIN-------
 Method: do
 SQL: DO $$DECLARE r record;
 BEGIN
@@ -361,6 +460,78 @@ BEGIN
     END LOOP;
 END$$
 Tree: [{"RawStmt"=>{"stmt"=>{"DoStmt"=>{"args"=>[{"DefElem"=>{"defname"=>"as", "arg"=>{"String"=>{"str"=>"DECLARE r record;\nBEGIN\n    FOR r IN SELECT table_schema, table_name FROM information_schema.tables\n             WHERE table_type = 'VIEW' AND table_schema = 'public'\n    LOOP\n        EXECUTE 'GRANT ALL ON ' || quote_ident(r.table_schema) || '.' || quote_ident(r.table_name) || ' TO webuser';\n    END LOOP;\nEND"}}, "defaction"=>0, "location"=>3}}]}}, "stmt_len"=>317}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_aggregate
+SQL: DROP AGGREGATE myavg(integer);
+Fingerprint: 02d86850b52beb64632a2c2fb4480682a9287bc7be
+Fingerprint Deparse: 02d86850b52beb64632a2c2fb4480682a9287bc7be
+Deparse SQL: DROP AGGREGATE "myavg"(int)
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"myavg"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>21}}]}}], "removeType"=>1, "behavior"=>0}}, "stmt_len"=>29}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_aggregate
+SQL: DROP AGGREGATE myavg(integer), myavg(bigint);
+Fingerprint: 0231154feab37055134c958ad02b0bc833dafd632b
+Fingerprint Deparse: 0231154feab37055134c958ad02b0bc833dafd632b
+Deparse SQL: DROP AGGREGATE "myavg"(int), "myavg"(bigint)
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"myavg"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>21}}]}}, {"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"myavg"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int8"}}], "typemod"=>-1, "location"=>37}}]}}], "removeType"=>1, "behavior"=>0}}, "stmt_len"=>44}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_index
+SQL: DROP INDEX title_idx;
+Fingerprint: 02a328373b9cbb33d266342e33d375a6b84b6bb0f4
+Fingerprint Deparse: 02a328373b9cbb33d266342e33d375a6b84b6bb0f4
+Deparse SQL: DROP INDEX "title_idx"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"title_idx"}}]], "removeType"=>20, "behavior"=>0}}, "stmt_len"=>20}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_function
+SQL: DROP FUNCTION sqrt(integer);
+Fingerprint: 0206602924801229253fd29741d49c06dce14eec86
+Fingerprint Deparse: 0206602924801229253fd29741d49c06dce14eec86
+Deparse SQL: DROP FUNCTION "sqrt"(int)
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"sqrt"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>19}}]}}], "removeType"=>19, "behavior"=>0}}, "stmt_len"=>27}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_function
+SQL: DROP FUNCTION sqrt(integer), sqrt(bigint);
+Fingerprint: 02148e89232ea016024d8eaa0c68044ad5e097fe0b
+Fingerprint Deparse: 02148e89232ea016024d8eaa0c68044ad5e097fe0b
+Deparse SQL: DROP FUNCTION "sqrt"(int), "sqrt"(bigint)
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"sqrt"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>19}}]}}, {"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"sqrt"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int8"}}], "typemod"=>-1, "location"=>34}}]}}], "removeType"=>19, "behavior"=>0}}, "stmt_len"=>41}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_function
+SQL: DROP FUNCTION update_employee_salaries;
+Fingerprint: 02d77c33a0cbc4125118acf4851cdc9650b631f709
+Fingerprint Deparse: 02d77c33a0cbc4125118acf4851cdc9650b631f709
+Deparse SQL: DROP FUNCTION "update_employee_salaries"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"update_employee_salaries"}}], "args_unspecified"=>true}}], "removeType"=>19, "behavior"=>0}}, "stmt_len"=>38}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_function
+SQL: DROP FUNCTION update_employee_salaries();
+Fingerprint: 02f02cfb91c0210090d9a9231beca1d7b052418e44
+Fingerprint Deparse: 02f02cfb91c0210090d9a9231beca1d7b052418e44
+Deparse SQL: DROP FUNCTION "update_employee_salaries"()
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"update_employee_salaries"}}]}}], "removeType"=>19, "behavior"=>0}}, "stmt_len"=>40}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_collation
+SQL: DROP COLLATION german;
+Fingerprint: 021d232de91051fe246e21ca741656c88671ae212f
+Fingerprint Deparse: 021d232de91051fe246e21ca741656c88671ae212f
+Deparse SQL: DROP COLLATION "german"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"german"}}]], "removeType"=>7, "behavior"=>0}}, "stmt_len"=>21}}]
 --------END-------
 
 -------BEGIN-------
@@ -393,12 +564,41 @@ Tree: [{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}, {
 --------END-------
 
 -------BEGIN-------
+Method: drop_foreign_data_wrapper
+SQL: DROP FOREIGN DATA WRAPPER dbi;
+Fingerprint: 02753428b33fe9226d852ef4eb46a63211c3ce8aa9
+Fingerprint Deparse: 02753428b33fe9226d852ef4eb46a63211c3ce8aa9
+Deparse SQL: DROP FOREIGN DATA WRAPPER "dbi"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"dbi"}}], "removeType"=>16, "behavior"=>0}}, "stmt_len"=>29}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_access_method
+SQL: DROP ACCESS METHOD heptree;
+Fingerprint: 02fd0aeaf5a9d782a60cb3c9fa62c7af96b4bd92e3
+Fingerprint Deparse: 02fd0aeaf5a9d782a60cb3c9fa62c7af96b4bd92e3
+Deparse SQL: DROP ACCESS METHOD "heptree"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"heptree"}}], "removeType"=>0, "behavior"=>0}}, "stmt_len"=>26}}]
+--------END-------
+
+-------BEGIN-------
 Method: vacuum
 SQL: VACUUM (VERBOSE, ANALYZE) onek;
 Fingerprint: 02f823b5be2409d5ddc39f61d20b8b235f58fca61a
 Fingerprint Deparse: 02f823b5be2409d5ddc39f61d20b8b235f58fca61a
 Deparse SQL: VACUUM VERBOSE ANALYZE "onek"
 Tree: [{"RawStmt"=>{"stmt"=>{"VacuumStmt"=>{"options"=>7, "relation"=>{"RangeVar"=>{"relname"=>"onek", "inh"=>true, "relpersistence"=>"p", "location"=>26}}}}, "stmt_len"=>30}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_statistics
+SQL: DROP STATISTICS IF EXISTS
+    accounting.users_uid_creation,
+    public.grants_user_role;
+Fingerprint: 020feab2a6d6609395291f3679f649724a8a9b2cfe
+Fingerprint Deparse: 020feab2a6d6609395291f3679f649724a8a9b2cfe
+Deparse SQL: DROP STATISTICS IF EXISTS "accounting"."users_uid_creation", "public"."grants_user_role"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"accounting"}}, {"String"=>{"str"=>"users_uid_creation"}}], [{"String"=>{"str"=>"public"}}, {"String"=>{"str"=>"grants_user_role"}}]], "removeType"=>35, "behavior"=>0, "missing_ok"=>true}}, "stmt_len"=>88}}]
 --------END-------
 
 -------BEGIN-------
@@ -436,6 +636,15 @@ Fingerprint: 0256d06cbbe4ccca54e72616caed37bd315ba4865f
 Fingerprint Deparse: 0256d06cbbe4ccca54e72616caed37bd315ba4865f
 Deparse SQL: BEGIN; SAVEPOINT "sp1"; INSERT INTO "wines" VALUES ('Chateau Lafite 2003', '24'); ROLLBACK TO SAVEPOINT "sp1"; UPDATE "wines" SET stock = "stock" + 24 WHERE "winename" = 'Chateau Lafite 2003'; COMMIT
 Tree: [{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}, {"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>4, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"sp1"}}, "defaction"=>0, "location"=>27}}]}}, "stmt_location"=>6, "stmt_len"=>34}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"wines", "inh"=>true, "relpersistence"=>"p", "location"=>54}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"Chateau Lafite 2003"}}, "location"=>67}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"24"}}, "location"=>90}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>41, "stmt_len"=>54}}, {"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>6, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"sp1"}}, "defaction"=>0, "location"=>193}}]}}, "stmt_location"=>96, "stmt_len"=>112}}, {"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"wines", "inh"=>true, "relpersistence"=>"p", "location"=>217}}, "targetList"=>[{"ResTarget"=>{"name"=>"stock", "val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"stock"}}], "location"=>235}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>24}}, "location"=>243}}, "location"=>241}}, "location"=>227}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"winename"}}], "location"=>252}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"Chateau Lafite 2003"}}, "location"=>263}}, "location"=>261}}}}, "stmt_location"=>209, "stmt_len"=>75}}, {"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>2}}, "stmt_location"=>285, "stmt_len"=>57}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_tsdictionary
+SQL: DROP TEXT SEARCH DICTIONARY english;
+Fingerprint: 02b25873d5f9401584f32ca657764436ac499766e5
+Fingerprint Deparse: 02b25873d5f9401584f32ca657764436ac499766e5
+Deparse SQL: DROP TEXT SEARCH DICTIONARY "english"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"english"}}]], "removeType"=>42, "behavior"=>0}}, "stmt_len"=>35}}]
 --------END-------
 
 -------BEGIN-------
@@ -535,6 +744,24 @@ Tree: [{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}]
 --------END-------
 
 -------BEGIN-------
+Method: drop_opclass
+SQL: DROP OPERATOR CLASS widget_ops USING btree;
+Fingerprint: 0278b1015c30eb2fd1e53512cf2449da7a3718d97a
+Fingerprint Deparse: 0278b1015c30eb2fd1e53512cf2449da7a3718d97a
+Deparse SQL: DROP OPERATOR CLASS "widget_ops" USING "btree"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"btree"}}, {"String"=>{"str"=>"widget_ops"}}]], "removeType"=>24, "behavior"=>0}}, "stmt_len"=>42}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_role
+SQL: DROP ROLE jonathan;
+Fingerprint: 026dc9deb18d5717c1fa9e8ed7042ed5ace1e6453b
+Fingerprint Deparse: 026dc9deb18d5717c1fa9e8ed7042ed5ace1e6453b
+Deparse SQL: DROP ROLE jonathan
+Tree: [{"RawStmt"=>{"stmt"=>{"DropRoleStmt"=>{"roles"=>[{"RoleSpec"=>{"roletype"=>0, "rolename"=>"jonathan", "location"=>10}}]}}, "stmt_len"=>18}}]
+--------END-------
+
+-------BEGIN-------
 Method: create_function
 SQL: CREATE FUNCTION add(integer, integer) RETURNS integer
     AS 'select $1 + $2;'
@@ -569,6 +796,24 @@ Fingerprint: 0235a207d7d32f31da77b1c65f2433d3f64caa2ed3
 Fingerprint Deparse: 0235a207d7d32f31da77b1c65f2433d3f64caa2ed3
 Deparse SQL: SELECT agg("col") FROM "tab"
 Tree: [{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"agg"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"col"}}], "location"=>11}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"tab", "inh"=>true, "relpersistence"=>"p", "location"=>21}}], "op"=>0}}, "stmt_len"=>24}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_policy
+SQL: DROP POLICY p1 ON my_table;
+Fingerprint: 027761fe172692ead4750c11b6b9d435900f79fd60
+Fingerprint Deparse: 027761fe172692ead4750c11b6b9d435900f79fd60
+Deparse SQL: DROP POLICY "p1" ON "my_table"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"my_table"}}, {"String"=>{"str"=>"p1"}}]], "removeType"=>27, "behavior"=>0}}, "stmt_len"=>26}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_tstemplate
+SQL: DROP TEXT SEARCH TEMPLATE thesaurus;
+Fingerprint: 02be9d84279cda581d808ef9ee8aa2b00eb7c9f1ae
+Fingerprint Deparse: 02be9d84279cda581d808ef9ee8aa2b00eb7c9f1ae
+Deparse SQL: DROP TEXT SEARCH TEMPLATE "thesaurus"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"thesaurus"}}]], "removeType"=>44, "behavior"=>0}}, "stmt_len"=>35}}]
 --------END-------
 
 -------BEGIN-------
@@ -628,6 +873,15 @@ Tree: [{"RawStmt"=>{"stmt"=>{"DeleteStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 --------END-------
 
 -------BEGIN-------
+Method: drop_sequence
+SQL: DROP SEQUENCE serial;
+Fingerprint: 02aa00b316664158cb97af5811f374b27d42061089
+Fingerprint Deparse: 02aa00b316664158cb97af5811f374b27d42061089
+Deparse SQL: DROP SEQUENCE "serial"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"serial"}}]], "removeType"=>33, "behavior"=>0}}, "stmt_len"=>20}}]
+--------END-------
+
+-------BEGIN-------
 Method: create_domain
 SQL: INSERT INTO tab (domcol) VALUES ((SELECT domcol FROM tab WHERE false));
 Fingerprint: 02a082405db1d972feac186b2a278656222956efe6
@@ -656,6 +910,15 @@ Fingerprint: 0263a091103c317acdbdaa37efb7173e66bc13c212
 Fingerprint Deparse: 0263a091103c317acdbdaa37efb7173e66bc13c212
 Deparse SQL: CREATE DOMAIN "us_postal_code" AS text CHECK ("value" ~ '^\d{5}$' OR "value" ~ '^\d{5}-\d{4}$'); CREATE TABLE "us_snail_addy" (address_id serial PRIMARY KEY, street1 text NOT NULL, street2 text, street3 text, city text NOT NULL, postal us_postal_code NOT NULL)
 Tree: [{"RawStmt"=>{"stmt"=>{"CreateDomainStmt"=>{"domainname"=>[{"String"=>{"str"=>"us_postal_code"}}], "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>32}}, "constraints"=>[{"Constraint"=>{"contype"=>4, "location"=>37, "raw_expr"=>{"BoolExpr"=>{"boolop"=>1, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"~"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"value"}}], "location"=>47}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"^\\d{5}$"}}, "location"=>55}}, "location"=>53}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"~"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"value"}}], "location"=>68}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"^\\d{5}-\\d{4}$"}}, "location"=>76}}, "location"=>74}}], "location"=>65}}, "initially_valid"=>true}}]}}, "stmt_len"=>93}}, {"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"us_snail_addy", "inh"=>true, "relpersistence"=>"p", "location"=>109}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"address_id", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"serial"}}], "typemod"=>-1, "location"=>138}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>5, "location"=>145}}], "location"=>127}}, {"ColumnDef"=>{"colname"=>"street1", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>168}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>1, "location"=>173}}], "location"=>160}}, {"ColumnDef"=>{"colname"=>"street2", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>193}}, "is_local"=>true, "location"=>185}}, {"ColumnDef"=>{"colname"=>"street3", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>209}}, "is_local"=>true, "location"=>201}}, {"ColumnDef"=>{"colname"=>"city", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>222}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>1, "location"=>227}}], "location"=>217}}, {"ColumnDef"=>{"colname"=>"postal", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"us_postal_code"}}], "typemod"=>-1, "location"=>246}}, "is_local"=>true, "constraints"=>[{"Constraint"=>{"contype"=>1, "location"=>261}}], "location"=>239}}], "oncommit"=>0}}, "stmt_location"=>94, "stmt_len"=>177}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_subscription
+SQL: DROP SUBSCRIPTION mysub;
+Fingerprint: 02b25ec4214bfc1e787d8ee4f4f0e99bc32c2b9d0d
+Fingerprint Deparse: 02b25ec4214bfc1e787d8ee4f4f0e99bc32c2b9d0d
+Deparse SQL: DROP SUBSCRIPTION mysub
+Tree: [{"RawStmt"=>{"stmt"=>{"DropSubscriptionStmt"=>{"subname"=>"mysub", "behavior"=>0}}, "stmt_len"=>23}}]
 --------END-------
 
 -------BEGIN-------
@@ -800,6 +1063,24 @@ Fingerprint: 02125c83e952b4d44c63a8feef6d43cee39c36b560
 Fingerprint Deparse: 02125c83e952b4d44c63a8feef6d43cee39c36b560
 Deparse SQL: SELECT pg_describe_object("refclassid", "refobjid", "refobjsubid") AS "Collation", pg_describe_object("classid", "objid", "objsubid") AS "Object" FROM "pg_depend" d JOIN "pg_collation" "c" ON "refclassid" = 'pg_collation'::regclass AND "refobjid" = "c"."oid" WHERE "c"."collversion" <> pg_collation_actual_version("c"."oid") ORDER BY 1, 2
 Tree: [{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"name"=>"Collation", "val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_describe_object"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refclassid"}}], "location"=>26}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refobjid"}}], "location"=>38}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refobjsubid"}}], "location"=>48}}], "location"=>7}}, "location"=>7}}, {"ResTarget"=>{"name"=>"Object", "val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_describe_object"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"classid"}}], "location"=>103}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"objid"}}], "location"=>112}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"objsubid"}}], "location"=>119}}], "location"=>84}}, "location"=>84}}], "fromClause"=>[{"JoinExpr"=>{"jointype"=>0, "larg"=>{"RangeVar"=>{"relname"=>"pg_depend", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"d"}}, "location"=>148}}, "rarg"=>{"RangeVar"=>{"relname"=>"pg_collation", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"c"}}, "location"=>165}}, "quals"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refclassid"}}], "location"=>190}}, "rexpr"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"pg_collation"}}, "location"=>203}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"regclass"}}], "typemod"=>-1, "location"=>219}}, "location"=>217}}, "location"=>201}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refobjid"}}], "location"=>232}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"c"}}, {"String"=>{"str"=>"oid"}}], "location"=>243}}, "location"=>241}}], "location"=>228}}}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"<>"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"c"}}, {"String"=>{"str"=>"collversion"}}], "location"=>257}}, "rexpr"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_collation_actual_version"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"c"}}, {"String"=>{"str"=>"oid"}}], "location"=>302}}], "location"=>274}}, "location"=>271}}, "sortClause"=>[{"SortBy"=>{"node"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>320}}, "sortby_dir"=>0, "sortby_nulls"=>0, "location"=>-1}}, {"SortBy"=>{"node"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>323}}, "sortby_dir"=>0, "sortby_nulls"=>0, "location"=>-1}}], "op"=>0}}, "stmt_len"=>324}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_tsconfig
+SQL: DROP TEXT SEARCH CONFIGURATION my_english;
+Fingerprint: 02006b73cb49c74f78e87c6fe21a53031cd9c7fb2d
+Fingerprint Deparse: 02006b73cb49c74f78e87c6fe21a53031cd9c7fb2d
+Deparse SQL: DROP TEXT SEARCH CONFIGURATION "my_english"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"my_english"}}]], "removeType"=>41, "behavior"=>0}}, "stmt_len"=>41}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_foreign_table
+SQL: DROP FOREIGN TABLE films, distributors;
+Fingerprint: 02ec3ae8279205c3b1c58d6ee8104c8b0fb09c9e98
+Fingerprint Deparse: 02ec3ae8279205c3b1c58d6ee8104c8b0fb09c9e98
+Deparse SQL: DROP FOREIGN TABLE "films", "distributors"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"films"}}], [{"String"=>{"str"=>"distributors"}}]], "removeType"=>18, "behavior"=>0}}, "stmt_len"=>38}}]
 --------END-------
 
 -------BEGIN-------
@@ -976,6 +1257,24 @@ Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"mystuf
 --------END-------
 
 -------BEGIN-------
+Method: drop_event_trigger
+SQL: DROP EVENT TRIGGER snitch;
+Fingerprint: 02396ad0680b0af63cdec538922dff52ad671630ac
+Fingerprint Deparse: 02396ad0680b0af63cdec538922dff52ad671630ac
+Deparse SQL: DROP EVENT TRIGGER "snitch"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"snitch"}}], "removeType"=>14, "behavior"=>0}}, "stmt_len"=>25}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_tsparser
+SQL: DROP TEXT SEARCH PARSER my_parser;
+Fingerprint: 021d3b496ba4f78cb537ad59b9013ffe4574c46ac3
+Fingerprint Deparse: 021d3b496ba4f78cb537ad59b9013ffe4574c46ac3
+Deparse SQL: DROP TEXT SEARCH PARSER "my_parser"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"my_parser"}}]], "removeType"=>43, "behavior"=>0}}, "stmt_len"=>33}}]
+--------END-------
+
+-------BEGIN-------
 Method: create_view
 SQL: CREATE VIEW vista AS SELECT 'Hello World';
 Fingerprint: 02e5c221eae3c8a6c844586daa17adb18122321685
@@ -1035,6 +1334,15 @@ Tree: [{"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"come
 --------END-------
 
 -------BEGIN-------
+Method: drop_view
+SQL: DROP VIEW kinds;
+Fingerprint: 02a2ed7cc35b9b9440adf89ad658a5e6b2223b86f8
+Fingerprint Deparse: 02a2ed7cc35b9b9440adf89ad658a5e6b2223b86f8
+Deparse SQL: DROP VIEW "kinds"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"kinds"}}]], "removeType"=>47, "behavior"=>0}}, "stmt_len"=>15}}]
+--------END-------
+
+-------BEGIN-------
 Method: release_savepoint
 SQL: BEGIN;
     INSERT INTO table1 VALUES (3);
@@ -1046,4 +1354,22 @@ Fingerprint: 024407976e4055866cfbdc38886d44ee79e1d94e28
 Fingerprint Deparse: 024407976e4055866cfbdc38886d44ee79e1d94e28
 Deparse SQL: BEGIN; INSERT INTO "table1" VALUES (3); SAVEPOINT "my_savepoint"; INSERT INTO "table1" VALUES (4); RELEASE "my_savepoint"; COMMIT
 Tree: [{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0}}, "stmt_len"=>5}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"table1", "inh"=>true, "relpersistence"=>"p", "location"=>23}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>3}}, "location"=>38}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>6, "stmt_len"=>34}}, {"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>4, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"my_savepoint"}}, "defaction"=>0, "location"=>46}}]}}, "stmt_location"=>41, "stmt_len"=>27}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"table1", "inh"=>true, "relpersistence"=>"p", "location"=>86}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>4}}, "location"=>101}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>69, "stmt_len"=>34}}, {"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>5, "options"=>[{"DefElem"=>{"defname"=>"savepoint_name", "arg"=>{"String"=>{"str"=>"my_savepoint"}}, "defaction"=>0, "location"=>109}}]}}, "stmt_location"=>104, "stmt_len"=>35}}, {"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>2}}, "stmt_location"=>140, "stmt_len"=>7}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_extension
+SQL: DROP EXTENSION hstore;
+Fingerprint: 02f85123ed9cb2ecf36ee8582610bd22860246a60b
+Fingerprint Deparse: 02f85123ed9cb2ecf36ee8582610bd22860246a60b
+Deparse SQL: DROP EXTENSION "hstore"
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"hstore"}}], "removeType"=>15, "behavior"=>0}}, "stmt_len"=>21}}]
+--------END-------
+
+-------BEGIN-------
+Method: drop_domain
+SQL: DROP DOMAIN box;
+Fingerprint: 023cf128d23a403ae593e251d2aa80b7c581c2a92f
+Fingerprint Deparse: 023cf128d23a403ae593e251d2aa80b7c581c2a92f
+Deparse SQL: DROP DOMAIN box
+Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"box"}}], "typemod"=>-1, "location"=>12}}], "removeType"=>12, "behavior"=>0}}, "stmt_len"=>15}}]
 --------END-------

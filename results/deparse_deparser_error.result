@@ -1,32 +1,5 @@
 
 -------BEGIN-------
-Method: drop_publication
-SQL: DROP PUBLICATION mypublication;
-Fingerprint: 02cdb94b26297e08821fa0f6d168f304743ee92b47
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""mypublication"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"mypublication"}}], "removeType"=>28, "behavior"=>0}}, "stmt_len"=>30}}]
---------END-------
-
--------BEGIN-------
-Method: drop_transform
-SQL: DROP TRANSFORM FOR hstore LANGUAGE plpythonu;
-Fingerprint: 0277cad537cd2e4af1c353ab48dc144767c6814424
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "hstore" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"hstore"}}], "typemod"=>-1, "location"=>19}}, {"String"=>{"str"=>"plpythonu"}}]], "removeType"=>39, "behavior"=>0}}, "stmt_len"=>44}}]
---------END-------
-
--------BEGIN-------
-Method: drop_materialized_view
-SQL: DROP MATERIALIZED VIEW order_summary;
-Fingerprint: 0276d5570273c363dbea342916ab46f6468e1fcac6
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""order_summary"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"order_summary"}}]], "removeType"=>23, "behavior"=>0}}, "stmt_len"=>36}}]
---------END-------
-
--------BEGIN-------
 Method: create_table_as
 SQL: PREPARE recentfilms(date) AS
   SELECT * FROM films WHERE date_prod > $1;
@@ -115,15 +88,6 @@ Fingerprint: 021c62ee10576759b8a5cf2fb42f33660abba78651
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: CreateStatsStmt: {"defnames"=>[{"String"=>{"str"=>"s2"}}], "stat_types"=>[{"String"=>{"str"=>"mcv"}}], "exprs"=>[{"RowExpr"=>{"args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"a"}}], "location"=>179}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"b"}}], "location"=>182}}], "row_format"=>2, "location"=>178}}], "relations"=>[{"RangeVar"=>{"relname"=>"t2", "inh"=>true, "relpersistence"=>"p", "location"=>190}}]}
 Tree: [{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"t2", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"a", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>26}}, "is_local"=>true, "location"=>22}}, {"ColumnDef"=>{"colname"=>"b", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>39}}, "is_local"=>true, "location"=>35}}], "oncommit"=>0}}, "stmt_len"=>44}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"t2", "inh"=>true, "relpersistence"=>"p", "location"=>59}}, "selectStmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"mod"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"i"}}], "location"=>73}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>100}}, "location"=>75}}], "location"=>69}}, "location"=>69}}, {"ResTarget"=>{"val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"mod"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"i"}}], "location"=>85}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>100}}, "location"=>87}}], "location"=>81}}, "location"=>81}}], "fromClause"=>[{"RangeFunction"=>{"functions"=>[[{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"generate_series"}}], "args"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>130}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1000000}}, "location"=>132}}], "location"=>114}}, nil]], "alias"=>{"Alias"=>{"aliasname"=>"s", "colnames"=>[{"String"=>{"str"=>"i"}}]}}}}], "op"=>0}}, "override"=>0}}, "stmt_location"=>45, "stmt_len"=>100}}, {"RawStmt"=>{"stmt"=>{"CreateStatsStmt"=>{"defnames"=>[{"String"=>{"str"=>"s2"}}], "stat_types"=>[{"String"=>{"str"=>"mcv"}}], "exprs"=>[{"RowExpr"=>{"args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"a"}}], "location"=>179}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"b"}}], "location"=>182}}], "row_format"=>2, "location"=>178}}], "relations"=>[{"RangeVar"=>{"relname"=>"t2", "inh"=>true, "relpersistence"=>"p", "location"=>190}}]}}, "stmt_location"=>146, "stmt_len"=>46}}, {"RawStmt"=>{"stmt"=>{"VacuumStmt"=>{"options"=>2, "relation"=>{"RangeVar"=>{"relname"=>"t2", "inh"=>true, "relpersistence"=>"p", "location"=>203}}}}, "stmt_location"=>193, "stmt_len"=>12}}, {"RawStmt"=>{"stmt"=>{"ExplainStmt"=>{"query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>267}}, "location"=>267}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"t2", "inh"=>true, "relpersistence"=>"p", "location"=>274}}], "whereClause"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"a"}}], "location"=>284}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>288}}, "location"=>286}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"b"}}], "location"=>296}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>300}}, "location"=>298}}], "location"=>291}}, "op"=>0}}, "options"=>[{"DefElem"=>{"defname"=>"analyze", "defaction"=>0, "location"=>252}}]}}, "stmt_location"=>206, "stmt_len"=>96}}, {"RawStmt"=>{"stmt"=>{"ExplainStmt"=>{"query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>370}}, "location"=>370}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"t2", "inh"=>true, "relpersistence"=>"p", "location"=>377}}], "whereClause"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"a"}}], "location"=>387}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>391}}, "location"=>389}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"b"}}], "location"=>399}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>403}}, "location"=>401}}], "location"=>394}}, "op"=>0}}, "options"=>[{"DefElem"=>{"defname"=>"analyze", "defaction"=>0, "location"=>355}}]}}, "stmt_location"=>303, "stmt_len"=>102}}]
---------END-------
-
--------BEGIN-------
-Method: drop_type
-SQL: DROP TYPE box;
-Fingerprint: 02a171d43aed14152a47e66cc5c0b1af70f67836d8
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "box" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"box"}}], "typemod"=>-1, "location"=>10}}], "removeType"=>45, "behavior"=>0}}, "stmt_len"=>13}}]
 --------END-------
 
 -------BEGIN-------
@@ -272,15 +236,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"ImportForeignSchemaStmt"=>{"server_name"=>"film_se
 --------END-------
 
 -------BEGIN-------
-Method: drop_tablespace
-SQL: DROP TABLESPACE mystuff;
-Fingerprint: 0222fe29bc4e2eb7e1787338f507fece3136e48204
-Fingerprint Deparse:   
-Deparse SQL: Can't deparse: DropTableSpaceStmt: {"tablespacename"=>"mystuff"}
-Tree: [{"RawStmt"=>{"stmt"=>{"DropTableSpaceStmt"=>{"tablespacename"=>"mystuff"}}, "stmt_len"=>23}}]
---------END-------
-
--------BEGIN-------
 Method: create_collation
 SQL: CREATE COLLATION french (locale = 'fr_FR.utf8');
 Fingerprint: 0217dc14e38dfacd2f5c129048eee9ca4dd1007528
@@ -305,15 +260,6 @@ Fingerprint: 02aa5c9948bc23b424bee5e8d37f0d50bd8bbcb238
 Fingerprint Deparse:   
 Deparse SQL: key not found: 7
 Tree: [{"RawStmt"=>{"stmt"=>{"DefineStmt"=>{"kind"=>7, "defnames"=>[{"String"=>{"str"=>"german"}}], "definition"=>[{"DefElem"=>{"defname"=>"from", "arg"=>[{"String"=>{"str"=>"de_DE"}}], "defaction"=>0, "location"=>29}}]}}, "stmt_len"=>36}}]
---------END-------
-
--------BEGIN-------
-Method: drop_conversion
-SQL: DROP CONVERSION myname;
-Fingerprint: 0203be032f9651324deb154abaad73457ad4f329a7
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""myname"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"myname"}}]], "removeType"=>8, "behavior"=>0}}, "stmt_len"=>22}}]
 --------END-------
 
 -------BEGIN-------
@@ -399,15 +345,6 @@ Fingerprint: 02ba7b45f544cd810502bb0cb26163af95f4015fa8
 Fingerprint Deparse:   
 Deparse SQL: undefined method `map' for nil:NilClass
 Tree: [{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"cities_ab", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"Constraint"=>{"contype"=>4, "conname"=>"city_id_nonzero", "location"=>53, "raw_expr"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"<>"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"city_id"}}], "location"=>87}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>0}}, "location"=>98}}, "location"=>95}}, "initially_valid"=>true}}], "inhRelations"=>[{"RangeVar"=>{"relname"=>"cities", "inh"=>true, "relpersistence"=>"p", "location"=>40}}], "partbound"=>{"PartitionBoundSpec"=>{"strategy"=>"l", "listdatums"=>[{"A_Const"=>{"val"=>{"String"=>{"str"=>"a"}}, "location"=>118}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"b"}}, "location"=>123}}], "location"=>114}}, "partspec"=>{"PartitionSpec"=>{"strategy"=>"range", "partParams"=>[{"PartitionElem"=>{"name"=>"population", "location"=>148}}], "location"=>128}}, "oncommit"=>0}}, "stmt_len"=>159}}, {"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"cities_ab_10000_to_100000", "inh"=>true, "relpersistence"=>"p", "location"=>175}}, "inhRelations"=>[{"RangeVar"=>{"relname"=>"cities_ab", "inh"=>true, "relpersistence"=>"p", "location"=>218}}], "partbound"=>{"PartitionBoundSpec"=>{"strategy"=>"r", "lowerdatums"=>[{"PartitionRangeDatum"=>{"kind"=>0, "value"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>10000}}, "location"=>245}}, "location"=>245}}], "upperdatums"=>[{"PartitionRangeDatum"=>{"kind"=>0, "value"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>100000}}, "location"=>256}}, "location"=>256}}], "location"=>239}}, "oncommit"=>0}}, "stmt_location"=>160, "stmt_len"=>103}}]
---------END-------
-
--------BEGIN-------
-Method: drop_trigger
-SQL: DROP TRIGGER if_dist_exists ON films;
-Fingerprint: 022cf13e5d31d5bfd4a137f39a79563021ef0c7ef6
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""films"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"films"}}, {"String"=>{"str"=>"if_dist_exists"}}]], "removeType"=>40, "behavior"=>0}}, "stmt_len"=>36}}]
 --------END-------
 
 -------BEGIN-------
@@ -567,15 +504,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"AlterOpFamilyStmt"=>{"opfamilyname"=>[{"String"=>{
 --------END-------
 
 -------BEGIN-------
-Method: drop_rule
-SQL: DROP RULE newrule ON mytable;
-Fingerprint: 02c7d815617cc08f5a8fccd0eb6205aec8ad4f1f1a
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""mytable"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"mytable"}}, {"String"=>{"str"=>"newrule"}}]], "removeType"=>31, "behavior"=>0}}, "stmt_len"=>28}}]
---------END-------
-
--------BEGIN-------
 Method: alter_publication
 SQL: ALTER PUBLICATION noinsert SET (publish = 'update, delete');
 Fingerprint: 021f8b43be863949a463e5d7235d65711f6e67c3df
@@ -591,24 +519,6 @@ Fingerprint: 02b63d0318c6a2c3d6d4e089d7e196c0b18f44bdf3
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: AlterPublicationStmt: {"pubname"=>"mypublication", "tables"=>[{"RangeVar"=>{"relname"=>"users", "inh"=>true, "relpersistence"=>"p", "location"=>42}}, {"RangeVar"=>{"relname"=>"departments", "inh"=>true, "relpersistence"=>"p", "location"=>49}}], "tableAction"=>2}
 Tree: [{"RawStmt"=>{"stmt"=>{"AlterPublicationStmt"=>{"pubname"=>"mypublication", "tables"=>[{"RangeVar"=>{"relname"=>"users", "inh"=>true, "relpersistence"=>"p", "location"=>42}}, {"RangeVar"=>{"relname"=>"departments", "inh"=>true, "relpersistence"=>"p", "location"=>49}}], "tableAction"=>2}}, "stmt_len"=>60}}]
---------END-------
-
--------BEGIN-------
-Method: drop_server
-SQL: DROP SERVER IF EXISTS foo;
-Fingerprint: 02c5b24bb7fa38f62f81c3082e559831d2aa99c7e7
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "IF" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"foo"}}], "removeType"=>17, "behavior"=>0, "missing_ok"=>true}}, "stmt_len"=>25}}]
---------END-------
-
--------BEGIN-------
-Method: drop_cast
-SQL: DROP CAST (text AS int);
-Fingerprint: 023412497044b61a7725009e2a014ce4d21df9eb8c
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "," (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>11}}, {"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>19}}]], "removeType"=>5, "behavior"=>0}}, "stmt_len"=>23}}]
 --------END-------
 
 -------BEGIN-------
@@ -630,39 +540,12 @@ Tree: [{"RawStmt"=>{"stmt"=>{"CommentStmt"=>{"objtype"=>37, "object"=>[{"String"
 --------END-------
 
 -------BEGIN-------
-Method: drop_opfamily
-SQL: DROP OPERATOR FAMILY float_ops USING btree;
-Fingerprint: 027bd7ecc076abbedf1e50444c9bd113fd4413182c
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""btree"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"btree"}}, {"String"=>{"str"=>"float_ops"}}]], "removeType"=>26, "behavior"=>0}}, "stmt_len"=>42}}]
---------END-------
-
--------BEGIN-------
-Method: drop_aggregate
-SQL: DROP AGGREGATE myavg(integer);
-Fingerprint: 02d86850b52beb64632a2c2fb4480682a9287bc7be
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""myavg"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"myavg"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>21}}]}}], "removeType"=>1, "behavior"=>0}}, "stmt_len"=>29}}]
---------END-------
-
--------BEGIN-------
 Method: drop_aggregate
 SQL: DROP AGGREGATE myrank(VARIADIC "any" ORDER BY VARIADIC "any");
 Fingerprint: 02a7ec591cd6b1cc7c02a50d87e7e274df2579d8df
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""myrank"" (scan.l:1121)
+Deparse SQL: syntax error at or near "any" (scan.l:1121)
 Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"myrank"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"any"}}], "typemod"=>-1, "location"=>31}}]}}], "removeType"=>1, "behavior"=>0}}, "stmt_len"=>61}}]
---------END-------
-
--------BEGIN-------
-Method: drop_aggregate
-SQL: DROP AGGREGATE myavg(integer), myavg(bigint);
-Fingerprint: 0231154feab37055134c958ad02b0bc833dafd632b
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""myavg"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"myavg"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>21}}]}}, {"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"myavg"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int8"}}], "typemod"=>-1, "location"=>37}}]}}], "removeType"=>1, "behavior"=>0}}, "stmt_len"=>44}}]
 --------END-------
 
 -------BEGIN-------
@@ -672,15 +555,6 @@ Fingerprint: 027f2810802e82a373c866f6ec8931b8cb2a2132cf
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: DeclareCursorStmt: {"portalname"=>"liahona", "options"=>32, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>34}}, "location"=>34}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>41}}], "op"=>0}}}
 Tree: [{"RawStmt"=>{"stmt"=>{"DeclareCursorStmt"=>{"portalname"=>"liahona", "options"=>32, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>34}}, "location"=>34}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>41}}], "op"=>0}}}}, "stmt_len"=>46}}]
---------END-------
-
--------BEGIN-------
-Method: drop_index
-SQL: DROP INDEX title_idx;
-Fingerprint: 02a328373b9cbb33d266342e33d375a6b84b6bb0f4
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""title_idx"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"title_idx"}}]], "removeType"=>20, "behavior"=>0}}, "stmt_len"=>20}}]
 --------END-------
 
 -------BEGIN-------
@@ -698,42 +572,6 @@ Fingerprint: 026bdb92ef38dea292c8feb880214e3de68a0a402f
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: ClosePortalStmt: {}
 Tree: [{"RawStmt"=>{"stmt"=>{"ClosePortalStmt"=>{}}, "stmt_len"=>9}}, {"RawStmt"=>{"stmt"=>{"VariableSetStmt"=>{"kind"=>1, "name"=>"session_authorization"}}, "stmt_location"=>10, "stmt_len"=>34}}, {"RawStmt"=>{"stmt"=>{"VariableSetStmt"=>{"kind"=>5}}, "stmt_location"=>45, "stmt_len"=>10}}, {"RawStmt"=>{"stmt"=>{"DeallocateStmt"=>{}}, "stmt_location"=>56, "stmt_len"=>15}}, {"RawStmt"=>{"stmt"=>{"UnlistenStmt"=>{}}, "stmt_location"=>72, "stmt_len"=>11}}, {"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_advisory_unlock_all"}}], "location"=>92}}, "location"=>92}}], "op"=>0}}, "stmt_location"=>84, "stmt_len"=>32}}, {"RawStmt"=>{"stmt"=>{"DiscardStmt"=>{"target"=>1}}, "stmt_location"=>117, "stmt_len"=>14}}, {"RawStmt"=>{"stmt"=>{"DiscardStmt"=>{"target"=>3}}, "stmt_location"=>132, "stmt_len"=>13}}, {"RawStmt"=>{"stmt"=>{"DiscardStmt"=>{"target"=>2}}, "stmt_location"=>146, "stmt_len"=>18}}]
---------END-------
-
--------BEGIN-------
-Method: drop_function
-SQL: DROP FUNCTION sqrt(integer);
-Fingerprint: 0206602924801229253fd29741d49c06dce14eec86
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""sqrt"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"sqrt"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>19}}]}}], "removeType"=>19, "behavior"=>0}}, "stmt_len"=>27}}]
---------END-------
-
--------BEGIN-------
-Method: drop_function
-SQL: DROP FUNCTION sqrt(integer), sqrt(bigint);
-Fingerprint: 02148e89232ea016024d8eaa0c68044ad5e097fe0b
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""sqrt"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"sqrt"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>19}}]}}, {"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"sqrt"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int8"}}], "typemod"=>-1, "location"=>34}}]}}], "removeType"=>19, "behavior"=>0}}, "stmt_len"=>41}}]
---------END-------
-
--------BEGIN-------
-Method: drop_function
-SQL: DROP FUNCTION update_employee_salaries;
-Fingerprint: 02d77c33a0cbc4125118acf4851cdc9650b631f709
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""update_employee_salaries"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"update_employee_salaries"}}], "args_unspecified"=>true}}], "removeType"=>19, "behavior"=>0}}, "stmt_len"=>38}}]
---------END-------
-
--------BEGIN-------
-Method: drop_function
-SQL: DROP FUNCTION update_employee_salaries();
-Fingerprint: 02f02cfb91c0210090d9a9231beca1d7b052418e44
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""update_employee_salaries"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"update_employee_salaries"}}]}}], "removeType"=>19, "behavior"=>0}}, "stmt_len"=>40}}]
 --------END-------
 
 -------BEGIN-------
@@ -767,44 +605,6 @@ Fingerprint: 020eb995c18825f7b64892aaebf9434f577e024611
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: UnlistenStmt: {"conditionname"=>"virtual"}
 Tree: [{"RawStmt"=>{"stmt"=>{"UnlistenStmt"=>{"conditionname"=>"virtual"}}, "stmt_len"=>16}}, {"RawStmt"=>{"stmt"=>{"NotifyStmt"=>{"conditionname"=>"virtual"}}, "stmt_location"=>17, "stmt_len"=>15}}]
---------END-------
-
--------BEGIN-------
-Method: drop_collation
-SQL: DROP COLLATION german;
-Fingerprint: 021d232de91051fe246e21ca741656c88671ae212f
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""german"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"german"}}]], "removeType"=>7, "behavior"=>0}}, "stmt_len"=>21}}]
---------END-------
-
--------BEGIN-------
-Method: drop_foreign_data_wrapper
-SQL: DROP FOREIGN DATA WRAPPER dbi;
-Fingerprint: 02753428b33fe9226d852ef4eb46a63211c3ce8aa9
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""dbi"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"dbi"}}], "removeType"=>16, "behavior"=>0}}, "stmt_len"=>29}}]
---------END-------
-
--------BEGIN-------
-Method: drop_access_method
-SQL: DROP ACCESS METHOD heptree;
-Fingerprint: 02fd0aeaf5a9d782a60cb3c9fa62c7af96b4bd92e3
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""heptree"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"heptree"}}], "removeType"=>0, "behavior"=>0}}, "stmt_len"=>26}}]
---------END-------
-
--------BEGIN-------
-Method: drop_statistics
-SQL: DROP STATISTICS IF EXISTS
-    accounting.users_uid_creation,
-    public.grants_user_role;
-Fingerprint: 020feab2a6d6609395291f3679f649724a8a9b2cfe
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "IF" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"accounting"}}, {"String"=>{"str"=>"users_uid_creation"}}], [{"String"=>{"str"=>"public"}}, {"String"=>{"str"=>"grants_user_role"}}]], "removeType"=>35, "behavior"=>0, "missing_ok"=>true}}, "stmt_len"=>88}}]
 --------END-------
 
 -------BEGIN-------
@@ -888,15 +688,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 --------END-------
 
 -------BEGIN-------
-Method: drop_tsdictionary
-SQL: DROP TEXT SEARCH DICTIONARY english;
-Fingerprint: 02b25873d5f9401584f32ca657764436ac499766e5
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""english"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"english"}}]], "removeType"=>42, "behavior"=>0}}, "stmt_len"=>35}}]
---------END-------
-
--------BEGIN-------
 Method: create_user_mapping
 SQL: CREATE USER MAPPING FOR bob SERVER foo OPTIONS (user 'bob', password 'secret');
 Fingerprint: 020331dc7b7d0a0802231b3f8676db0f8a4dadf6f3
@@ -977,24 +768,6 @@ Fingerprint: 02e7d8e39e5bb1c33ba22f4de74dee9af8d7501ce0
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: {"renameType"=>23, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"foo", "inh"=>true, "relpersistence"=>"p", "location"=>24}}, "newname"=>"bar", "behavior"=>0}
 Tree: [{"RawStmt"=>{"stmt"=>{"RenameStmt"=>{"renameType"=>23, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"foo", "inh"=>true, "relpersistence"=>"p", "location"=>24}}, "newname"=>"bar", "behavior"=>0}}, "stmt_len"=>41}}]
---------END-------
-
--------BEGIN-------
-Method: drop_opclass
-SQL: DROP OPERATOR CLASS widget_ops USING btree;
-Fingerprint: 0278b1015c30eb2fd1e53512cf2449da7a3718d97a
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""btree"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"btree"}}, {"String"=>{"str"=>"widget_ops"}}]], "removeType"=>24, "behavior"=>0}}, "stmt_len"=>42}}]
---------END-------
-
--------BEGIN-------
-Method: drop_role
-SQL: DROP ROLE jonathan;
-Fingerprint: 026dc9deb18d5717c1fa9e8ed7042ed5ace1e6453b
-Fingerprint Deparse:   
-Deparse SQL: Can't deparse: DropRoleStmt: {"roles"=>[{"RoleSpec"=>{"roletype"=>0, "rolename"=>"jonathan", "location"=>10}}]}
-Tree: [{"RawStmt"=>{"stmt"=>{"DropRoleStmt"=>{"roles"=>[{"RoleSpec"=>{"roletype"=>0, "rolename"=>"jonathan", "location"=>10}}]}}, "stmt_len"=>18}}]
 --------END-------
 
 -------BEGIN-------
@@ -1082,15 +855,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"CreateFunctionStmt"=>{"funcname"=>[{"String"=>{"st
 --------END-------
 
 -------BEGIN-------
-Method: drop_policy
-SQL: DROP POLICY p1 ON my_table;
-Fingerprint: 027761fe172692ead4750c11b6b9d435900f79fd60
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""my_table"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"my_table"}}, {"String"=>{"str"=>"p1"}}]], "removeType"=>27, "behavior"=>0}}, "stmt_len"=>26}}]
---------END-------
-
--------BEGIN-------
 Method: alter_conversion
 SQL: ALTER CONVERSION iso_8859_1_to_utf8 RENAME TO latin1_to_unicode;
 Fingerprint: 0248b4ecdfb669d630e22a66afbd9b0fe512e945ef
@@ -1106,15 +870,6 @@ Fingerprint: 0288ead30ba984a3111f8dd42d82955c18b95f9986
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: AlterOwnerStmt: {"objectType"=>8, "object"=>[{"String"=>{"str"=>"iso_8859_1_to_utf8"}}], "newowner"=>{"RoleSpec"=>{"roletype"=>0, "rolename"=>"joe", "location"=>45}}}
 Tree: [{"RawStmt"=>{"stmt"=>{"AlterOwnerStmt"=>{"objectType"=>8, "object"=>[{"String"=>{"str"=>"iso_8859_1_to_utf8"}}], "newowner"=>{"RoleSpec"=>{"roletype"=>0, "rolename"=>"joe", "location"=>45}}}}, "stmt_len"=>48}}]
---------END-------
-
--------BEGIN-------
-Method: drop_tstemplate
-SQL: DROP TEXT SEARCH TEMPLATE thesaurus;
-Fingerprint: 02be9d84279cda581d808ef9ee8aa2b00eb7c9f1ae
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""thesaurus"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"thesaurus"}}]], "removeType"=>44, "behavior"=>0}}, "stmt_len"=>35}}]
 --------END-------
 
 -------BEGIN-------
@@ -1227,15 +982,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"DeleteStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 --------END-------
 
 -------BEGIN-------
-Method: drop_sequence
-SQL: DROP SEQUENCE serial;
-Fingerprint: 02aa00b316664158cb97af5811f374b27d42061089
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""serial"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"serial"}}]], "removeType"=>33, "behavior"=>0}}, "stmt_len"=>20}}]
---------END-------
-
--------BEGIN-------
 Method: alter_sequence
 SQL: ALTER SEQUENCE serial RESTART WITH 105;
 Fingerprint: 02179a2b43231058acc24620fb94e8d5dd861a87ea
@@ -1292,15 +1038,6 @@ Fingerprint: 02c12506486dcadd05f5653b5ffc4afbfaf66a595f
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: AlterUserMappingStmt: {"user"=>{"RoleSpec"=>{"roletype"=>0, "rolename"=>"bob", "location"=>23}}, "servername"=>"foo", "options"=>[{"DefElem"=>{"defname"=>"password", "arg"=>{"String"=>{"str"=>"public"}}, "defaction"=>1, "location"=>51}}]}
 Tree: [{"RawStmt"=>{"stmt"=>{"AlterUserMappingStmt"=>{"user"=>{"RoleSpec"=>{"roletype"=>0, "rolename"=>"bob", "location"=>23}}, "servername"=>"foo", "options"=>[{"DefElem"=>{"defname"=>"password", "arg"=>{"String"=>{"str"=>"public"}}, "defaction"=>1, "location"=>51}}]}}, "stmt_len"=>69}}]
---------END-------
-
--------BEGIN-------
-Method: drop_subscription
-SQL: DROP SUBSCRIPTION mysub;
-Fingerprint: 02b25ec4214bfc1e787d8ee4f4f0e99bc32c2b9d0d
-Fingerprint Deparse:   
-Deparse SQL: Can't deparse: DropSubscriptionStmt: {"subname"=>"mysub", "behavior"=>0}
-Tree: [{"RawStmt"=>{"stmt"=>{"DropSubscriptionStmt"=>{"subname"=>"mysub", "behavior"=>0}}, "stmt_len"=>23}}]
 --------END-------
 
 -------BEGIN-------
@@ -1382,24 +1119,6 @@ Fingerprint: 02b62a5422e0e8d5be5d82e1347991d93c35b8360f
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: AlterOwnerStmt: {"objectType"=>7, "object"=>[{"String"=>{"str"=>"en_US"}}], "newowner"=>{"RoleSpec"=>{"roletype"=>0, "rolename"=>"joe", "location"=>33}}}
 Tree: [{"RawStmt"=>{"stmt"=>{"AlterOwnerStmt"=>{"objectType"=>7, "object"=>[{"String"=>{"str"=>"en_US"}}], "newowner"=>{"RoleSpec"=>{"roletype"=>0, "rolename"=>"joe", "location"=>33}}}}, "stmt_len"=>36}}]
---------END-------
-
--------BEGIN-------
-Method: drop_tsconfig
-SQL: DROP TEXT SEARCH CONFIGURATION my_english;
-Fingerprint: 02006b73cb49c74f78e87c6fe21a53031cd9c7fb2d
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""my_english"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"my_english"}}]], "removeType"=>41, "behavior"=>0}}, "stmt_len"=>41}}]
---------END-------
-
--------BEGIN-------
-Method: drop_foreign_table
-SQL: DROP FOREIGN TABLE films, distributors;
-Fingerprint: 02ec3ae8279205c3b1c58d6ee8104c8b0fb09c9e98
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""films"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"films"}}], [{"String"=>{"str"=>"distributors"}}]], "removeType"=>18, "behavior"=>0}}, "stmt_len"=>38}}]
 --------END-------
 
 -------BEGIN-------
@@ -1718,15 +1437,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"DefineStmt"=>{"kind"=>42, "defnames"=>[{"String"=>
 --------END-------
 
 -------BEGIN-------
-Method: drop_event_trigger
-SQL: DROP EVENT TRIGGER snitch;
-Fingerprint: 02396ad0680b0af63cdec538922dff52ad671630ac
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""snitch"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"snitch"}}], "removeType"=>14, "behavior"=>0}}, "stmt_len"=>25}}]
---------END-------
-
--------BEGIN-------
 Method: alter_database
 SQL: ALTER DATABASE test SET enable_indexscan TO off;
 Fingerprint: 02ec2fd56c8e850ff23e8537097104ed3ddb3a6a95
@@ -1769,15 +1479,6 @@ Fingerprint: 0250798864fb832c1f2b5adf0000349cfba3340727
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: ClusterStmt: {}
 Tree: [{"RawStmt"=>{"stmt"=>{"ClusterStmt"=>{}}, "stmt_len"=>7}}]
---------END-------
-
--------BEGIN-------
-Method: drop_tsparser
-SQL: DROP TEXT SEARCH PARSER my_parser;
-Fingerprint: 021d3b496ba4f78cb537ad59b9013ffe4574c46ac3
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""my_parser"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"my_parser"}}]], "removeType"=>43, "behavior"=>0}}, "stmt_len"=>33}}]
 --------END-------
 
 -------BEGIN-------
@@ -1833,15 +1534,6 @@ Fingerprint: 020cd1a87ca2563e68b56c8568ac987a4900de32fd
 Fingerprint Deparse:   
 Deparse SQL: syntax error at or near "'repeatable read'" (scan.l:1121)
 Tree: [{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>0, "options"=>[{"DefElem"=>{"defname"=>"transaction_isolation", "arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"repeatable read"}}, "location"=>34}}, "defaction"=>0, "location"=>18}}]}}, "stmt_len"=>49}}, {"RawStmt"=>{"stmt"=>{"VariableSetStmt"=>{"kind"=>3, "name"=>"TRANSACTION SNAPSHOT", "args"=>[{"A_Const"=>{"val"=>{"String"=>{"str"=>"00000003-0000001B-1"}}, "location"=>76}}]}}, "stmt_location"=>50, "stmt_len"=>47}}]
---------END-------
-
--------BEGIN-------
-Method: drop_view
-SQL: DROP VIEW kinds;
-Fingerprint: 02a2ed7cc35b9b9440adf89ad658a5e6b2223b86f8
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""kinds"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[[{"String"=>{"str"=>"kinds"}}]], "removeType"=>47, "behavior"=>0}}, "stmt_len"=>15}}]
 --------END-------
 
 -------BEGIN-------
@@ -1932,15 +1624,6 @@ Fingerprint: 0222f8feaecd81fccb621420b9a5ae23303a70c15b
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse type: bit
 Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"~"}}], "objargs"=>[nil, {"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"bit"}}], "typmods"=>[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>-1}}], "typemod"=>-1, "location"=>23}}]}}, {"ObjectWithArgs"=>{"objname"=>[{"String"=>{"str"=>"!"}}], "objargs"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int8"}}], "typemod"=>-1, "location"=>32}}, nil]}}], "removeType"=>25, "behavior"=>0}}, "stmt_len"=>45}}]
---------END-------
-
--------BEGIN-------
-Method: drop_extension
-SQL: DROP EXTENSION hstore;
-Fingerprint: 02f85123ed9cb2ecf36ee8582610bd22860246a60b
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ""hstore"" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"hstore"}}], "removeType"=>15, "behavior"=>0}}, "stmt_len"=>21}}]
 --------END-------
 
 -------BEGIN-------
@@ -2155,15 +1838,6 @@ Fingerprint: 0297414d86a8a7481a2134c8c4e240bb3654cfe5e7
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: CreateAmStmt: {"amname"=>"heptree", "handler_name"=>[{"String"=>{"str"=>"heptree_handler"}}], "amtype"=>"i"}
 Tree: [{"RawStmt"=>{"stmt"=>{"CreateAmStmt"=>{"amname"=>"heptree", "handler_name"=>[{"String"=>{"str"=>"heptree_handler"}}], "amtype"=>"i"}}, "stmt_len"=>63}}]
---------END-------
-
--------BEGIN-------
-Method: drop_domain
-SQL: DROP DOMAIN box;
-Fingerprint: 023cf128d23a403ae593e251d2aa80b7c581c2a92f
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "box" (scan.l:1121)
-Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"TypeName"=>{"names"=>[{"String"=>{"str"=>"box"}}], "typemod"=>-1, "location"=>12}}], "removeType"=>12, "behavior"=>0}}, "stmt_len"=>15}}]
 --------END-------
 
 -------BEGIN-------
