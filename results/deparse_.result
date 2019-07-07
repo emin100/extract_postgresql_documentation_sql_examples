@@ -10,8 +10,8 @@ OK	Method                        	  Test Count	  Pass Count	   Fingerprint Err	 
   	create_event_trigger          	           1	           0	                 0	           1	    0
   	create_statistics             	           2	           0	                 0	           0	    2
 ✓ 	drop_type                     	           1	           1	                 0	           0	    0
-  	alter_rule                    	           1	           0	                 0	           0	    1
-  	alter_view                    	           2	           0	                 1	           0	    1
+✓ 	alter_rule                    	           1	           1	                 0	           0	    0
+✓ 	alter_view                    	           2	           2	                 0	           0	    0
   	call                          	           1	           0	                 0	           1	    0
 ✓ 	create_materialized_view      	           0	           0	                 0	           0	    0
   	drop_procedure                	           1	           0	                 0	           1	    0
@@ -74,7 +74,7 @@ OK	Method                        	  Test Count	  Pass Count	   Fingerprint Err	 
 ✓ 	commit                        	           1	           1	                 0	           0	    0
   	drop_language                 	           1	           0	                 0	           0	    1
 ✓ 	set_session_auth              	           0	           0	                 0	           0	    0
-  	alter_foreign_table           	           2	           0	                 1	           1	    0
+  	alter_foreign_table           	           2	           0	                 0	           1	    1
   	notify                        	           1	           0	                 0	           1	    0
   	copy                          	           6	           3	                 1	           2	    0
   	values                        	           6	           4	                 1	           0	    1
@@ -150,7 +150,7 @@ OK	Method                        	  Test Count	  Pass Count	   Fingerprint Err	 
   	cluster                       	           3	           0	                 0	           0	    3
   	create_policy                 	           1	           0	                 0	           1	    0
 ✓ 	drop_tsparser                 	           1	           1	                 0	           0	    0
-  	alter_type                    	           6	           0	                 1	           0	    5
+  	alter_type                    	           6	           0	                 0	           0	    6
   	set_transaction               	           1	           0	                 0	           0	    1
   	create_view                   	           7	           5	                 2	           0	    0
 ✓ 	deallocate                    	           0	           0	                 0	           0	    0

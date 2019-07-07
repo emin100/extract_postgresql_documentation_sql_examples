@@ -9,19 +9,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"intoClause"=>{"IntoClause"=>{"rel"=
 --------END-------
 
 -------BEGIN-------
-Method: alter_view
-SQL: CREATE TABLE base_table (id int, ts timestamptz);
-CREATE VIEW a_view AS SELECT * FROM base_table;
-ALTER VIEW a_view ALTER COLUMN ts SET DEFAULT now();
-INSERT INTO base_table(id) VALUES(1);  -- ts will receive a NULL
-INSERT INTO a_view(id) VALUES(2);  -- ts will receive the current time
-Fingerprint: 02238dc96e0d5d65959475030feb463dcefc4e5299
-Fingerprint Deparse: 02eaf6f03ac0bfa6ec13a7556644dd08430a8edc75
-Deparse SQL: CREATE TABLE "base_table" (id int, ts timestamptz); CREATE VIEW a_view AS SELECT * FROM "base_table"; ALTER TABLE "a_view" ALTER COLUMN ts SET DEFAULT now(); INSERT INTO "base_table" (id) VALUES (1); INSERT INTO "a_view" (id) VALUES (2)
-Tree: [{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"base_table", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"id", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>28}}, "is_local"=>true, "location"=>25}}, {"ColumnDef"=>{"colname"=>"ts", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"timestamptz"}}], "typemod"=>-1, "location"=>36}}, "is_local"=>true, "location"=>33}}], "oncommit"=>0}}, "stmt_len"=>48}}, {"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"a_view", "inh"=>true, "relpersistence"=>"p", "location"=>62}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>79}}, "location"=>79}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"base_table", "inh"=>true, "relpersistence"=>"p", "location"=>86}}], "op"=>0}}, "withCheckOption"=>0}}, "stmt_location"=>49, "stmt_len"=>47}}, {"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"a_view", "inh"=>true, "relpersistence"=>"p", "location"=>109}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>3, "name"=>"ts", "def"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"now"}}], "location"=>144}}, "behavior"=>0}}], "relkind"=>47}}, "stmt_location"=>97, "stmt_len"=>52}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"base_table", "inh"=>true, "relpersistence"=>"p", "location"=>163}}, "cols"=>[{"ResTarget"=>{"name"=>"id", "location"=>174}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>185}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>150, "stmt_len"=>37}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"a_view", "inh"=>true, "relpersistence"=>"p", "location"=>228}}, "cols"=>[{"ResTarget"=>{"name"=>"id", "location"=>235}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>246}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>188, "stmt_len"=>60}}]
---------END-------
-
--------BEGIN-------
 Method: create_schema
 SQL: CREATE SCHEMA hollywood;
 CREATE TABLE hollywood.films (title text, release date, awards text[]);
@@ -233,15 +220,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 --------END-------
 
 -------BEGIN-------
-Method: alter_foreign_table
-SQL: ALTER FOREIGN TABLE distributors ALTER COLUMN street SET NOT NULL;
-Fingerprint: 022ec3bba295c28985c88168fd68e14858abe47018
-Fingerprint Deparse: 02dd60a38eaa7289a41d6078bd872574d4ac99e5c2
-Deparse SQL: ALTER TABLE "distributors" ALTER COLUMN street SET NOT NULL
-Tree: [{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>20}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>5, "name"=>"street", "behavior"=>0}}], "relkind"=>18}}, "stmt_len"=>65}}]
---------END-------
-
--------BEGIN-------
 Method: copy
 SQL: COPY country TO STDOUT (DELIMITER '|');
 Fingerprint: 02eacd6f268cf85d807aeabbdd72292f5c07fc69d6
@@ -323,15 +301,6 @@ Fingerprint: 029c70158256ce53f85d54f71736b40ae126167c70
 Fingerprint Deparse: 026568916359188356fe16839be89f88b117164dad
 Deparse SQL: ALTER TABLE "distributors" ADD CONSTRAINT zipchk CHECK (char_length("zipcode") = 5)
 Tree: [{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>14, "def"=>{"Constraint"=>{"contype"=>4, "conname"=>"zipchk", "location"=>29, "is_no_inherit"=>true, "raw_expr"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"char_length"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"zipcode"}}], "location"=>66}}], "location"=>54}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>5}}, "location"=>77}}, "location"=>75}}, "initially_valid"=>true}}, "behavior"=>0}}], "relkind"=>37}}, "stmt_len"=>90}}]
---------END-------
-
--------BEGIN-------
-Method: alter_type
-SQL: ALTER TYPE compfoo ADD ATTRIBUTE f3 int;
-Fingerprint: 021494f1e1c3c189b58cd1477fac4017b4d5c69e03
-Fingerprint Deparse: 023366c63ee0987c017b5b5660ce64c4dfc40e8ce0
-Deparse SQL: ALTER TABLE ONLY "compfoo" ADD COLUMN f3 int
-Tree: [{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"compfoo", "relpersistence"=>"p", "location"=>11}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>0, "def"=>{"ColumnDef"=>{"colname"=>"f3", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>36}}, "is_local"=>true, "location"=>33}}, "behavior"=>0}}], "relkind"=>45}}, "stmt_len"=>39}}]
 --------END-------
 
 -------BEGIN-------

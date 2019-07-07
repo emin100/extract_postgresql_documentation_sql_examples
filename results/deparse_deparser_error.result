@@ -79,24 +79,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 --------END-------
 
 -------BEGIN-------
-Method: alter_rule
-SQL: ALTER RULE notify_all ON emp RENAME TO notify_me;
-Fingerprint: 02c94c01f61ade6f229014bb3a7f297e4b44e1ae87
-Fingerprint Deparse:   
-Deparse SQL: Can't deparse: {"renameType"=>31, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"emp", "inh"=>true, "relpersistence"=>"p", "location"=>25}}, "subname"=>"notify_all", "newname"=>"notify_me", "behavior"=>0}
-Tree: [{"RawStmt"=>{"stmt"=>{"RenameStmt"=>{"renameType"=>31, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"emp", "inh"=>true, "relpersistence"=>"p", "location"=>25}}, "subname"=>"notify_all", "newname"=>"notify_me", "behavior"=>0}}, "stmt_len"=>48}}]
---------END-------
-
--------BEGIN-------
-Method: alter_view
-SQL: ALTER VIEW foo RENAME TO bar;
-Fingerprint: 0205ceda678c0f573d9fdde1b086d70133ff74e1b4
-Fingerprint Deparse:   
-Deparse SQL: Can't deparse: {"renameType"=>47, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"foo", "inh"=>true, "relpersistence"=>"p", "location"=>11}}, "newname"=>"bar", "behavior"=>0}
-Tree: [{"RawStmt"=>{"stmt"=>{"RenameStmt"=>{"renameType"=>47, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"foo", "inh"=>true, "relpersistence"=>"p", "location"=>11}}, "newname"=>"bar", "behavior"=>0}}, "stmt_len"=>28}}]
---------END-------
-
--------BEGIN-------
 Method: create_rule
 SQL: CREATE RULE "_RETURN" AS
     ON SELECT TO t1
@@ -691,6 +673,15 @@ Fingerprint: 021c890527a93d472dbcbb08b9f1bc911536def018
 Fingerprint Deparse:   
 Deparse SQL: syntax error at or near ""plsample"" (scan.l:1121)
 Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"String"=>{"str"=>"plsample"}}], "removeType"=>21, "behavior"=>0}}, "stmt_len"=>22}}]
+--------END-------
+
+-------BEGIN-------
+Method: alter_foreign_table
+SQL: ALTER FOREIGN TABLE distributors ALTER COLUMN street SET NOT NULL;
+Fingerprint: 022ec3bba295c28985c88168fd68e14858abe47018
+Fingerprint Deparse:   
+Deparse SQL: syntax error at or near ""distributors"" (scan.l:1121)
+Tree: [{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>20}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>5, "name"=>"street", "behavior"=>0}}], "relkind"=>18}}, "stmt_len"=>65}}]
 --------END-------
 
 -------BEGIN-------
@@ -1471,6 +1462,15 @@ Fingerprint: 0226dcf3554aeddc607f3132d8c870d92708db55db
 Fingerprint Deparse:   
 Deparse SQL: Can't deparse: AlterObjectSchemaStmt: {"objectType"=>45, "object"=>[{"String"=>{"str"=>"email"}}], "newschema"=>"customers"}
 Tree: [{"RawStmt"=>{"stmt"=>{"AlterObjectSchemaStmt"=>{"objectType"=>45, "object"=>[{"String"=>{"str"=>"email"}}], "newschema"=>"customers"}}, "stmt_len"=>37}}]
+--------END-------
+
+-------BEGIN-------
+Method: alter_type
+SQL: ALTER TYPE compfoo ADD ATTRIBUTE f3 int;
+Fingerprint: 021494f1e1c3c189b58cd1477fac4017b4d5c69e03
+Fingerprint Deparse:   
+Deparse SQL: syntax error at or near "ONLY" (scan.l:1121)
+Tree: [{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"compfoo", "relpersistence"=>"p", "location"=>11}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>0, "def"=>{"ColumnDef"=>{"colname"=>"f3", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>36}}, "is_local"=>true, "location"=>33}}, "behavior"=>0}}], "relkind"=>45}}, "stmt_len"=>39}}]
 --------END-------
 
 -------BEGIN-------

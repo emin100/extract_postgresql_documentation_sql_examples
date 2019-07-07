@@ -131,6 +131,37 @@ Tree: [{"RawStmt"=>{"stmt"=>{"DropStmt"=>{"objects"=>[{"TypeName"=>{"names"=>[{"
 --------END-------
 
 -------BEGIN-------
+Method: alter_rule
+SQL: ALTER RULE notify_all ON emp RENAME TO notify_me;
+Fingerprint: 02c94c01f61ade6f229014bb3a7f297e4b44e1ae87
+Fingerprint Deparse: 02c94c01f61ade6f229014bb3a7f297e4b44e1ae87
+Deparse SQL: ALTER RULE "notify_all" ON "emp" RENAME TO "notify_me"
+Tree: [{"RawStmt"=>{"stmt"=>{"RenameStmt"=>{"renameType"=>31, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"emp", "inh"=>true, "relpersistence"=>"p", "location"=>25}}, "subname"=>"notify_all", "newname"=>"notify_me", "behavior"=>0}}, "stmt_len"=>48}}]
+--------END-------
+
+-------BEGIN-------
+Method: alter_view
+SQL: ALTER VIEW foo RENAME TO bar;
+Fingerprint: 0205ceda678c0f573d9fdde1b086d70133ff74e1b4
+Fingerprint Deparse: 0205ceda678c0f573d9fdde1b086d70133ff74e1b4
+Deparse SQL: ALTER VIEW "foo" RENAME TO "bar"
+Tree: [{"RawStmt"=>{"stmt"=>{"RenameStmt"=>{"renameType"=>47, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"foo", "inh"=>true, "relpersistence"=>"p", "location"=>11}}, "newname"=>"bar", "behavior"=>0}}, "stmt_len"=>28}}]
+--------END-------
+
+-------BEGIN-------
+Method: alter_view
+SQL: CREATE TABLE base_table (id int, ts timestamptz);
+CREATE VIEW a_view AS SELECT * FROM base_table;
+ALTER VIEW a_view ALTER COLUMN ts SET DEFAULT now();
+INSERT INTO base_table(id) VALUES(1);  -- ts will receive a NULL
+INSERT INTO a_view(id) VALUES(2);  -- ts will receive the current time
+Fingerprint: 02238dc96e0d5d65959475030feb463dcefc4e5299
+Fingerprint Deparse: 02238dc96e0d5d65959475030feb463dcefc4e5299
+Deparse SQL: CREATE TABLE "base_table" (id int, ts timestamptz); CREATE VIEW a_view AS SELECT * FROM "base_table"; ALTER VIEW "a_view" ALTER COLUMN ts SET DEFAULT now(); INSERT INTO "base_table" (id) VALUES (1); INSERT INTO "a_view" (id) VALUES (2)
+Tree: [{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"base_table", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"id", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>28}}, "is_local"=>true, "location"=>25}}, {"ColumnDef"=>{"colname"=>"ts", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"timestamptz"}}], "typemod"=>-1, "location"=>36}}, "is_local"=>true, "location"=>33}}], "oncommit"=>0}}, "stmt_len"=>48}}, {"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"a_view", "inh"=>true, "relpersistence"=>"p", "location"=>62}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>79}}, "location"=>79}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"base_table", "inh"=>true, "relpersistence"=>"p", "location"=>86}}], "op"=>0}}, "withCheckOption"=>0}}, "stmt_location"=>49, "stmt_len"=>47}}, {"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"a_view", "inh"=>true, "relpersistence"=>"p", "location"=>109}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>3, "name"=>"ts", "def"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"now"}}], "location"=>144}}, "behavior"=>0}}], "relkind"=>47}}, "stmt_location"=>97, "stmt_len"=>52}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"base_table", "inh"=>true, "relpersistence"=>"p", "location"=>163}}, "cols"=>[{"ResTarget"=>{"name"=>"id", "location"=>174}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>185}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>150, "stmt_len"=>37}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"a_view", "inh"=>true, "relpersistence"=>"p", "location"=>228}}, "cols"=>[{"ResTarget"=>{"name"=>"id", "location"=>235}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>246}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>188, "stmt_len"=>60}}]
+--------END-------
+
+-------BEGIN-------
 Method: create_sequence
 SQL: SELECT * FROM name;
 Fingerprint: 02e6e820550cad5e8f22c4e70dba18188c42f99b87
@@ -1207,7 +1238,7 @@ Method: alter_table
 SQL: ALTER TABLE distributors RENAME TO suppliers;
 Fingerprint: 02c7d8c82a9a9f987243cc638b44f6c4023fb4d5e7
 Fingerprint Deparse: 02c7d8c82a9a9f987243cc638b44f6c4023fb4d5e7
-Deparse SQL: ALTER TABLE "distributors" RENAME TO suppliers
+Deparse SQL: ALTER TABLE "distributors" RENAME TO "suppliers"
 Tree: [{"RawStmt"=>{"stmt"=>{"RenameStmt"=>{"renameType"=>37, "relationType"=>0, "relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "newname"=>"suppliers", "behavior"=>0}}, "stmt_len"=>44}}]
 --------END-------
 
