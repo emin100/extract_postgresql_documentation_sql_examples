@@ -3,7 +3,7 @@ OK	Method                        	  Test Count	  Pass Count	   Fingerprint Err	 
 ✓ 	drop_publication              	           1	           1	                 0	           0	    0
 ✓ 	drop_transform                	           1	           1	                 0	           0	    0
 ✓ 	drop_materialized_view        	           1	           1	                 0	           0	    0
-  	create_table_as               	           3	           0	                 2	           0	    1
+✓ 	create_table_as               	           3	           3	                 0	           0	    0
   	alter_tsdictionary            	           3	           0	                 0	           0	    3
   	select_into                   	           1	           0	                 1	           0	    0
 ✓ 	set                           	           2	           2	                 0	           0	    0
@@ -81,7 +81,7 @@ OK	Method                        	  Test Count	  Pass Count	   Fingerprint Err	 
   	create_opclass                	           1	           0	                 0	           0	    1
 ✓ 	checkpoint                    	           0	           0	                 0	           0	    0
 ✓ 	begin                         	           1	           1	                 0	           0	    0
-  	prepare                       	           2	           0	                 0	           0	    2
+✓ 	prepare                       	           2	           2	                 0	           0	    0
   	alter_materialized_view       	           1	           0	                 0	           0	    1
 ✓ 	drop_opclass                  	           1	           1	                 0	           0	    0
 ✓ 	drop_group                    	           0	           0	                 0	           0	    0
