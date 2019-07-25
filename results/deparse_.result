@@ -5,7 +5,7 @@ OK	Method                        	  Test Count	  Pass Count	   Fingerprint Err	 
 ✓ 	drop_materialized_view        	           1	           1	                 0	           0	    0
 ✓ 	create_table_as               	           3	           3	                 0	           0	    0
   	alter_tsdictionary            	           3	           0	                 0	           0	    3
-  	select_into                   	           1	           0	                 1	           0	    0
+✓ 	select_into                   	           1	           1	                 0	           0	    0
 ✓ 	set                           	           2	           2	                 0	           0	    0
   	create_event_trigger          	           1	           0	                 0	           1	    0
   	create_statistics             	           2	           0	                 0	           0	    2

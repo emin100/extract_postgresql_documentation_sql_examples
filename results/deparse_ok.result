@@ -104,6 +104,15 @@ Tree: [{"RawStmt"=>{"stmt"=>{"PrepareStmt"=>{"name"=>"recentfilms", "argtypes"=>
 --------END-------
 
 -------BEGIN-------
+Method: select_into
+SQL: SELECT * INTO films_recent FROM films WHERE date_prod >= '2002-01-01';
+Fingerprint: 0248013c0cbc1bdd5c16115443ef6f1dfe05d13859
+Fingerprint Deparse: 0248013c0cbc1bdd5c16115443ef6f1dfe05d13859
+Deparse SQL: SELECT * INTO "films_recent" FROM "films" WHERE "date_prod" >= '2002-01-01'
+Tree: [{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"intoClause"=>{"IntoClause"=>{"rel"=>{"RangeVar"=>{"relname"=>"films_recent", "inh"=>true, "relpersistence"=>"p", "location"=>14}}, "onCommit"=>0}}, "targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>32}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>">="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"date_prod"}}], "location"=>44}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"2002-01-01"}}, "location"=>57}}, "location"=>54}}, "op"=>0}}, "stmt_len"=>69}}]
+--------END-------
+
+-------BEGIN-------
 Method: set
 SQL: SELECT setseed(value);
 Fingerprint: 021d31d83597efa556d01b05dbf03112ecfd7263e6
