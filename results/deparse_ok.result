@@ -367,6 +367,27 @@ Tree: [{"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 
 -------BEGIN-------
 Method: update
+SQL: UPDATE weather SET temp_lo = temp_lo+1, temp_hi = temp_lo+15, prcp = DEFAULT
+  WHERE city = 'San Francisco' AND date = '2003-07-03';
+Fingerprint: 02172a33ed41633a39c5c9c9b2e88d8faf8e42141f
+Fingerprint Deparse: 02172a33ed41633a39c5c9c9b2e88d8faf8e42141f
+Deparse SQL: UPDATE "weather" SET temp_lo = "temp_lo" + 1, temp_hi = "temp_lo" + 15, prcp = DEFAULT WHERE "city" = 'San Francisco' AND "date" = '2003-07-03'
+Tree: [{"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"weather", "inh"=>true, "relpersistence"=>"p", "location"=>7}}, "targetList"=>[{"ResTarget"=>{"name"=>"temp_lo", "val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"temp_lo"}}], "location"=>29}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>37}}, "location"=>36}}, "location"=>19}}, {"ResTarget"=>{"name"=>"temp_hi", "val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"temp_lo"}}], "location"=>50}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>15}}, "location"=>58}}, "location"=>57}}, "location"=>40}}, {"ResTarget"=>{"name"=>"prcp", "val"=>{"SetToDefault"=>{"location"=>69}}, "location"=>62}}], "whereClause"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"city"}}], "location"=>85}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"San Francisco"}}, "location"=>92}}, "location"=>90}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"date"}}], "location"=>112}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"2003-07-03"}}, "location"=>119}}, "location"=>117}}], "location"=>108}}}}, "stmt_len"=>131}}]
+--------END-------
+
+-------BEGIN-------
+Method: update
+SQL: UPDATE weather SET temp_lo = temp_lo+1, temp_hi = temp_lo+15, prcp = DEFAULT
+  WHERE city = 'San Francisco' AND date = '2003-07-03'
+  RETURNING temp_lo, temp_hi, prcp;
+Fingerprint: 02e54b57295ded6500377b45295fbfa09d405cda08
+Fingerprint Deparse: 02e54b57295ded6500377b45295fbfa09d405cda08
+Deparse SQL: UPDATE "weather" SET temp_lo = "temp_lo" + 1, temp_hi = "temp_lo" + 15, prcp = DEFAULT WHERE "city" = 'San Francisco' AND "date" = '2003-07-03' RETURNING "temp_lo", "temp_hi", "prcp"
+Tree: [{"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"weather", "inh"=>true, "relpersistence"=>"p", "location"=>7}}, "targetList"=>[{"ResTarget"=>{"name"=>"temp_lo", "val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"temp_lo"}}], "location"=>29}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>37}}, "location"=>36}}, "location"=>19}}, {"ResTarget"=>{"name"=>"temp_hi", "val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"+"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"temp_lo"}}], "location"=>50}}, "rexpr"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>15}}, "location"=>58}}, "location"=>57}}, "location"=>40}}, {"ResTarget"=>{"name"=>"prcp", "val"=>{"SetToDefault"=>{"location"=>69}}, "location"=>62}}], "whereClause"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"city"}}], "location"=>85}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"San Francisco"}}, "location"=>92}}, "location"=>90}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"date"}}], "location"=>112}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"2003-07-03"}}, "location"=>119}}, "location"=>117}}], "location"=>108}}, "returningList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"temp_lo"}}], "location"=>144}}, "location"=>144}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"temp_hi"}}], "location"=>153}}, "location"=>153}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"prcp"}}], "location"=>162}}, "location"=>162}}]}}, "stmt_len"=>166}}]
+--------END-------
+
+-------BEGIN-------
+Method: update
 SQL: UPDATE employees SET sales_count = sales_count + 1 WHERE id =
   (SELECT sales_person FROM accounts WHERE name = 'Acme Corporation');
 Fingerprint: 0218a247cefb90d72db9982db88821f635e76ac8c6
@@ -968,11 +989,44 @@ Tree: [{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 
 -------BEGIN-------
 Method: insert
+SQL: INSERT INTO films VALUES
+    ('UA502', 'Bananas', 105, DEFAULT, 'Comedy', '82 minutes');
+INSERT INTO films (code, title, did, date_prod, kind)
+    VALUES ('T_601', 'Yojimbo', 106, DEFAULT, 'Drama');
+Fingerprint: 020e76e6d4df769b56b09696ee61c13212bece1b44
+Fingerprint Deparse: 020e76e6d4df769b56b09696ee61c13212bece1b44
+Deparse SQL: INSERT INTO "films" VALUES ('UA502', 'Bananas', 105, DEFAULT, 'Comedy', '82 minutes'); INSERT INTO "films" (code, title, did, date_prod, kind) VALUES ('T_601', 'Yojimbo', 106, DEFAULT, 'Drama')
+Tree: [{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"UA502"}}, "location"=>30}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Bananas"}}, "location"=>39}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>105}}, "location"=>50}}, {"SetToDefault"=>{"location"=>55}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Comedy"}}, "location"=>64}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"82 minutes"}}, "location"=>74}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>87}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>101}}, "cols"=>[{"ResTarget"=>{"name"=>"code", "location"=>108}}, {"ResTarget"=>{"name"=>"title", "location"=>114}}, {"ResTarget"=>{"name"=>"did", "location"=>121}}, {"ResTarget"=>{"name"=>"date_prod", "location"=>126}}, {"ResTarget"=>{"name"=>"kind", "location"=>137}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"T_601"}}, "location"=>155}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Yojimbo"}}, "location"=>164}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>106}}, "location"=>175}}, {"SetToDefault"=>{"location"=>180}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Drama"}}, "location"=>189}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>88, "stmt_len"=>109}}]
+--------END-------
+
+-------BEGIN-------
+Method: insert
+SQL: INSERT INTO films (code, title, did, date_prod, kind) VALUES
+    ('B6717', 'Tampopo', 110, '1985-02-10', 'Comedy'),
+    ('HG120', 'The Dinner Game', 140, DEFAULT, 'Comedy');
+Fingerprint: 024ce759186ea44388df4f3b859d7025f7fc7e3147
+Fingerprint Deparse: 024ce759186ea44388df4f3b859d7025f7fc7e3147
+Deparse SQL: INSERT INTO "films" (code, title, did, date_prod, kind) VALUES ('B6717', 'Tampopo', 110, '1985-02-10', 'Comedy'), ('HG120', 'The Dinner Game', 140, DEFAULT, 'Comedy')
+Tree: [{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cols"=>[{"ResTarget"=>{"name"=>"code", "location"=>19}}, {"ResTarget"=>{"name"=>"title", "location"=>25}}, {"ResTarget"=>{"name"=>"did", "location"=>32}}, {"ResTarget"=>{"name"=>"date_prod", "location"=>37}}, {"ResTarget"=>{"name"=>"kind", "location"=>48}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"B6717"}}, "location"=>66}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Tampopo"}}, "location"=>75}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>110}}, "location"=>86}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"1985-02-10"}}, "location"=>91}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Comedy"}}, "location"=>105}}], [{"A_Const"=>{"val"=>{"String"=>{"str"=>"HG120"}}, "location"=>121}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"The Dinner Game"}}, "location"=>130}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>140}}, "location"=>149}}, {"SetToDefault"=>{"location"=>154}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Comedy"}}, "location"=>163}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>172}}]
+--------END-------
+
+-------BEGIN-------
+Method: insert
 SQL: INSERT INTO films SELECT * FROM tmp_films WHERE date_prod  '2004-05-07';
 Fingerprint: 02a29d451e23e0c4dfe1895c9ef8c2681f439b35d8
 Fingerprint Deparse: 02a29d451e23e0c4dfe1895c9ef8c2681f439b35d8
 Deparse SQL: INSERT INTO "films" SELECT * FROM "tmp_films" WHERE '2004-05-07'::date_prod
 Tree: [{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "selectStmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>25}}, "location"=>25}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"tmp_films", "inh"=>true, "relpersistence"=>"p", "location"=>32}}], "whereClause"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"2004-05-07"}}, "location"=>59}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"date_prod"}}], "typemod"=>-1, "location"=>48}}, "location"=>-1}}, "op"=>0}}, "override"=>0}}, "stmt_len"=>71}}]
+--------END-------
+
+-------BEGIN-------
+Method: insert
+SQL: INSERT INTO distributors (did, dname) VALUES (DEFAULT, 'XYZ Widgets')
+   RETURNING did;
+Fingerprint: 020d11cdf7e432e9793b0f67f6c67201eb0e077ae7
+Fingerprint Deparse: 020d11cdf7e432e9793b0f67f6c67201eb0e077ae7
+Deparse SQL: INSERT INTO "distributors" (did, dname) VALUES (DEFAULT, 'XYZ Widgets') RETURNING "did"
+Tree: [{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cols"=>[{"ResTarget"=>{"name"=>"did", "location"=>26}}, {"ResTarget"=>{"name"=>"dname", "location"=>31}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"SetToDefault"=>{"location"=>46}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"XYZ Widgets"}}, "location"=>55}}]], "op"=>0}}, "returningList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"did"}}], "location"=>83}}, "location"=>83}}], "override"=>0}}, "stmt_len"=>86}}]
 --------END-------
 
 -------BEGIN-------
@@ -1483,6 +1537,17 @@ Fingerprint: 024ce759186ea44388df4f3b859d7025f7fc7e3147
 Fingerprint Deparse: 024ce759186ea44388df4f3b859d7025f7fc7e3147
 Deparse SQL: INSERT INTO "films" (code, title, did, date_prod, kind) VALUES ('T_601', 'Yojimbo', 106, '1961-06-16', 'Drama')
 Tree: [{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "cols"=>[{"ResTarget"=>{"name"=>"code", "location"=>19}}, {"ResTarget"=>{"name"=>"title", "location"=>25}}, {"ResTarget"=>{"name"=>"did", "location"=>32}}, {"ResTarget"=>{"name"=>"date_prod", "location"=>37}}, {"ResTarget"=>{"name"=>"kind", "location"=>48}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"T_601"}}, "location"=>66}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Yojimbo"}}, "location"=>75}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>106}}, "location"=>86}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"1961-06-16"}}, "location"=>91}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Drama"}}, "location"=>105}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>113}}]
+--------END-------
+
+-------BEGIN-------
+Method: values
+SQL: INSERT INTO films VALUES
+    ('UA502', 'Bananas', 105, DEFAULT, 'Comedy', '82 minutes'),
+    ('T_601', 'Yojimbo', 106, DEFAULT, 'Drama', DEFAULT);
+Fingerprint: 022b181513ed12623a5d018d335564c88109b4f72e
+Fingerprint Deparse: 022b181513ed12623a5d018d335564c88109b4f72e
+Deparse SQL: INSERT INTO "films" VALUES ('UA502', 'Bananas', 105, DEFAULT, 'Comedy', '82 minutes'), ('T_601', 'Yojimbo', 106, DEFAULT, 'Drama', DEFAULT)
+Tree: [{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>12}}, "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"UA502"}}, "location"=>30}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Bananas"}}, "location"=>39}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>105}}, "location"=>50}}, {"SetToDefault"=>{"location"=>55}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Comedy"}}, "location"=>64}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"82 minutes"}}, "location"=>74}}], [{"A_Const"=>{"val"=>{"String"=>{"str"=>"T_601"}}, "location"=>94}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Yojimbo"}}, "location"=>103}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>106}}, "location"=>114}}, {"SetToDefault"=>{"location"=>119}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Drama"}}, "location"=>128}}, {"SetToDefault"=>{"location"=>137}}]], "op"=>0}}, "override"=>0}}, "stmt_len"=>145}}]
 --------END-------
 
 -------BEGIN-------

@@ -73,7 +73,7 @@ OK	Method                        	  Test Count	  Pass Count	   Fingerprint Err	 
   	alter_type                    	           6	           1	                 0	           0	    5
 ✓ 	begin                         	           1	           1	                 0	           0	    0
 ✓ 	drop_tsparser                 	           1	           1	                 0	           0	    0
-  	update                        	          11	           3	                 2	           0	    6
+  	update                        	          11	           5	                 2	           0	    4
   	alter_procedure               	           6	           0	                 0	           6	    0
   	security_label                	           1	           0	                 0	           0	    1
 ✓ 	grant                         	           3	           3	                 0	           0	    0
@@ -118,7 +118,7 @@ OK	Method                        	  Test Count	  Pass Count	   Fingerprint Err	 
   	alter_system                  	           2	           0	                 0	           0	    2
   	declare                       	           1	           0	                 0	           0	    1
 ✓ 	reassign_owned                	           0	           0	                 0	           0	    0
-  	insert                        	          13	           4	                 4	           0	    5
+  	insert                        	          13	           7	                 4	           0	    2
 ✓ 	drop_subscription             	           1	           1	                 0	           0	    0
   	create_operator               	           2	           0	                 0	           1	    1
 ✓ 	drop_access_method            	           1	           1	                 0	           0	    0
@@ -173,7 +173,7 @@ OK	Method                        	  Test Count	  Pass Count	   Fingerprint Err	 
 ✓ 	create_tstemplate             	           0	           0	                 0	           0	    0
   	alter_server                  	           2	           0	                 0	           0	    2
   	lock                          	           2	           0	                 1	           1	    0
-  	values                        	           6	           4	                 1	           0	    1
+  	values                        	           6	           5	                 1	           0	    0
 ✓ 	alter_user                    	           0	           0	                 0	           0	    0
 ✓ 	drop_tsconfig                 	           1	           1	                 0	           0	    0
   	create_type                   	           5	           4	                 0	           0	    1
