@@ -1,18 +1,5 @@
 
 -------BEGIN-------
-Method: alter_view
-SQL: CREATE TABLE base_table (id int, ts timestamptz);
-CREATE VIEW a_view AS SELECT * FROM base_table;
-ALTER VIEW a_view ALTER COLUMN ts SET DEFAULT now();
-INSERT INTO base_table(id) VALUES(1);  -- ts will receive a NULL
-INSERT INTO a_view(id) VALUES(2);  -- ts will receive the current time
-Fingerprint: 02238dc96e0d5d65959475030feb463dcefc4e5299
-Fingerprint Deparse: 02eaf6f03ac0bfa6ec13a7556644dd08430a8edc75
-Deparse SQL: CREATE TABLE "base_table" (id int, ts timestamptz); CREATE VIEW a_view AS SELECT * FROM "base_table"; ALTER TABLE "a_view" ALTER COLUMN ts SET DEFAULT now(); INSERT INTO "base_table" (id) VALUES (1); INSERT INTO "a_view" (id) VALUES (2)
-Tree: [{"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"base_table", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"id", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>28}}, "is_local"=>true, "location"=>25}}, {"ColumnDef"=>{"colname"=>"ts", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"timestamptz"}}], "typemod"=>-1, "location"=>36}}, "is_local"=>true, "location"=>33}}], "oncommit"=>0}}, "stmt_len"=>48}}, {"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"relname"=>"a_view", "inh"=>true, "relpersistence"=>"p", "location"=>62}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>79}}, "location"=>79}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"base_table", "inh"=>true, "relpersistence"=>"p", "location"=>86}}], "op"=>0}}, "withCheckOption"=>0}}, "stmt_location"=>49, "stmt_len"=>47}}, {"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"a_view", "inh"=>true, "relpersistence"=>"p", "location"=>109}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>3, "name"=>"ts", "def"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"now"}}], "location"=>144}}, "behavior"=>0}}], "relkind"=>47}}, "stmt_location"=>97, "stmt_len"=>52}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"base_table", "inh"=>true, "relpersistence"=>"p", "location"=>163}}, "cols"=>[{"ResTarget"=>{"name"=>"id", "location"=>174}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>185}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>150, "stmt_len"=>37}}, {"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"a_view", "inh"=>true, "relpersistence"=>"p", "location"=>228}}, "cols"=>[{"ResTarget"=>{"name"=>"id", "location"=>235}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>246}}]], "op"=>0}}, "override"=>0}}, "stmt_location"=>188, "stmt_len"=>60}}]
---------END-------
-
--------BEGIN-------
 Method: create_view
 SQL: CREATE VIEW universal_comedies AS
     SELECT *
@@ -56,15 +43,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>7, "gid"=>"foobar"}}, "
 --------END-------
 
 -------BEGIN-------
-Method: alter_type
-SQL: ALTER TYPE compfoo ADD ATTRIBUTE f3 int;
-Fingerprint: 021494f1e1c3c189b58cd1477fac4017b4d5c69e03
-Fingerprint Deparse: 023366c63ee0987c017b5b5660ce64c4dfc40e8ce0
-Deparse SQL: ALTER TABLE ONLY "compfoo" ADD COLUMN f3 int
-Tree: [{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"compfoo", "relpersistence"=>"p", "location"=>11}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>0, "def"=>{"ColumnDef"=>{"colname"=>"f3", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>36}}, "is_local"=>true, "location"=>33}}, "behavior"=>0}}], "relkind"=>45}}, "stmt_len"=>39}}]
---------END-------
-
--------BEGIN-------
 Method: update
 SQL: UPDATE employees SET sales_count = sales_count + 1 FROM accounts
   WHERE accounts.name = 'Acme Corporation'
@@ -87,6 +65,33 @@ Tree: [{"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=
 --------END-------
 
 -------BEGIN-------
+Method: revoke
+SQL: REVOKE INSERT ON films FROM PUBLIC;
+Fingerprint: 02249e39e35603af6b1e8f9186d29284d64da6b94f
+Fingerprint Deparse: 02a561db638cd042e891c4111d0cd2031b7c86fcbb
+Deparse SQL: GRANT insert ON "films" TO PUBLIC
+Tree: [{"RawStmt"=>{"stmt"=>{"GrantStmt"=>{"targtype"=>0, "objtype"=>1, "objects"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>17}}], "privileges"=>[{"AccessPriv"=>{"priv_name"=>"insert"}}], "grantees"=>[{"RoleSpec"=>{"roletype"=>3, "location"=>28}}], "behavior"=>0}}, "stmt_len"=>34}}]
+--------END-------
+
+-------BEGIN-------
+Method: revoke
+SQL: REVOKE ALL PRIVILEGES ON kinds FROM manuel;
+Fingerprint: 02b254a591140b6b3ed96f97eabe8429eb95c204af
+Fingerprint Deparse: 02762d6c32679cebcc830885385de7009b6d1be082
+Deparse SQL: GRANT ALL ON "kinds" TO "manuel"
+Tree: [{"RawStmt"=>{"stmt"=>{"GrantStmt"=>{"targtype"=>0, "objtype"=>1, "objects"=>[{"RangeVar"=>{"relname"=>"kinds", "inh"=>true, "relpersistence"=>"p", "location"=>25}}], "grantees"=>[{"RoleSpec"=>{"roletype"=>0, "rolename"=>"manuel", "location"=>36}}], "behavior"=>0}}, "stmt_len"=>42}}]
+--------END-------
+
+-------BEGIN-------
+Method: revoke
+SQL: REVOKE admins FROM joe;
+Fingerprint: 02d1997e7a88ca2c539f0d0d6c54824977c4d4ee14
+Fingerprint Deparse: 02bcdfc4d708ccf0e21da33e36b3d80de14c5e1b3c
+Deparse SQL: GRANT admins TO "joe"
+Tree: [{"RawStmt"=>{"stmt"=>{"GrantRoleStmt"=>{"granted_roles"=>[{"AccessPriv"=>{"priv_name"=>"admins"}}], "grantee_roles"=>[{"RoleSpec"=>{"roletype"=>0, "rolename"=>"joe", "location"=>19}}], "behavior"=>0}}, "stmt_len"=>22}}]
+--------END-------
+
+-------BEGIN-------
 Method: create_schema
 SQL: CREATE SCHEMA hollywood;
 CREATE TABLE hollywood.films (title text, release date, awards text[]);
@@ -94,7 +99,7 @@ CREATE VIEW hollywood.winners AS
     SELECT title, release FROM hollywood.films WHERE awards IS NOT NULL;
 Fingerprint: 02933807a49d31071202e0b82ded14f19e655c9e6b
 Fingerprint Deparse: 021c30cf23a15ade4c644959df3a5e6cfcc5129dc6
-Deparse SQL: CREATE SCHEMA "hollywood"; CREATE TABLE "hollywood"."films" (title text, release date, awards text[]); CREATE VIEW winners AS SELECT "title", "release" FROM "hollywood"."films" WHERE "awards" IS NOT NULL
+Deparse SQL: CREATE SCHEMA hollywood; CREATE TABLE "hollywood"."films" (title text, release date, awards text[]); CREATE VIEW winners AS SELECT "title", "release" FROM "hollywood"."films" WHERE "awards" IS NOT NULL
 Tree: [{"RawStmt"=>{"stmt"=>{"CreateSchemaStmt"=>{"schemaname"=>"hollywood"}}, "stmt_len"=>23}}, {"RawStmt"=>{"stmt"=>{"CreateStmt"=>{"relation"=>{"RangeVar"=>{"schemaname"=>"hollywood", "relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>38}}, "tableElts"=>[{"ColumnDef"=>{"colname"=>"title", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "location"=>61}}, "is_local"=>true, "location"=>55}}, {"ColumnDef"=>{"colname"=>"release", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"date"}}], "typemod"=>-1, "location"=>75}}, "is_local"=>true, "location"=>67}}, {"ColumnDef"=>{"colname"=>"awards", "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"text"}}], "typemod"=>-1, "arrayBounds"=>[{"Integer"=>{"ival"=>-1}}], "location"=>88}}, "is_local"=>true, "location"=>81}}], "oncommit"=>0}}, "stmt_location"=>24, "stmt_len"=>71}}, {"RawStmt"=>{"stmt"=>{"ViewStmt"=>{"view"=>{"RangeVar"=>{"schemaname"=>"hollywood", "relname"=>"winners", "inh"=>true, "relpersistence"=>"p", "location"=>109}}, "query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"title"}}], "location"=>141}}, "location"=>141}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"release"}}], "location"=>148}}, "location"=>148}}], "fromClause"=>[{"RangeVar"=>{"schemaname"=>"hollywood", "relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>161}}], "whereClause"=>{"NullTest"=>{"arg"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"awards"}}], "location"=>183}}, "nulltesttype"=>1, "location"=>190}}, "op"=>0}}, "withCheckOption"=>0}}, "stmt_location"=>96, "stmt_len"=>105}}]
 --------END-------
 
@@ -153,15 +158,6 @@ Fingerprint: 02040c77662eaa184219529e29a81b262da62a13bb
 Fingerprint Deparse: 02d7fe8be2ec147318457eb71f5f613709a6a340c5
 Deparse SQL: INSERT INTO "distributors" (did, dname) VALUES (10, 'Conrad International')
 Tree: [{"RawStmt"=>{"stmt"=>{"InsertStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>183}}, "cols"=>[{"ResTarget"=>{"name"=>"did", "location"=>197}}, {"ResTarget"=>{"name"=>"dname", "location"=>202}}], "selectStmt"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>10}}, "location"=>217}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Conrad International"}}, "location"=>221}}]], "op"=>0}}, "onConflictClause"=>{"OnConflictClause"=>{"action"=>1, "infer"=>{"InferClause"=>{"indexElems"=>[{"IndexElem"=>{"name"=>"did", "ordering"=>0, "nulls_ordering"=>0}}], "whereClause"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"is_active"}}], "location"=>273}}, "location"=>261}}, "location"=>249}}, "override"=>0}}, "stmt_len"=>293}}]
---------END-------
-
--------BEGIN-------
-Method: select_into
-SQL: SELECT * INTO films_recent FROM films WHERE date_prod >= '2002-01-01';
-Fingerprint: 0248013c0cbc1bdd5c16115443ef6f1dfe05d13859
-Fingerprint Deparse: 027bb75892dfc2ab52f3cc1daf5adb9d2cbfb82da1
-Deparse SQL: SELECT * FROM "films" WHERE "date_prod" >= '2002-01-01'
-Tree: [{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"intoClause"=>{"IntoClause"=>{"rel"=>{"RangeVar"=>{"relname"=>"films_recent", "inh"=>true, "relpersistence"=>"p", "location"=>14}}, "onCommit"=>0}}, "targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>32}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>">="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"date_prod"}}], "location"=>44}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"2002-01-01"}}, "location"=>57}}, "location"=>54}}, "op"=>0}}, "stmt_len"=>69}}]
 --------END-------
 
 -------BEGIN-------
@@ -276,26 +272,6 @@ Tree: [{"RawStmt"=>{"stmt"=>{"TransactionStmt"=>{"kind"=>9, "gid"=>"foobar"}}, "
 --------END-------
 
 -------BEGIN-------
-Method: create_table_as
-SQL: CREATE TABLE films_recent AS
-  SELECT * FROM films WHERE date_prod >= '2002-01-01';
-Fingerprint: 02e60fc36c9dfc29392dee040f2e6dadaacc7e50b0
-Fingerprint Deparse: 02f324bc93d2e2c4908477e7f736d1d5aa9111de7e
-Deparse SQL: CREATE TEMPORARY TABLE "films_recent" AS SELECT * FROM "films" WHERE "date_prod" >= '2002-01-01'
-Tree: [{"RawStmt"=>{"stmt"=>{"CreateTableAsStmt"=>{"query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>38}}, "location"=>38}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>45}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>">="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"date_prod"}}], "location"=>57}}, "rexpr"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"2002-01-01"}}, "location"=>70}}, "location"=>67}}, "op"=>0}}, "into"=>{"IntoClause"=>{"rel"=>{"RangeVar"=>{"relname"=>"films_recent", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "onCommit"=>0}}, "relkind"=>37}}, "stmt_len"=>82}}]
---------END-------
-
--------BEGIN-------
-Method: create_table_as
-SQL: CREATE TABLE films2 AS
-  TABLE films;
-Fingerprint: 02d546cd869125606931fb8185bf58fc65e2e521ad
-Fingerprint Deparse: 024c5384005a846fe4e925d43c0772474f7f7e4c68
-Deparse SQL: CREATE TEMPORARY TABLE "films2" AS SELECT * FROM "films"
-Tree: [{"RawStmt"=>{"stmt"=>{"CreateTableAsStmt"=>{"query"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"A_Star"=>{}}], "location"=>-1}}, "location"=>-1}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>31}}], "op"=>0}}, "into"=>{"IntoClause"=>{"rel"=>{"RangeVar"=>{"relname"=>"films2", "inh"=>true, "relpersistence"=>"p", "location"=>13}}, "onCommit"=>0}}, "relkind"=>37}}, "stmt_len"=>36}}]
---------END-------
-
--------BEGIN-------
 Method: create_function
 SQL: CREATE OR REPLACE FUNCTION increment(i integer) RETURNS integer AS $$
         BEGIN
@@ -310,15 +286,6 @@ Deparse SQL: CREATE OR REPLACE FUNCTION "increment"(int) RETURNS int AS $$
         END;
 $$ language "plpgsql"
 Tree: [{"RawStmt"=>{"stmt"=>{"CreateFunctionStmt"=>{"replace"=>true, "funcname"=>[{"String"=>{"str"=>"increment"}}], "parameters"=>[{"FunctionParameter"=>{"name"=>"i", "argType"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>39}}, "mode"=>105}}], "returnType"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"int4"}}], "typemod"=>-1, "location"=>56}}, "options"=>[{"DefElem"=>{"defname"=>"as", "arg"=>[{"String"=>{"str"=>"\n        BEGIN\n                RETURN i + 1;\n        END;\n"}}], "defaction"=>0, "location"=>64}}, {"DefElem"=>{"defname"=>"language", "arg"=>{"String"=>{"str"=>"plpgsql"}}, "defaction"=>0, "location"=>130}}]}}, "stmt_len"=>146}}]
---------END-------
-
--------BEGIN-------
-Method: alter_foreign_table
-SQL: ALTER FOREIGN TABLE distributors ALTER COLUMN street SET NOT NULL;
-Fingerprint: 022ec3bba295c28985c88168fd68e14858abe47018
-Fingerprint Deparse: 02dd60a38eaa7289a41d6078bd872574d4ac99e5c2
-Deparse SQL: ALTER TABLE "distributors" ALTER COLUMN street SET NOT NULL
-Tree: [{"RawStmt"=>{"stmt"=>{"AlterTableStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"distributors", "inh"=>true, "relpersistence"=>"p", "location"=>20}}, "cmds"=>[{"AlterTableCmd"=>{"subtype"=>5, "name"=>"street", "behavior"=>0}}], "relkind"=>18}}, "stmt_len"=>65}}]
 --------END-------
 
 -------BEGIN-------
@@ -357,6 +324,6 @@ UPDATE employees SET salary = salary * v.increase
   WHERE employees.depno = v.depno AND employees.sales >= v.target;
 Fingerprint: 02db9740794c2f13148881aea1edf1a29d2efe96d5
 Fingerprint Deparse: 02274f7dc292bbb732b007bc638c71fcab497fdff7
-Deparse SQL: SELECT "f".* FROM "films" "f", (VALUES ('MGM', 'Horror'), ('UA', 'Sci-Fi')) t("studio", "kind") WHERE "f"."studio" = "t"."studio" AND "f"."kind" = "t"."kind"; UPDATE "employees" SET salary = "salary" * "v"."increase" WHERE "employees"."depno" = "v"."depno" AND "employees"."sales" >= "v"."target"
+Deparse SQL: SELECT "f".* FROM "films" f, (VALUES ('MGM', 'Horror'), ('UA', 'Sci-Fi')) t("studio", "kind") WHERE "f"."studio" = "t"."studio" AND "f"."kind" = "t"."kind"; UPDATE "employees" SET salary = "salary" * "v"."increase" WHERE "employees"."depno" = "v"."depno" AND "employees"."sales" >= "v"."target"
 Tree: [{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"f"}}, {"A_Star"=>{}}], "location"=>7}}, "location"=>7}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"f"}}, "location"=>18}}, {"RangeSubselect"=>{"subquery"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"String"=>{"str"=>"MGM"}}, "location"=>35}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Horror"}}, "location"=>42}}], [{"A_Const"=>{"val"=>{"String"=>{"str"=>"UA"}}, "location"=>54}}, {"A_Const"=>{"val"=>{"String"=>{"str"=>"Sci-Fi"}}, "location"=>60}}]], "op"=>0}}, "alias"=>{"Alias"=>{"aliasname"=>"t", "colnames"=>[{"String"=>{"str"=>"studio"}}, {"String"=>{"str"=>"kind"}}]}}}}], "whereClause"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"f"}}, {"String"=>{"str"=>"studio"}}], "location"=>99}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"t"}}, {"String"=>{"str"=>"studio"}}], "location"=>110}}, "location"=>108}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"f"}}, {"String"=>{"str"=>"kind"}}], "location"=>123}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"t"}}, {"String"=>{"str"=>"kind"}}], "location"=>132}}, "location"=>130}}], "location"=>119}}, "op"=>0}}, "stmt_len"=>138}}, {"RawStmt"=>{"stmt"=>{"UpdateStmt"=>{"relation"=>{"RangeVar"=>{"relname"=>"employees", "inh"=>true, "relpersistence"=>"p", "location"=>148}}, "targetList"=>[{"ResTarget"=>{"name"=>"salary", "val"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"*"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"salary"}}], "location"=>171}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"v"}}, {"String"=>{"str"=>"increase"}}], "location"=>180}}, "location"=>178}}, "location"=>162}}], "whereClause"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"employees"}}, {"String"=>{"str"=>"depno"}}], "location"=>280}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"v"}}, {"String"=>{"str"=>"depno"}}], "location"=>298}}, "location"=>296}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>">="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"employees"}}, {"String"=>{"str"=>"sales"}}], "location"=>310}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"v"}}, {"String"=>{"str"=>"target"}}], "location"=>329}}, "location"=>326}}], "location"=>306}}, "fromClause"=>[{"RangeSubselect"=>{"subquery"=>{"SelectStmt"=>{"valuesLists"=>[[{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>206}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>200000}}, "location"=>209}}, {"A_Const"=>{"val"=>{"Float"=>{"str"=>"1.2"}}, "location"=>217}}], [{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>224}}, {"A_Const"=>{"val"=>{"Integer"=>{"ival"=>400000}}, "location"=>227}}, {"A_Const"=>{"val"=>{"Float"=>{"str"=>"1.4"}}, "location"=>235}}]], "op"=>0}}, "alias"=>{"Alias"=>{"aliasname"=>"v", "colnames"=>[{"String"=>{"str"=>"depno"}}, {"String"=>{"str"=>"target"}}, {"String"=>{"str"=>"increase"}}]}}}}]}}, "stmt_location"=>139, "stmt_len"=>198}}]
 --------END-------
