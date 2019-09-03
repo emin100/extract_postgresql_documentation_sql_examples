@@ -442,6 +442,33 @@ Tree: [{"RawStmt"=>{"stmt"=>{"GrantRoleStmt"=>{"granted_roles"=>[{"AccessPriv"=>
 --------END-------
 
 -------BEGIN-------
+Method: revoke
+SQL: REVOKE INSERT ON films FROM PUBLIC;
+Fingerprint: 02249e39e35603af6b1e8f9186d29284d64da6b94f
+Fingerprint Deparse: 02249e39e35603af6b1e8f9186d29284d64da6b94f
+Deparse SQL: REVOKE insert ON "films" FROM PUBLIC
+Tree: [{"RawStmt"=>{"stmt"=>{"GrantStmt"=>{"targtype"=>0, "objtype"=>1, "objects"=>[{"RangeVar"=>{"relname"=>"films", "inh"=>true, "relpersistence"=>"p", "location"=>17}}], "privileges"=>[{"AccessPriv"=>{"priv_name"=>"insert"}}], "grantees"=>[{"RoleSpec"=>{"roletype"=>3, "location"=>28}}], "behavior"=>0}}, "stmt_len"=>34}}]
+--------END-------
+
+-------BEGIN-------
+Method: revoke
+SQL: REVOKE ALL PRIVILEGES ON kinds FROM manuel;
+Fingerprint: 02b254a591140b6b3ed96f97eabe8429eb95c204af
+Fingerprint Deparse: 02b254a591140b6b3ed96f97eabe8429eb95c204af
+Deparse SQL: REVOKE ALL ON "kinds" FROM "manuel"
+Tree: [{"RawStmt"=>{"stmt"=>{"GrantStmt"=>{"targtype"=>0, "objtype"=>1, "objects"=>[{"RangeVar"=>{"relname"=>"kinds", "inh"=>true, "relpersistence"=>"p", "location"=>25}}], "grantees"=>[{"RoleSpec"=>{"roletype"=>0, "rolename"=>"manuel", "location"=>36}}], "behavior"=>0}}, "stmt_len"=>42}}]
+--------END-------
+
+-------BEGIN-------
+Method: revoke
+SQL: REVOKE admins FROM joe;
+Fingerprint: 02d1997e7a88ca2c539f0d0d6c54824977c4d4ee14
+Fingerprint Deparse: 02d1997e7a88ca2c539f0d0d6c54824977c4d4ee14
+Deparse SQL: REVOKE admins FROM "joe"
+Tree: [{"RawStmt"=>{"stmt"=>{"GrantRoleStmt"=>{"granted_roles"=>[{"AccessPriv"=>{"priv_name"=>"admins"}}], "grantee_roles"=>[{"RoleSpec"=>{"roletype"=>0, "rolename"=>"joe", "location"=>19}}], "behavior"=>0}}, "stmt_len"=>22}}]
+--------END-------
+
+-------BEGIN-------
 Method: drop_event_trigger
 SQL: DROP EVENT TRIGGER snitch;
 Fingerprint: 02396ad0680b0af63cdec538922dff52ad671630ac
