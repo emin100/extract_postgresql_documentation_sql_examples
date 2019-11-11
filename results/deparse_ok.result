@@ -523,7 +523,7 @@ SQL: SELECT pg_describe_object(refclassid, refobjid, refobjsubid) AS "Collation"
   ORDER BY 1, 2;
 Fingerprint: 02125c83e952b4d44c63a8feef6d43cee39c36b560
 Fingerprint Deparse: 02125c83e952b4d44c63a8feef6d43cee39c36b560
-Deparse SQL: SELECT pg_describe_object("refclassid", "refobjid", "refobjsubid") AS "Collation", pg_describe_object("classid", "objid", "objsubid") AS "Object" FROM "pg_depend" d JOIN "pg_collation" "c" ON "refclassid" = 'pg_collation'::regclass AND "refobjid" = "c"."oid" WHERE "c"."collversion" <> pg_collation_actual_version("c"."oid") ORDER BY 1, 2
+Deparse SQL: SELECT pg_describe_object("refclassid", "refobjid", "refobjsubid") AS "Collation", pg_describe_object("classid", "objid", "objsubid") AS Object FROM "pg_depend" d JOIN "pg_collation" c ON "refclassid" = 'pg_collation'::regclass AND "refobjid" = "c"."oid" WHERE "c"."collversion" <> pg_collation_actual_version("c"."oid") ORDER BY 1, 2
 Tree: [{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"name"=>"Collation", "val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_describe_object"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refclassid"}}], "location"=>26}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refobjid"}}], "location"=>38}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refobjsubid"}}], "location"=>48}}], "location"=>7}}, "location"=>7}}, {"ResTarget"=>{"name"=>"Object", "val"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_describe_object"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"classid"}}], "location"=>103}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"objid"}}], "location"=>112}}, {"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"objsubid"}}], "location"=>119}}], "location"=>84}}, "location"=>84}}], "fromClause"=>[{"JoinExpr"=>{"jointype"=>0, "larg"=>{"RangeVar"=>{"relname"=>"pg_depend", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"d"}}, "location"=>148}}, "rarg"=>{"RangeVar"=>{"relname"=>"pg_collation", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"c"}}, "location"=>165}}, "quals"=>{"BoolExpr"=>{"boolop"=>0, "args"=>[{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refclassid"}}], "location"=>190}}, "rexpr"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"pg_collation"}}, "location"=>203}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"regclass"}}], "typemod"=>-1, "location"=>219}}, "location"=>217}}, "location"=>201}}, {"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"="}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"refobjid"}}], "location"=>232}}, "rexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"c"}}, {"String"=>{"str"=>"oid"}}], "location"=>243}}, "location"=>241}}], "location"=>228}}}}], "whereClause"=>{"A_Expr"=>{"kind"=>0, "name"=>[{"String"=>{"str"=>"<>"}}], "lexpr"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"c"}}, {"String"=>{"str"=>"collversion"}}], "location"=>257}}, "rexpr"=>{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"pg_collation_actual_version"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"c"}}, {"String"=>{"str"=>"oid"}}], "location"=>302}}], "location"=>274}}, "location"=>271}}, "sortClause"=>[{"SortBy"=>{"node"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>1}}, "location"=>320}}, "sortby_dir"=>0, "sortby_nulls"=>0, "location"=>-1}}, {"SortBy"=>{"node"=>{"A_Const"=>{"val"=>{"Integer"=>{"ival"=>2}}, "location"=>323}}, "sortby_dir"=>0, "sortby_nulls"=>0, "location"=>-1}}], "op"=>0}}, "stmt_len"=>324}}]
 --------END-------
 
@@ -668,6 +668,15 @@ Tree: [{"RawStmt"=>{"stmt"=>{"DoStmt"=>{"args"=>[{"DefElem"=>{"defname"=>"as", "
 
 -------BEGIN-------
 Method: prepare
+SQL: EXPLAIN EXECUTE name(parameter_values);
+Fingerprint: 02a2a4dddaa6ac7561423e826e448045ac91aff8f7
+Fingerprint Deparse: 02a2a4dddaa6ac7561423e826e448045ac91aff8f7
+Deparse SQL: EXPLAIN EXECUTE name ("parameter_values")
+Tree: [{"RawStmt"=>{"stmt"=>{"ExplainStmt"=>{"query"=>{"ExecuteStmt"=>{"name"=>"name", "params"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"parameter_values"}}], "location"=>21}}]}}}}, "stmt_len"=>38}}]
+--------END-------
+
+-------BEGIN-------
+Method: prepare
 SQL: PREPARE fooplan (int, text, bool, numeric) AS
     INSERT INTO foo VALUES($1, $2, $3, $4);
 EXECUTE fooplan(1, 'Hunter Valley', 't', 200.00);
@@ -778,7 +787,7 @@ SQL: SELECT m.name AS mname, pname
 FROM manufacturers m, LATERAL get_product_names(m.id) pname;
 Fingerprint: 024910d8e2b74ee7069fe077dcb49ae520b68724a9
 Fingerprint Deparse: 024910d8e2b74ee7069fe077dcb49ae520b68724a9
-Deparse SQL: SELECT "m"."name" AS mname, "pname" FROM "manufacturers" "m", LATERAL get_product_names("m"."id") pname
+Deparse SQL: SELECT "m"."name" AS mname, "pname" FROM "manufacturers" m, LATERAL get_product_names("m"."id") pname
 Tree: [{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"name"=>"mname", "val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"m"}}, {"String"=>{"str"=>"name"}}], "location"=>7}}, "location"=>7}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"pname"}}], "location"=>24}}, "location"=>24}}], "fromClause"=>[{"RangeVar"=>{"relname"=>"manufacturers", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"m"}}, "location"=>35}}, {"RangeFunction"=>{"lateral"=>true, "functions"=>[[{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"get_product_names"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"m"}}, {"String"=>{"str"=>"id"}}], "location"=>78}}], "location"=>60}}, nil]], "alias"=>{"Alias"=>{"aliasname"=>"pname"}}}}], "op"=>0}}, "stmt_len"=>89}}]
 --------END-------
 
@@ -788,7 +797,7 @@ SQL: SELECT m.name AS mname, pname
 FROM manufacturers m LEFT JOIN LATERAL get_product_names(m.id) pname ON true;
 Fingerprint: 024f8cf8f766a2e9402251016e0f0782e6c96129a0
 Fingerprint Deparse: 024f8cf8f766a2e9402251016e0f0782e6c96129a0
-Deparse SQL: SELECT "m"."name" AS mname, "pname" FROM "manufacturers" "m" LEFT JOIN LATERAL get_product_names("m"."id") pname ON true
+Deparse SQL: SELECT "m"."name" AS mname, "pname" FROM "manufacturers" m LEFT JOIN LATERAL get_product_names("m"."id") pname ON true
 Tree: [{"RawStmt"=>{"stmt"=>{"SelectStmt"=>{"targetList"=>[{"ResTarget"=>{"name"=>"mname", "val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"m"}}, {"String"=>{"str"=>"name"}}], "location"=>7}}, "location"=>7}}, {"ResTarget"=>{"val"=>{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"pname"}}], "location"=>24}}, "location"=>24}}], "fromClause"=>[{"JoinExpr"=>{"jointype"=>1, "larg"=>{"RangeVar"=>{"relname"=>"manufacturers", "inh"=>true, "relpersistence"=>"p", "alias"=>{"Alias"=>{"aliasname"=>"m"}}, "location"=>35}}, "rarg"=>{"RangeFunction"=>{"lateral"=>true, "functions"=>[[{"FuncCall"=>{"funcname"=>[{"String"=>{"str"=>"get_product_names"}}], "args"=>[{"ColumnRef"=>{"fields"=>[{"String"=>{"str"=>"m"}}, {"String"=>{"str"=>"id"}}], "location"=>87}}], "location"=>69}}, nil]], "alias"=>{"Alias"=>{"aliasname"=>"pname"}}}}, "quals"=>{"TypeCast"=>{"arg"=>{"A_Const"=>{"val"=>{"String"=>{"str"=>"t"}}, "location"=>102}}, "typeName"=>{"TypeName"=>{"names"=>[{"String"=>{"str"=>"pg_catalog"}}, {"String"=>{"str"=>"bool"}}], "typemod"=>-1, "location"=>-1}}, "location"=>-1}}}}], "op"=>0}}, "stmt_len"=>106}}]
 --------END-------
 
