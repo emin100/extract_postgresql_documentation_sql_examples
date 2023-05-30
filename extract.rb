@@ -1,5 +1,6 @@
 #! /usr/bin/env ruby
 
+require 'cgi'
 require 'nokogiri'
 require 'pg_query'
 
@@ -35,7 +36,8 @@ Dir[sgml_dir + '*'].each do |file_name|
   sql_sub = (file_name.split('/')[5]).split('.')[0].strip
   next if sql_sub == 'allfiles'
 
-  doc = Nokogiri.XML(f, nil, 'UTF-8')
+  #doc = Nokogiri.XML(f, nil, 'UTF-8')
+  doc = Nokogiri.XML(CGI.unescapeHTML(f.read()))
   count = 0
   count_fingerprint = 0
   count_error_deparser = 0
@@ -91,7 +93,7 @@ Dir[sgml_dir + '*'].each do |file_name|
         file_name_error = 'deparser_error'
       end
       message(file_name_error,
-              sql,
+        file_name+sql,
               (parsed_sql.tree unless parsed_sql.nil?),
               (parsed_sql.fingerprint unless parsed_sql.nil?),
               nil,

@@ -1,173 +1,154 @@
 
 -------BEGIN-------
-Method: drop_routine
-SQL: DROP ROUTINE foo(integer);
+Method: alter_foreign_table
+SQL: postgres/doc/src/sgml/ref/alter_foreign_table.sgmlALTER FOREIGN TABLE myschema.distributors OPTIONS (ADD opt1 'value', SET opt2 'value2', DROP opt3 'value3');
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "ROUTINE" (scan.l:1121)
+Deparse SQL: syntax error at or near "'value3'" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: reindex
-SQL: $ export PGOPTIONS="-P"
-$ psql broken_db
-...
-broken_db= REINDEX DATABASE broken_db;
-broken_db= \q
+Method: alter_operator
+SQL: postgres/doc/src/sgml/ref/alter_operator.sgmlALTER OPERATOR  (_int4, _int4) SET (RESTRICT = _int_contsel, JOIN = _int_contjoinsel);
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "$" (scan.l:1121)
+Deparse SQL: syntax error at or near "(" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: reindex
-SQL: REINDEX TABLE CONCURRENTLY my_broken_table;
+Method: alter_opfamily
+SQL: postgres/doc/src/sgml/ref/alter_opfamily.sgmlALTER OPERATOR FAMILY integer_ops USING btree ADD
+
+  -- int4 vs int2
+  OPERATOR 1  (int4, int2) ,
+  OPERATOR 2 = (int4, int2) ,
+  OPERATOR 3 = (int4, int2) ,
+  OPERATOR 4 >= (int4, int2) ,
+  OPERATOR 5 > (int4, int2) ,
+  FUNCTION 1 btint42cmp(int4, int2) ,
+
+  -- int2 vs int4
+  OPERATOR 1  (int2, int4) ,
+  OPERATOR 2 = (int2, int4) ,
+  OPERATOR 3 = (int2, int4) ,
+  OPERATOR 4 >= (int2, int4) ,
+  OPERATOR 5 > (int2, int4) ,
+  FUNCTION 1 btint24cmp(int2, int4) ;
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "CONCURRENTLY" (scan.l:1121)
+Deparse SQL: syntax error at or near "(" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_tablespace
-SQL: mkdir /data/dbs
-chown postgres:postgres /data/dbs
+Method: copy
+SQL: postgres/doc/src/sgml/ref/copy.sgmlAF      AFGHANISTAN
+AL      ALBANIA
+DZ      ALGERIA
+ZM      ZAMBIA
+ZW      ZIMBABWE
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "mkdir" (scan.l:1121)
+Deparse SQL: syntax error at or near "AF" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_trigger
-SQL: CREATE TRIGGER check_update
-    BEFORE UPDATE ON accounts
-    FOR EACH ROW
-    EXECUTE FUNCTION check_account_update();
+Method: copy
+SQL: postgres/doc/src/sgml/ref/copy.sgml0000000   P   G   C   O   P   Y  \n 377  \r  \n  \0  \0  \0  \0  \0  \0
+0000020  \0  \0  \0  \0 003  \0  \0  \0 002   A   F  \0  \0  \0 013   A
+0000040   F   G   H   A   N   I   S   T   A   N 377 377 377 377  \0 003
+0000060  \0  \0  \0 002   A   L  \0  \0  \0 007   A   L   B   A   N   I
+0000100   A 377 377 377 377  \0 003  \0  \0  \0 002   D   Z  \0  \0  \0
+0000120 007   A   L   G   E   R   I   A 377 377 377 377  \0 003  \0  \0
+0000140  \0 002   Z   M  \0  \0  \0 006   Z   A   M   B   I   A 377 377
+0000160 377 377  \0 003  \0  \0  \0 002   Z   W  \0  \0  \0  \b   Z   I
+0000200   M   B   A   B   W   E 377 377 377 377 377 377
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "FUNCTION" (scan.l:1121)
+Deparse SQL: syntax error at or near "0000000" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_trigger
-SQL: CREATE TRIGGER check_update
-    BEFORE UPDATE OF balance ON accounts
-    FOR EACH ROW
-    EXECUTE FUNCTION check_account_update();
+Method: create_aggregate
+SQL: postgres/doc/src/sgml/ref/create_aggregate.sgmlsfunc( internal-state, next-data-values ) ---> next-internal-state
+ffunc( internal-state ) ---> aggregate-value
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "FUNCTION" (scan.l:1121)
+Deparse SQL: syntax error at or near "sfunc" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_trigger
-SQL: CREATE TRIGGER check_update
-    BEFORE UPDATE ON accounts
-    FOR EACH ROW
-    WHEN (OLD.balance IS DISTINCT FROM NEW.balance)
-    EXECUTE FUNCTION check_account_update();
+Method: create_aggregate
+SQL: postgres/doc/src/sgml/ref/create_aggregate.sgmlSELECT col FROM tab ORDER BY col USING sortop LIMIT 1;
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "FUNCTION" (scan.l:1121)
+Deparse SQL: syntax error at or near "sortop" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_trigger
-SQL: CREATE TRIGGER log_update
-    AFTER UPDATE ON accounts
-    FOR EACH ROW
-    WHEN (OLD.* IS DISTINCT FROM NEW.*)
-    EXECUTE FUNCTION log_account_update();
+Method: create_conversion
+SQL: postgres/doc/src/sgml/ref/create_conversion.sgmlconv_proc(
+    integer,  -- source encoding ID
+    integer,  -- destination encoding ID
+    cstring,  -- source string (null terminated C string)
+    internal, -- destination (fill with a null terminated C string)
+    integer   -- source string length
+) RETURNS void;
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "FUNCTION" (scan.l:1121)
+Deparse SQL: syntax error at or near "conv_proc" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_trigger
-SQL: CREATE TRIGGER view_insert
-    INSTEAD OF INSERT ON my_view
-    FOR EACH ROW
-    EXECUTE FUNCTION view_insert_row();
+Method: create_extension
+SQL: postgres/doc/src/sgml/ref/create_extension.sgmlCREATE EXTENSION hstore SCHEMA public FROM unpackaged;
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "FUNCTION" (scan.l:1121)
+Deparse SQL: CREATE EXTENSION ... FROM is no longer supported (gram.y:5023)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_trigger
-SQL: CREATE TRIGGER transfer_insert
-    AFTER INSERT ON transfer
-    REFERENCING NEW TABLE AS inserted
-    FOR EACH STATEMENT
-    EXECUTE FUNCTION check_transfer_balances_to_zero();
+Method: create_opclass
+SQL: postgres/doc/src/sgml/ref/create_opclass.sgmlCREATE OPERATOR CLASS gist__int_ops
+    DEFAULT FOR TYPE _int4 USING gist AS
+        OPERATOR        3       ,
+        OPERATOR        6       = (anyarray, anyarray),
+        OPERATOR        7       @>,
+        OPERATOR        8       @,
+        OPERATOR        20      @@ (_int4, query_int),
+        FUNCTION        1       g_int_consistent (internal, _int4, smallint, oid, internal),
+        FUNCTION        2       g_int_union (internal, internal),
+        FUNCTION        3       g_int_compress (internal),
+        FUNCTION        4       g_int_decompress (internal),
+        FUNCTION        5       g_int_penalty (internal, internal, internal),
+        FUNCTION        6       g_int_picksplit (internal, internal),
+        FUNCTION        7       g_int_same (_int4, _int4, internal);
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "FUNCTION" (scan.l:1121)
+Deparse SQL: syntax error at or near "," (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_trigger
-SQL: CREATE TRIGGER paired_items_update
-    AFTER UPDATE ON paired_items
-    REFERENCING NEW TABLE AS newtab OLD TABLE AS oldtab
-    FOR EACH ROW
-    EXECUTE FUNCTION check_matching_pairs();
+Method: create_operator
+SQL: postgres/doc/src/sgml/ref/create_operator.sgmlCOMMUTATOR = OPERATOR(myschema.===) ,
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "FUNCTION" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: create_event_trigger
-SQL: CREATE OR REPLACE FUNCTION abort_any_command()
-  RETURNS event_trigger
- LANGUAGE plpgsql
-  AS $$
-BEGIN
-  RAISE EXCEPTION 'command % is disabled', tg_tag;
-END;
-$$;
-
-CREATE EVENT TRIGGER abort_ddl ON ddl_command_start
-   EXECUTE FUNCTION abort_any_command();
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "FUNCTION" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_routine
-SQL: ALTER ROUTINE foo(integer) RENAME TO foobar;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "ROUTINE" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: drop_procedure
-SQL: DROP PROCEDURE do_db_maintenance();
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "PROCEDURE" (scan.l:1121)
+Deparse SQL: syntax error at or near "COMMUTATOR" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
 Method: create_policy
-SQL: expression from RESTRICTIVE SELECT/ALL policy 1
+SQL: postgres/doc/src/sgml/ref/create_policy.sgmlexpression from RESTRICTIVE SELECT/ALL policy 1
 AND
 expression from RESTRICTIVE SELECT/ALL policy 2
 AND
@@ -196,197 +177,72 @@ AND
 )
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "expression" (scan.l:1121)
+Deparse SQL: syntax error at or near "expression" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: unlisten
-SQL: LISTEN virtual;
-NOTIFY virtual;
-Asynchronous notification "virtual" received from server process with PID 8448.
+Method: create_table
+SQL: postgres/doc/src/sgml/ref/create_table.sgmlCREATE TABLE circles (
+    c circle,
+    EXCLUDE USING gist (c WITH )
+);
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "Asynchronous" (scan.l:1121)
+Deparse SQL: syntax error at or near ")" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_procedure
-SQL: CREATE PROCEDURE insert_data(a integer, b integer)
-LANGUAGE SQL
-AS $$
-INSERT INTO tbl VALUES (a);
-INSERT INTO tbl VALUES (b);
-$$;
-
-CALL insert_data(1, 2);
+Method: create_tablespace
+SQL: postgres/doc/src/sgml/ref/create_tablespace.sgmlmkdir /data/dbs
+chown postgres:postgres /data/dbs
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "PROCEDURE" (scan.l:1121)
+Deparse SQL: syntax error at or near "mkdir" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_conversion
-SQL: conv_proc(
-    integer,  -- source encoding ID
-    integer,  -- destination encoding ID
-    cstring,  -- source string (null terminated C string)
-    internal, -- destination (fill with a null terminated C string)
-    integer   -- source string length
-) RETURNS void;
+Method: create_view
+SQL: postgres/doc/src/sgml/ref/create_view.sgmlCREATE RECURSIVE VIEW public.nums_1_100 (n) AS
+    VALUES (1)
+UNION ALL
+    SELECT n+1 FROM nums_1_100 WHERE n  100;
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "conv_proc" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_procedure
-SQL: ALTER PROCEDURE insert_data(integer, integer) RENAME TO insert_record;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "PROCEDURE" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_procedure
-SQL: ALTER PROCEDURE insert_data(integer, integer) OWNER TO joe;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "PROCEDURE" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_procedure
-SQL: ALTER PROCEDURE insert_data(integer, integer) SET SCHEMA accounting;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "PROCEDURE" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_procedure
-SQL: ALTER PROCEDURE insert_data(integer, integer) DEPENDS ON EXTENSION myext;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "PROCEDURE" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_procedure
-SQL: ALTER PROCEDURE check_password(text) SET search_path = admin, pg_temp;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "PROCEDURE" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_procedure
-SQL: ALTER PROCEDURE check_password(text) RESET search_path;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "PROCEDURE" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_table
-SQL: ALTER TABLE orders
-    ATTACH PARTITION orders_p4 FOR VALUES WITH (MODULUS 4, REMAINDER 3);
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "WITH" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_table
-SQL: ALTER TABLE cities
-    ATTACH PARTITION cities_partdef DEFAULT;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "DEFAULT" (scan.l:1121)
+Deparse SQL: syntax error at or near "100" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
 Method: listen
-SQL: LISTEN virtual;
+SQL: postgres/doc/src/sgml/ref/listen.sgmlLISTEN virtual;
 NOTIFY virtual;
 Asynchronous notification "virtual" received from server process with PID 8448.
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "Asynchronous" (scan.l:1121)
+Deparse SQL: syntax error at or near "Asynchronous" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_operator
-SQL: COMMUTATOR = OPERATOR(myschema.===) ,
+Method: lock
+SQL: postgres/doc/src/sgml/ref/lock.sgmlBEGIN WORK;
+LOCK TABLE films IN SHARE ROW EXCLUSIVE MODE;
+DELETE FROM films_user_comments WHERE id IN
+    (SELECT id FROM films WHERE rating  5);
+DELETE FROM films WHERE rating  5;
+COMMIT WORK;
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "COMMUTATOR" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: comment
-SQL: COMMENT ON ACCESS METHOD rtree IS 'R-Tree access method';
-COMMENT ON AGGREGATE my_aggregate (double precision) IS 'Computes sample variance';
-COMMENT ON CAST (text AS int4) IS 'Allow casts from text to int4';
-COMMENT ON COLLATION "fr_CA" IS 'Canadian French';
-COMMENT ON COLUMN my_table.my_column IS 'Employee ID number';
-COMMENT ON CONVERSION my_conv IS 'Conversion to UTF8';
-COMMENT ON CONSTRAINT bar_col_cons ON bar IS 'Constrains column col';
-COMMENT ON CONSTRAINT dom_col_constr ON DOMAIN dom IS 'Constrains col of domain';
-COMMENT ON DATABASE my_database IS 'Development Database';
-COMMENT ON DOMAIN my_domain IS 'Email Address Domain';
-COMMENT ON EXTENSION hstore IS 'implements the hstore data type';
-COMMENT ON FOREIGN DATA WRAPPER mywrapper IS 'my foreign data wrapper';
-COMMENT ON FOREIGN TABLE my_foreign_table IS 'Employee Information in other database';
-COMMENT ON FUNCTION my_function (timestamp) IS 'Returns Roman Numeral';
-COMMENT ON INDEX my_index IS 'Enforces uniqueness on employee ID';
-COMMENT ON LANGUAGE plpython IS 'Python support for stored procedures';
-COMMENT ON LARGE OBJECT 346344 IS 'Planning document';
-COMMENT ON MATERIALIZED VIEW my_matview IS 'Summary of order history';
-COMMENT ON OPERATOR ^ (text, text) IS 'Performs intersection of two texts';
-COMMENT ON OPERATOR - (NONE, integer) IS 'Unary minus';
-COMMENT ON OPERATOR CLASS int4ops USING btree IS '4 byte integer operators for btrees';
-COMMENT ON OPERATOR FAMILY integer_ops USING btree IS 'all integer operators for btrees';
-COMMENT ON POLICY my_policy ON mytable IS 'Filter rows by users';
-COMMENT ON PROCEDURE my_proc (integer, integer) IS 'Runs a report';
-COMMENT ON ROLE my_role IS 'Administration group for finance tables';
-COMMENT ON RULE my_rule ON my_table IS 'Logs updates of employee records';
-COMMENT ON SCHEMA my_schema IS 'Departmental data';
-COMMENT ON SEQUENCE my_sequence IS 'Used to generate primary keys';
-COMMENT ON SERVER myserver IS 'my foreign server';
-COMMENT ON STATISTICS my_statistics IS 'Improves planner row estimations';
-COMMENT ON TABLE my_schema.my_table IS 'Employee Information';
-COMMENT ON TABLESPACE my_tablespace IS 'Tablespace for indexes';
-COMMENT ON TEXT SEARCH CONFIGURATION my_config IS 'Special word filtering';
-COMMENT ON TEXT SEARCH DICTIONARY swedish IS 'Snowball stemmer for Swedish language';
-COMMENT ON TEXT SEARCH PARSER my_parser IS 'Splits text into words';
-COMMENT ON TEXT SEARCH TEMPLATE snowball IS 'Snowball stemmer';
-COMMENT ON TRANSFORM FOR hstore LANGUAGE plpythonu IS 'Transform between hstore and Python dict';
-COMMENT ON TRIGGER my_trigger ON my_table IS 'Used for RI';
-COMMENT ON TYPE complex IS 'Complex number data type';
-COMMENT ON VIEW my_view IS 'View of departmental costs';
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "PROCEDURE" (scan.l:1121)
+Deparse SQL: syntax error at or near "5" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
 Method: notify
-SQL: LISTEN virtual;
+SQL: postgres/doc/src/sgml/ref/notify.sgmlLISTEN virtual;
 NOTIFY virtual;
 Asynchronous notification "virtual" received from server process with PID 8448.
 NOTIFY virtual, 'This is the payload';
@@ -397,169 +253,30 @@ SELECT pg_notify('fo' || 'o', 'pay' || 'load');
 Asynchronous notification "foo" with payload "payload" received from server process with PID 14728.
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "Asynchronous" (scan.l:1121)
+Deparse SQL: syntax error at or near "Asynchronous" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_table
-SQL: CREATE TABLE distributors (
-    did     integer CHECK (did  100),
-    name    varchar(40)
-);
+Method: reindex
+SQL: postgres/doc/src/sgml/ref/reindex.sgml$ export PGOPTIONS="-P"
+$ psql broken_db
+...
+broken_db=> REINDEX DATABASE broken_db;
+broken_db=> \q
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "100" (scan.l:1121)
+Deparse SQL: syntax error at or near "$" (scan.l:1202)
 Tree:   
 --------END-------
 
 -------BEGIN-------
-Method: create_table
-SQL: CREATE TABLE distributors (
-    did     integer,
-    name    varchar(40),
-    CONSTRAINT con1 CHECK (did  100 AND name  '')
-);
+Method: unlisten
+SQL: postgres/doc/src/sgml/ref/unlisten.sgmlLISTEN virtual;
+NOTIFY virtual;
+Asynchronous notification "virtual" received from server process with PID 8448.
 Fingerprint:   
 Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "100" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: create_table
-SQL: CREATE TABLE circles (
-    c circle,
-    EXCLUDE USING gist (c WITH )
-);
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near ")" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: create_table
-SQL: CREATE TABLE orders_p1 PARTITION OF orders
-    FOR VALUES WITH (MODULUS 4, REMAINDER 0);
-CREATE TABLE orders_p2 PARTITION OF orders
-    FOR VALUES WITH (MODULUS 4, REMAINDER 1);
-CREATE TABLE orders_p3 PARTITION OF orders
-    FOR VALUES WITH (MODULUS 4, REMAINDER 2);
-CREATE TABLE orders_p4 PARTITION OF orders
-    FOR VALUES WITH (MODULUS 4, REMAINDER 3);
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "WITH" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: create_table
-SQL: CREATE TABLE cities_partdef
-    PARTITION OF cities DEFAULT;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "DEFAULT" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: call
-SQL: CALL do_db_maintenance();
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "CALL" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_foreign_table
-SQL: ALTER FOREIGN TABLE myschema.distributors OPTIONS (ADD opt1 'value', SET opt2 'value2', DROP opt3 'value3');
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "'value3'" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: copy
-SQL: AF      AFGHANISTAN
-AL      ALBANIA
-DZ      ALGERIA
-ZM      ZAMBIA
-ZW      ZIMBABWE
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "AF" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: copy
-SQL: 0000000   P   G   C   O   P   Y  \n 377  \r  \n  \0  \0  \0  \0  \0  \0
-0000020  \0  \0  \0  \0 003  \0  \0  \0 002   A   F  \0  \0  \0 013   A
-0000040   F   G   H   A   N   I   S   T   A   N 377 377 377 377  \0 003
-0000060  \0  \0  \0 002   A   L  \0  \0  \0 007   A   L   B   A   N   I
-0000100   A 377 377 377 377  \0 003  \0  \0  \0 002   D   Z  \0  \0  \0
-0000120 007   A   L   G   E   R   I   A 377 377 377 377  \0 003  \0  \0
-0000140  \0 002   Z   M  \0  \0  \0 006   Z   A   M   B   I   A 377 377
-0000160 377 377  \0 003  \0  \0  \0 002   Z   W  \0  \0  \0  \b   Z   I
-0000200   M   B   A   B   W   E 377 377 377 377 377 377
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "0000000" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: create_index
-SQL: CREATE UNIQUE INDEX title_idx ON films (title) INCLUDE (director, rating);
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "INCLUDE" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: alter_index
-SQL: CREATE INDEX coord_idx ON measured (x, y, (z + t));
-ALTER INDEX coord_idx ALTER COLUMN 3 SET STATISTICS 1000;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "3" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: lock
-SQL: BEGIN WORK;
-LOCK TABLE films IN SHARE ROW EXCLUSIVE MODE;
-DELETE FROM films_user_comments WHERE id IN
-    (SELECT id FROM films WHERE rating  5);
-DELETE FROM films WHERE rating  5;
-COMMIT WORK;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "5" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: create_aggregate
-SQL: sfunc( internal-state, next-data-values ) ---> next-internal-state
-ffunc( internal-state ) ---> aggregate-value
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "sfunc" (scan.l:1121)
-Tree:   
---------END-------
-
--------BEGIN-------
-Method: create_aggregate
-SQL: SELECT col FROM tab ORDER BY col USING sortop LIMIT 1;
-Fingerprint:   
-Fingerprint Deparse:   
-Deparse SQL: syntax error at or near "sortop" (scan.l:1121)
+Deparse SQL: syntax error at or near "Asynchronous" (scan.l:1202)
 Tree:   
 --------END-------
